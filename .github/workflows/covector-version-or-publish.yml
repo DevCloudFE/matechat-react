@@ -29,6 +29,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           registry-url: 'https://registry.npmjs.org'
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
       - name: git config
         run: |
           git config --global user.name "${{ github.event.pusher.name }}"
