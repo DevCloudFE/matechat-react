@@ -89,29 +89,16 @@ export interface BubbleProps
    * @default "solid"
    */
   background?: "transparent" | "solid";
-}
-
-/**
- * Props for the WaitingProp component.
- */
-export interface WaitingProps
-  extends React.ComponentProps<"div">,
-    VariantProps<typeof bubbleVariants> {
   /**
-   * The avatar to display in the bubble.
-   * @default {text: "A"}
+   * Custom pending content to display when pending is true.
+   * @description If not provided, will use default dots animation.
    */
-  avatar?: AvatarProps;
+  pending?: React.ReactNode;
   /**
-   * The alignment of the bubble.
-   * @default "left"
+   * Whether the bubble is in pending state.
+   * @default false
    */
-  align?: "left" | "center" | "right";
-  /**
-   * Whether to display the background of the bubble.
-   * @default "transparent"
-   */
-  background?: "transparent" | "solid";
+  isPending?: boolean;
 }
 
 export function Bubble({
@@ -120,9 +107,25 @@ export function Bubble({
   size,
   align,
   background = "solid",
+  pending,
+  isPending = false,
   ...props
 }: BubbleProps) {
   const { isDark } = useTheme();
+
+  const defaultPending = (
+    <div className="flex items-center space-x-1 py-1">
+      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+      <div
+        className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+        style={{ animationDelay: "0.1s" }}
+      />
+      <div
+        className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+        style={{ animationDelay: "0.2s" }}
+      />
+    </div>
+  );
 
   return (
     <div
@@ -135,106 +138,55 @@ export function Bubble({
             align,
             background,
           }),
+          pending && "flex items-center",
         ),
       )}
       {...props}
     >
-      <Markdown
-        remarkPlugins={[remarkGfm, remarkMath]}
-        components={{
-          code(props) {
-            const { children, className, ref: _ref, ...rest } = props;
-            const match = /language-(\w+)/.exec(className || "");
-            return match ? (
-              <div className="w-full overflow-x-auto border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                <SyntaxHighlighter
-                  {...rest}
-                  PreTag="div"
-                  language={match[1]}
-                  style={isDark ? vscDarkPlus : oneLight}
-                  customStyle={{
-                    background: "transparent",
-                    margin: 0,
-                    padding: "1rem",
-                    borderRadius: "0.5rem",
-                    overflowX: "auto",
-                  }}
-                  codeTagProps={{
-                    style: {
-                      fontFamily: "monospace",
-                      fontSize: "0.875rem",
-                    },
-                  }}
-                >
-                  {String(children).replace(/\n$/, "")}
-                </SyntaxHighlighter>
-              </div>
-            ) : (
-              <code {...rest} className={className}>
-                {children}
-              </code>
-            );
-          },
-        }}
-      >
-        {text}
-      </Markdown>
-    </div>
-  );
-}
-
-export function WaitingBubble({
-  className,
-  size,
-  align = "left",
-  background = "transparent",
-  avatar = {
-    text: "A",
-  },
-  ...props
-}: WaitingProps) {
-  return (
-    <div
-      key="waiting-bubble"
-      data-slot="bubble-item"
-      className={twMerge(
-        clsx(align === "right" && "flex-row-reverse"),
-        "flex items-start gap-2 w-full",
+      {isPending ? (
+        pending || defaultPending
+      ) : (
+        <Markdown
+          remarkPlugins={[remarkGfm, remarkMath]}
+          components={{
+            code(props) {
+              const { children, className, ref: _ref, ...rest } = props;
+              const match = /language-(\w+)/.exec(className || "");
+              return match ? (
+                <div className="w-full overflow-x-auto border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                  <SyntaxHighlighter
+                    {...rest}
+                    PreTag="div"
+                    language={match[1]}
+                    style={isDark ? vscDarkPlus : oneLight}
+                    customStyle={{
+                      background: "transparent",
+                      margin: 0,
+                      padding: "1rem",
+                      borderRadius: "0.5rem",
+                      overflowX: "auto",
+                    }}
+                    codeTagProps={{
+                      style: {
+                        fontFamily: "monospace",
+                        fontSize: "0.875rem",
+                      },
+                    }}
+                  >
+                    {String(children).replace(/\n$/, "")}
+                  </SyntaxHighlighter>
+                </div>
+              ) : (
+                <code {...rest} className={className}>
+                  {children}
+                </code>
+              );
+            },
+          }}
+        >
+          {text}
+        </Markdown>
       )}
-    >
-      <Avatar
-        className="flex-shrink-0"
-        {...(avatar?.imageUrl
-          ? { imageUrl: avatar.imageUrl }
-          : { text: avatar.text })}
-      />
-      <div
-        data-slot="bubble"
-        className={twMerge(
-          clsx(
-            bubbleVariants({
-              className,
-              size,
-              align,
-              background,
-            }),
-            "flex items-center",
-          ),
-        )}
-        {...props}
-      >
-        <div className="flex items-center space-x-1 py-1">
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-          <div
-            className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-            style={{ animationDelay: "0.1s" }}
-          />
-          <div
-            className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-            style={{ animationDelay: "0.2s" }}
-          />
-        </div>
-      </div>
     </div>
   );
 }
@@ -281,17 +233,27 @@ export interface BubbleListProps extends React.ComponentProps<"div"> {
    * @default "right-solid"
    */
   background?: "transparent" | "solid" | "left-solid" | "right-solid";
+  isPending?: boolean;
+  assistant?: {
+    avatar?: AvatarProps;
+    align?: 'left' | 'right';
+  };
   footer?: React.ReactNode;
-  waiting?: WaitingProps;
-  isWaiting?: boolean;
+  pending?: React.ReactNode;
 }
 
 export function BubbleList({
   className,
   background = "right-solid",
   footer,
-  waiting,
-  isWaiting = false,
+  pending,
+  assistant = {
+    avatar: {
+      text: "A"
+    },
+    align: "left",
+  },
+  isPending = true,
   ...props
 }: BubbleListProps) {
   const { messages } = props;
@@ -305,7 +267,7 @@ export function BubbleList({
         block: "end",
       });
     }
-  }, [messages, isWaiting]);
+  }, [messages, isPending]);
 
   return (
     <div
@@ -352,7 +314,36 @@ export function BubbleList({
             />
           </div>
         ))}
-        {isWaiting && <WaitingBubble {...waiting} />}
+        {
+          isPending && (
+            <div
+              key="pending"
+              data-slot="bubble-item"
+              className={twMerge(
+                clsx(assistant?.align === "right" && "flex-row-reverse"),
+                "flex items-start gap-2 w-full",
+              )}
+            >
+              <Avatar
+                className="flex-shrink-0"
+                {...(assistant?.avatar || {})}
+              />
+              <Bubble
+                isPending={isPending}
+                pending={pending}
+                text=""
+                align={assistant?.align || "left"}
+                background={
+                  (background === "left-solid" && (assistant?.align || "left") === "left") ||
+                  (background === "right-solid" && (assistant?.align || "left") === "right") ||
+                  background === "solid"
+                    ? "solid"
+                    : "transparent"
+                }
+              />
+            </div>
+          )
+        }
       </div>
       {footer && (
         <div

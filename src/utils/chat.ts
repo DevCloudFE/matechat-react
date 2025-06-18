@@ -10,13 +10,13 @@ export function useChat(
   input: (prompt: string, options?: InputOptions) => Promise<void>;
   on: <K extends EventTypes["type"]>(type: K, handler: Events[K]) => () => void;
   setMessages: React.Dispatch<React.SetStateAction<MessageParam[]>>;
-  isWaiting: boolean;
+  isPending: boolean;
 } {
   const [messages, setMessages] = useState<MessageParam[]>(initialMessages);
-  const [isWaiting, setIsWaiting] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   const input = async (prompt: string, options?: InputOptions) => {
-    setIsWaiting(true);
+    setIsPending(true);
     return backend.input(prompt, {
       messages,
       ...options,
@@ -50,7 +50,7 @@ export function useChat(
         setMessages((prevMessages) => [...prevMessages, event.payload]);
       }),
       backend.on("error", (event) => {
-        setIsWaiting(false);
+        setIsPending(false);
         console.error("Error from backend:", event.payload.error);
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -63,10 +63,10 @@ export function useChat(
         ]);
       }),
       backend.on("finish", (event) => {
-        setIsWaiting(false);
+        setIsPending(false);
       }),
       backend.on("chunk", (event) => {
-        setIsWaiting(false);
+        setIsPending(false);
         setMessages((prev) => {
           const lastMessage = prev[prev.length - 1];
           if (lastMessage && lastMessage.role === "assistant") {
@@ -100,5 +100,5 @@ export function useChat(
     };
   }, [backend]);
 
-  return { messages, input, on, setMessages, isWaiting };
+  return { messages, input, on, setMessages, isPending };
 }

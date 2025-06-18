@@ -42,7 +42,7 @@ export function Chat() {
   if (!backend) {
     throw new Error("Backend is not initialized");
   }
-  const { messages, input, setMessages, isWaiting } = useChat(
+  const { messages, input, setMessages, isPending } = useChat(
     backend,
     initialMessages,
   );
@@ -60,7 +60,7 @@ export function Chat() {
             className="px-4 w-full max-w-full"
             messages={messages}
             background="right-solid"
-            isWaiting={isWaiting}
+            isPending={isPending}
             footer={
               <Button
                 onClick={onClear}
