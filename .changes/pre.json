@@ -1,6 +1,8 @@
 {
   "tag": "alpha",
   "changes": [
+    ".changes/background-option.md",
+    ".changes/chore-deps.md",
     ".changes/release-alpha.md"
   ]
 }
