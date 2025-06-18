@@ -96,7 +96,7 @@ export interface BubbleProps
  */
 export interface WaitingProps
   extends React.ComponentProps<"div">,
-   VariantProps<typeof bubbleVariants>{
+    VariantProps<typeof bubbleVariants> {
   /**
    * The avatar to display in the bubble.
    * @default {text: "A"}
@@ -189,52 +189,54 @@ export function WaitingBubble({
   align = "left",
   background = "transparent",
   avatar = {
-    text: "A"
+    text: "A",
   },
   ...props
 }: WaitingProps) {
   return (
     <div
-      key = "waiting-bubble"
+      key="waiting-bubble"
       data-slot="bubble-item"
       className={twMerge(
-        clsx(
-          align === "right" && "flex-row-reverse",
-        ),
-        "flex items-start gap-2 w-full"
+        clsx(align === "right" && "flex-row-reverse"),
+        "flex items-start gap-2 w-full",
       )}
     >
       <Avatar
         className="flex-shrink-0"
-        {
-          ... (avatar?.imageUrl ? {imageUrl: avatar.imageUrl} : {text: avatar.text})
-        }
+        {...(avatar?.imageUrl
+          ? { imageUrl: avatar.imageUrl }
+          : { text: avatar.text })}
       />
       <div
         data-slot="bubble"
-        className={
-          twMerge(
-            clsx(
-              bubbleVariants({
-                className,
-                size,
-                align,
-                background,
-              }),
-              "flex items-center"
-            )
-          )
-        }
+        className={twMerge(
+          clsx(
+            bubbleVariants({
+              className,
+              size,
+              align,
+              background,
+            }),
+            "flex items-center",
+          ),
+        )}
         {...props}
       >
         <div className="flex items-center space-x-1 py-1">
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+          <div
+            className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+            style={{ animationDelay: "0.1s" }}
+          />
+          <div
+            className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+            style={{ animationDelay: "0.2s" }}
+          />
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export interface AvatarProps {
@@ -291,8 +293,7 @@ export function BubbleList({
   waiting,
   isWaiting = false,
   ...props
-}: BubbleListProps,
-) {
+}: BubbleListProps) {
   const { messages } = props;
   const lastMessageRef = useRef<HTMLDivElement>(null);
 
@@ -351,10 +352,7 @@ export function BubbleList({
             />
           </div>
         ))}
-        {
-          isWaiting &&
-          ( <WaitingBubble {...waiting}/> )
-        }
+        {isWaiting && <WaitingBubble {...waiting} />}
       </div>
       {footer && (
         <div
