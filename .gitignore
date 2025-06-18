@@ -1,6 +1,7 @@
 node_modules
 dist
 
+.idea
 *.log
 .DS_Store
 .eslintcache

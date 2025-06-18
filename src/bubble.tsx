@@ -91,6 +91,29 @@ export interface BubbleProps
   background?: "transparent" | "solid";
 }
 
+/**
+ * Props for the WaitingProp component.
+ */
+export interface WaitingProps
+  extends React.ComponentProps<"div">,
+   VariantProps<typeof bubbleVariants>{
+  /**
+   * The avatar to display in the bubble.
+   * @default {text: "A"}
+   */
+  avatar?: AvatarProps;
+  /**
+   * The alignment of the bubble.
+   * @default "left"
+   */
+  align?: "left" | "center" | "right";
+  /**
+   * Whether to display the background of the bubble.
+   * @default "transparent"
+   */
+  background?: "transparent" | "solid";
+}
+
 export function Bubble({
   className,
   text,
@@ -160,6 +183,60 @@ export function Bubble({
   );
 }
 
+export function WaitingBubble({
+  className,
+  size,
+  align = "left",
+  background = "transparent",
+  avatar = {
+    text: "A"
+  },
+  ...props
+}: WaitingProps) {
+  return (
+    <div
+      key = "waiting-bubble"
+      data-slot="bubble-item"
+      className={twMerge(
+        clsx(
+          align === "right" && "flex-row-reverse",
+        ),
+        "flex items-start gap-2 w-full"
+      )}
+    >
+      <Avatar
+        className="flex-shrink-0"
+        {
+          ... (avatar?.imageUrl ? {imageUrl: avatar.imageUrl} : {text: avatar.text})
+        }
+      />
+      <div
+        data-slot="bubble"
+        className={
+          twMerge(
+            clsx(
+              bubbleVariants({
+                className,
+                size,
+                align,
+                background,
+              }),
+              "flex items-center"
+            )
+          )
+        }
+        {...props}
+      >
+        <div className="flex items-center space-x-1 py-1">
+          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
+          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export interface AvatarProps {
   text?: string;
   imageUrl?: string;
@@ -203,14 +280,19 @@ export interface BubbleListProps extends React.ComponentProps<"div"> {
    */
   background?: "transparent" | "solid" | "left-solid" | "right-solid";
   footer?: React.ReactNode;
+  waiting?: WaitingProps;
+  isWaiting?: boolean;
 }
 
 export function BubbleList({
   className,
   background = "right-solid",
   footer,
+  waiting,
+  isWaiting = false,
   ...props
-}: BubbleListProps) {
+}: BubbleListProps,
+) {
   const { messages } = props;
   const lastMessageRef = useRef<HTMLDivElement>(null);
 
@@ -222,7 +304,7 @@ export function BubbleList({
         block: "end",
       });
     }
-  }, [messages]);
+  }, [messages, isWaiting]);
 
   return (
     <div
@@ -269,6 +351,10 @@ export function BubbleList({
             />
           </div>
         ))}
+        {
+          isWaiting &&
+          ( <WaitingBubble {...waiting}/> )
+        }
       </div>
       {footer && (
         <div
