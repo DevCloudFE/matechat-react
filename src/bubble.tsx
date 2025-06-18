@@ -236,7 +236,7 @@ export interface BubbleListProps extends React.ComponentProps<"div"> {
   isPending?: boolean;
   assistant?: {
     avatar?: AvatarProps;
-    align?: 'left' | 'right';
+    align?: "left" | "right";
   };
   footer?: React.ReactNode;
   pending?: React.ReactNode;
@@ -249,7 +249,7 @@ export function BubbleList({
   pending,
   assistant = {
     avatar: {
-      text: "A"
+      text: "A",
     },
     align: "left",
   },
@@ -314,36 +314,33 @@ export function BubbleList({
             />
           </div>
         ))}
-        {
-          isPending && (
-            <div
-              key="pending"
-              data-slot="bubble-item"
-              className={twMerge(
-                clsx(assistant?.align === "right" && "flex-row-reverse"),
-                "flex items-start gap-2 w-full",
-              )}
-            >
-              <Avatar
-                className="flex-shrink-0"
-                {...(assistant?.avatar || {})}
-              />
-              <Bubble
-                isPending={isPending}
-                pending={pending}
-                text=""
-                align={assistant?.align || "left"}
-                background={
-                  (background === "left-solid" && (assistant?.align || "left") === "left") ||
-                  (background === "right-solid" && (assistant?.align || "left") === "right") ||
-                  background === "solid"
-                    ? "solid"
-                    : "transparent"
-                }
-              />
-            </div>
-          )
-        }
+        {isPending && (
+          <div
+            key="pending"
+            data-slot="bubble-item"
+            className={twMerge(
+              clsx(assistant?.align === "right" && "flex-row-reverse"),
+              "flex items-start gap-2 w-full",
+            )}
+          >
+            <Avatar className="flex-shrink-0" {...(assistant?.avatar || {})} />
+            <Bubble
+              isPending={isPending}
+              pending={pending}
+              text=""
+              align={assistant?.align || "left"}
+              background={
+                (background === "left-solid" &&
+                  (assistant?.align || "left") === "left") ||
+                (background === "right-solid" &&
+                  (assistant?.align || "left") === "right") ||
+                background === "solid"
+                  ? "solid"
+                  : "transparent"
+              }
+            />
+          </div>
+        )}
       </div>
       {footer && (
         <div
