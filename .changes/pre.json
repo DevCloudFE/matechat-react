@@ -4,6 +4,8 @@
     ".changes/background-option.md",
     ".changes/bubble-patch.md",
     ".changes/chore-deps.md",
+    ".changes/fix-sender-lint.md",
+    ".changes/optimize-sender-button.md",
     ".changes/release-alpha.md"
   ]
 }

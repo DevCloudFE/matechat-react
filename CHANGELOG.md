@@ -1,5 +1,15 @@
 # Changelog
 
+## \[0.1.0-alpha.3]
+
+- [`3a19451`](https://github.com/DevCloudFE/matechat-react/commit/3a19451365a39174e32a18a25685286914c48e9f) Fix the lint error on `useEffect` in `sender.tsx`.
+- [`b5e4cb8`](https://github.com/DevCloudFE/matechat-react/commit/b5e4cb86ffb618ff147ca8b1133db6eb4748f5a2) Optimize the `SenderButton` component in `sender.tsx`.
+
+  This optimization includes:
+
+  - Add `icon` and `isSending` option to `SenderButton` component.
+  - Add doc-string for `SenderButton` and `Sender` props.
+
 ## \[0.1.0-alpha.2]
 
 - [`17b60e7`](https://github.com/DevCloudFE/matechat-react/commit/17b60e7a0db056e37fe2e34dabbda4a2c15af972) ([#23](https://github.com/DevCloudFE/matechat-react/pull/23) by [@Raven-Book](https://github.com/DevCloudFE/matechat-react/../../Raven-Book)) Add loading animation during AI request wait states.
