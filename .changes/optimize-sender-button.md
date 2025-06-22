@@ -1,5 +1,5 @@
 ---
-"@matechat/react": patch
+"@matechat/react": patch:feat
 ---
 
 Optimize the `SenderButton` component in `sender.tsx`.

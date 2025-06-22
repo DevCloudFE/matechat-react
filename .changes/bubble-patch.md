@@ -1,5 +1,5 @@
 ---
-"@matechat/react": patch
+"@matechat/react": patch:feat
 ---
 
 Add loading animation during AI request wait states.

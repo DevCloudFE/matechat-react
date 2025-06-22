@@ -1,5 +1,5 @@
 ---
-"@matechat/react": patch
+"@matechat/react": patch:feat
 ---
 
 Optimize `background` option of `BubbleList` component.

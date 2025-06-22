@@ -1,5 +1,5 @@
 ---
-"@matechat/react": patch
+"@matechat/react": patch:chore
 ---
 
 Bump dependencies.

@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     lib: {
       name: "index",
-      entry: "./src/index.ts",
+      entry: ["./src/index.ts", "./src/utils/index.ts"],
       formats: ["es"],
     },
     rollupOptions: {
