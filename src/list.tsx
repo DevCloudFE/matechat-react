@@ -5,15 +5,14 @@ export type SelectOptionsType = SelectOption[] | OptionGroup[];
 
 export interface SelectOption {
   label?: string;
-  value?: any;
+  value?: string;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface OptionGroup {
   label?: string;
-  code?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface ListProps extends React.ComponentProps<"div"> {
@@ -25,7 +24,7 @@ export interface ListProps extends React.ComponentProps<"div"> {
   optionGroupTemplate?: (group: OptionGroup) => React.ReactNode;
   optionLabel?: string;
   optionValue?: string;
-  onSelected?: (value: any) => void;
+  onSelected?: (value: string) => void;
 }
 
 export function List({
@@ -41,35 +40,50 @@ export function List({
   ...props
 }: ListProps) {
   const renderOption = (option: SelectOption) => (
-    <div
-      data-solt="list-item"
-      key={option[optionValue] ?? option[optionLabel]}
+    <button
+      type="button"
+      tabIndex={-1}
+      data-slot="list-item"
+      key={
+        (option[optionValue] as string | number) ??
+        (option[optionLabel] as string | number)
+      }
       className={twMerge(
         clsx(
-          "cursor-pointer px-4 py-2 text-sm hover:bg-blue-300",
-          value === option[optionValue] && "bg-blue-500 font-semibold"
-        )
+          "cursor-pointer px-4 py-2 text-sm hover:bg-blue-300 block w-full text-left",
+          value === option[optionValue] &&
+            "bg-blue-500 hover:bg-blue-500 font-semibold",
+        ),
       )}
-      onClick={() => onSelected?.(option[optionValue])}
+      onClick={() => onSelected?.(option[optionValue] as string)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onSelected?.(option[optionValue] as string);
+        }
+      }}
     >
-      {option[optionLabel]}
-    </div>
+      {option[optionLabel] as React.ReactNode}
+    </button>
   );
 
   const renderGroup = (group: OptionGroup) => {
     const children = (group?.[optionGroupChildren] as SelectOption[]) ?? [];
 
     return (
-      <div key={group[optionGroupLabel] ?? group.code}>
+      <div
+        key={
+          (group[optionGroupLabel] as string | number) ??
+          (group.code as string | number)
+        }
+      >
         <div
           data-solt="list-label"
           className="px-3 py-2 bg-gray-100 font-medium text-sm flex items-center gap-2"
         >
-          {optionGroupTemplate ? (
-            optionGroupTemplate(group)
-          ) : (
-            <>{group[optionGroupLabel]}</>
-          )}
+          {optionGroupTemplate
+            ? (optionGroupTemplate(group) as React.ReactNode)
+            : (group[optionGroupLabel] as React.ReactNode)}
         </div>
         {children.map(renderOption)}
       </div>
