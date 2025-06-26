@@ -1,4 +1,4 @@
-import { MessageSquarePlus, MessageSquareWarning } from "lucide-react";
+import { MessageSquarePlus } from "lucide-react";
 import { useState } from "react";
 import { BubbleList } from "../../dist/bubble";
 import { Button } from "../../dist/button";
@@ -73,26 +73,26 @@ export function Chat() {
             }
           />
           {messages.length === 0 && (
-            <Prompts className="mx-10">
-              <Prompt size="md" className="max-w-xs">
-                <PromptTitle>
-                  <MessageSquareWarning />
-                  Understanding the Transformer Model
-                </PromptTitle>
-                <PromptDescription>
-                  Give a detailed analysis of the Transformer model.
-                </PromptDescription>
-              </Prompt>
-              <Prompt className="max-w-xs">
-                <PromptTitle>
-                  <MessageSquareWarning />
-                  Understanding the Attention Mechanism
-                </PromptTitle>
-                <PromptDescription>
-                  Explain the attention mechanism in neural networks.
-                </PromptDescription>
-              </Prompt>
-            </Prompts>
+            <>
+              <Prompts size="xs" >
+                <Prompt>
+                  <PromptTitle>
+                    Understanding the Transformer Model
+                  </PromptTitle>
+                  <PromptDescription>
+                    Give a detailed analysis of the Transformer model.
+                  </PromptDescription>
+                </Prompt>
+                <Prompt>
+                  <PromptTitle>
+                    Understanding the Attention Mechanism
+                  </PromptTitle>
+                  <PromptDescription>
+                    Explain the attention mechanism in neural networks.
+                  </PromptDescription>
+                </Prompt>
+              </Prompts>
+            </>
           )}
           <Sender
             className="w-full"
