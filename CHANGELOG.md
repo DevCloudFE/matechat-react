@@ -1,5 +1,11 @@
 # Changelog
 
+## \[0.1.0-alpha.5]
+
+### New Features
+
+- [`31f4edf`](https://github.com/DevCloudFE/matechat-react/commit/31f4edf5b24d7488ad3049e40eeca081593f9939) ([#31](https://github.com/DevCloudFE/matechat-react/pull/31) by [@xx-yoke](https://github.com/DevCloudFE/matechat-react/../../xx-yoke)) Add `FileUpload` component for file selections.
+
 ## \[0.1.0-alpha.4]
 
 ### New Features
