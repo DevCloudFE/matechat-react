@@ -5,6 +5,7 @@
     ".changes/background-option.md",
     ".changes/bubble-patch.md",
     ".changes/chore-deps.md",
+    ".changes/file-upload.md",
     ".changes/fix-sender-lint.md",
     ".changes/fix-utils-build.md",
     ".changes/optimize-sender-button.md",
