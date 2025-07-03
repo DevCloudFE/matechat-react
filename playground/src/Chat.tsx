@@ -2,6 +2,8 @@ import { MessageSquarePlus, MessageSquareWarning } from "lucide-react";
 import { useState } from "react";
 import { BubbleList } from "../../dist/bubble";
 import { Button } from "../../dist/button";
+import { FileUpload } from "../../dist/file-upload";
+
 import {
   Prompt,
   PromptDescription,
@@ -100,6 +102,7 @@ export function Chat() {
             input={input}
             onMessageChange={setPrompt}
           />
+          <FileUpload />
         </main>
       </div>
     </>
