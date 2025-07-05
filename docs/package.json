@@ -1,11 +1,12 @@
 {
-  "name": "docs",
-  "version": "1.0.0",
+  "name": "@matechat/react-docs",
+  "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "rspress build",
     "dev": "rspress dev",
-    "format": "prettier --write .",
+    "lint:fix": "biome check . --fix",
     "preview": "rspress preview"
   },
   "dependencies": {
