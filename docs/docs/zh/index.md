@@ -2,19 +2,18 @@
 pageType: home
 
 hero:
-  name: MateChat-React
-  text: AI 对话 UI 组件库
-  tagline: 一个灵活React UI组件库，为 AI 对话交互场景设计。
-  actions:
-    - theme: brand
-      text: 快速开始
-      link: guide/start/introduction
-    - theme: alt
-      text: GitHub
-      link: https://github.com/DevCloudFE/matechat-react
+  name: MateChat React
+  text: AI 场景解决方案
+  tagline: 基于 DevUI Design 的 AI 场景前端解决方案
+  # actions:
+  #   - theme: brand
+  #     text: 快速开始
+  #     link: guide/start/introduction
+  #   - theme: alt
+  #     text: GitHub
+  #     link: https://github.com/DevCloudFE/matechat-react
   image:
-    src: https://avatars.githubusercontent.com/u/49863837?s=170&v=4
-    alt: MateChat 标志
+    src: /matechat-icon.svg
 
 features:
   - title: 丰富的 AI 对话组件

@@ -1,34 +1,6 @@
 {
-  "gettingStarted": {
-    "zh": "开始",
-    "en": "Getting Started"
-  },
-  "other": {
-    "zh": "其他",
-    "en": "Other"
-  },
-  "model-docking": {
-    "zh": "模型对接",
-    "en": "Model-Docking"
-  },
-  "general": {
-    "zh": "通用",
-    "en": "General"
-  },
-  "layout": {
-    "zh": "布局",
-    "en": "Layout"
-  },
-  "session": {
-    "zh": "对话",
-    "en": "Session"
-  },
-  "input": {
-    "zh": "输入",
-    "en": "Input"
-  },
-  "interaction": {
-    "zh": "交互",
-    "en": "Interaction"
+  "quickStart": {
+    "zh": "快速开始",
+    "en": "Quick Start"
   }
 }
