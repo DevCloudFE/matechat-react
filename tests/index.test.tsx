@@ -30,6 +30,7 @@ test("single prompt", () => {
   );
   expect(titleElement).toBeInTheDocument();
   expect(descriptionElement).toBeInTheDocument();
-  expect(titleElement).toHaveClass("inline-flex font-semibold");
+  expect(titleElement).toHaveClass("font-medium", "text-gray-900");
   expect(titleElement.tagName).toBe("H3");
+  expect(descriptionElement).toHaveClass("text-gray-600");
 });
