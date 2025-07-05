@@ -6,26 +6,21 @@ export default defineConfig({
   plugins: [pluginPlayground()],
   root: path.join(__dirname, "docs"),
   title: "MateChat React",
-  icon: "/matechat-react-logo.png",
-  logo: {
-    light: "/matechat-react-logo.png",
-    dark: "/matechat-react-logo.png",
-  },
-  lang: "zh",
+  icon: "/matechat-icon.svg",
+  logo: "/matechat-icon.svg",
+  lang: "en",
   locales: [
-    // todo: 待开发英文文档
-    // {
-    //   lang: 'en',
-    //   // 导航栏切换语言的标签
-    //   label: 'English',
-    //   title: 'Rspress',
-    //   description: 'Static Site Generator',
-    // },
+    {
+      lang: "en",
+      label: "English",
+      title: "MateChat React",
+      description: "Frontend AI scenario solution based on DevUI Design",
+    },
     {
       lang: "zh",
       label: "简体中文",
-      title: "Rspress",
-      description: "静态网站生成器",
+      title: "MateChat React",
+      description: "基于 DevUI 设计的前端 AI 解决方案",
     },
   ],
   themeConfig: {
@@ -37,14 +32,8 @@ export default defineConfig({
       },
     ],
   },
-  builderConfig: {
-    resolve: {
-      alias: {
-        "@matechat/react": path.resolve(__dirname, "../dist"),
-      },
-    },
+  globalStyles: path.resolve(__dirname, "./docs/tailwind.css"),
+  mediumZoom: {
+    selector: ".rspress-doc",
   },
-  // 引入全局样式
-  globalStyles: path.resolve(__dirname, "./docs/style.css"),
-  mediumZoom: false,
 });
