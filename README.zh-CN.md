@@ -7,6 +7,7 @@
 MateChat React 是 [MateChat](https://github.com/DevCloudFE/MateChat) 的 React 版本，
 它是一个基于华为 DevUI 设计的前端 AI 场景解决方案 UI 库。
 
+
 [![npm Version](https://img.shields.io/npm/v/@matechat/react.svg)](https://www.npmjs.com/package/@matechat/react)
 [![npm Downloads](https://img.shields.io/npm/dm/@matechat/react.svg)](https://www.npmjs.com/package/@matechat/react)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
@@ -15,7 +16,7 @@ MateChat React 是 [MateChat](https://github.com/DevCloudFE/MateChat) 的 React 
 
 <div align="center">
 
-[English](./README.md) | 简体中文
+[English](./README.md) | [简体中文](./README.zh-CN.md)
 
 </div>
 
@@ -23,7 +24,7 @@ MateChat React 是 [MateChat](https://github.com/DevCloudFE/MateChat) 的 React 
 
 ## 介绍
 
-**MateChat React** 是一个专为 AI 场景打造的 React 组件库，适用于聊天助手、提示工程工具、Agent 框架等场景。 这是 [MateChat](https://github.com/DevCloudFE/MateChat) 的 React 版本，保持一致的功能与风格。
+**MateChat React** 是一个专为 AI 场景打造的 React 组件库，适用于聊天助手、提示工程工具、Agent 框架等场景。  这是 [MateChat](https://github.com/DevCloudFE/MateChat) 的 React 版本，保持一致的功能与风格。
 
 MateChat 基于 [华为 DevUI Design](https://devui.design/)，提供现代视觉语言、一致的用户体验以及良好的可扩展性。
 
@@ -50,8 +51,8 @@ pnpm add @matechat/react
 ```
 
 ```tsx
-import { Bubble } from "@matechat/react";
-import avatar from "./avatar.png";
+import { Bubble } from '@matechat/react';
+import avatar from './avatar.png';
 
 export default function BubbleDemo() {
   return (
@@ -73,6 +74,22 @@ export default function BubbleDemo() {
 }
 ```
 
+
+## 本地开发
+
+```bash
+git clone git@github.com:DevCloudFE/matechat-react.git
+cd matechat-react
+pnpm install
+pnpm dev
+```
+
+构建组件库：
+
+```bash
+pnpm build
+```
+
 ---
 
 ## 文档
@@ -86,7 +103,7 @@ export default function BubbleDemo() {
 
 ## Star 趋势
 
-[![Star History Chart](https://api.star-history.com/svg?repos=DevCloudFE/matechat-react&type=Date)](https://www.star-history.com/#DevCloudFE/matechat-react&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=DevCloudFE/matechat-react\&type=Date)](https://www.star-history.com/#DevCloudFE/matechat-react&Date)
 
 ---
 
@@ -94,9 +111,9 @@ export default function BubbleDemo() {
 
 我们欢迎各种形式的贡献：
 
-- 提交 bug 或需求 issue
-- 创建 pull request
-- 帮助完善文档或翻译
+* 提交 bug 或需求 issue
+* 创建 pull request
+* 帮助完善文档或翻译
 
 **贡献者：**
 
@@ -117,3 +134,5 @@ export default function BubbleDemo() {
 ## License
 
 该项目已获得 [MIT 许可](./LICENSE).
+
+
