@@ -9,6 +9,7 @@
     "preview": "rspress preview"
   },
   "dependencies": {
+    "@matechat/react": "link:..",
     "@rspress/plugin-playground": "^1.44.0",
     "rspress": "^1.40.2"
   },

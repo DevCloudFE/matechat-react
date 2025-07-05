@@ -1,27 +1,27 @@
 [
-    {
-      "type": "dir",
-      "name": "general",
-      "label": "general"
-    },
-    {
-      "type": "dir",
-      "name": "layout",
-      "label": "layout"
-    },
-    {
-      "type": "dir",
-      "name": "session",
-      "label": "session"
-    },
-    {
-      "type": "dir",
-      "name": "input",
-      "label": "input"
-    },
-    {
-      "type": "dir",
-      "name": "interaction",
-      "label": "interaction"
-    }
-  ]
+  {
+    "type": "dir",
+    "name": "general",
+    "label": "general"
+  },
+  {
+    "type": "dir",
+    "name": "layout",
+    "label": "layout"
+  },
+  {
+    "type": "dir",
+    "name": "session",
+    "label": "session"
+  },
+  {
+    "type": "dir",
+    "name": "input",
+    "label": "input"
+  },
+  {
+    "type": "dir",
+    "name": "interaction",
+    "label": "interaction"
+  }
+]

@@ -1,5 +1,5 @@
+import { List } from "@matechat/react";
 import React, { useState } from "react";
-import { List } from '@matechat/react';
 
 export default function ListDemoFlat() {
   const [selected, setSelected] = useState<string | undefined>();
@@ -19,7 +19,7 @@ export default function ListDemoFlat() {
         border: "1px solid #eee",
         borderRadius: 8,
         padding: 16,
-        boxShadow: "0 2px 6px rgba(0,0,0,0.05)"
+        boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
       }}
     >
       <div style={{ marginBottom: 12, fontWeight: 500, fontSize: 14 }}>

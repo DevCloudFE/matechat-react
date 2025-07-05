@@ -1,5 +1,5 @@
-import { Bubble } from '@matechat/react';
-import avatar from './avatar.png';
+import { Bubble } from "@matechat/react";
+import avatar from "./avatar.png";
 
 export default function BubbleDemo() {
   return (

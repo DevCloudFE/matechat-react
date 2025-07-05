@@ -1,9 +1,9 @@
-import { Button } from '@matechat/react';
+import { Button } from "@matechat/react";
 
-export default function ButtonDemo(){
-    return (
-        <div>
-            <Button/>
-        </div>
-    )
+export default function ButtonDemo() {
+  return (
+    <div>
+      <Button />
+    </div>
+  );
 }

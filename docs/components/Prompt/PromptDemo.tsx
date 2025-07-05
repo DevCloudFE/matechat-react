@@ -1,4 +1,9 @@
-import { Prompts, Prompt, PromptTitle, PromptDescription } from "@matechat/react";
+import {
+  Prompt,
+  PromptDescription,
+  Prompts,
+  PromptTitle,
+} from "@matechat/react";
 
 export default function PromptDemo() {
   return (
@@ -6,18 +11,22 @@ export default function PromptDemo() {
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "20px",      // 每个之间间距
-        width: "100%", 
+        gap: "20px", // 每个之间间距
+        width: "100%",
       }}
     >
       <Prompt size="lg">
         <PromptTitle>🌟 大号提示</PromptTitle>
-        <PromptDescription>适合在页面顶部醒目显示的重要信息。</PromptDescription>
+        <PromptDescription>
+          适合在页面顶部醒目显示的重要信息。
+        </PromptDescription>
       </Prompt>
 
       <Prompt size="md">
         <PromptTitle>📌 中号提示</PromptTitle>
-        <PromptDescription>常用于普通提示或分块标题下方的补充说明。</PromptDescription>
+        <PromptDescription>
+          常用于普通提示或分块标题下方的补充说明。
+        </PromptDescription>
       </Prompt>
 
       <Prompt size="sm">
