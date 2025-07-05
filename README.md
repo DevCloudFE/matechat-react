@@ -6,7 +6,6 @@
 
 MateChat React is the React version of [MateChat](https://github.com/DevCloudFE/MateChat), a front-end AI scenario solution UI library based on Huawei DevUI Design.
 
-
 [![npm Version](https://img.shields.io/npm/v/@matechat/react.svg)](https://www.npmjs.com/package/@matechat/react)
 [![npm Downloads](https://img.shields.io/npm/dm/@matechat/react.svg)](https://www.npmjs.com/package/@matechat/react)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
@@ -15,7 +14,7 @@ MateChat React is the React version of [MateChat](https://github.com/DevCloudFE/
 
 <div align="center">
 
-[English](./README.md) | [简体中文](./README.zh-CN.md)
+English | [简体中文](./README.zh-CN.md)
 
 </div>
 
@@ -48,8 +47,8 @@ pnpm add @matechat/react
 ```
 
 ```tsx
-import { Bubble } from '@matechat/react';
-import avatar from './avatar.png';
+import { Bubble } from "@matechat/react";
+import avatar from "./avatar.png";
 
 export default function BubbleDemo() {
   return (
@@ -73,32 +72,11 @@ export default function BubbleDemo() {
 
 ---
 
-## Development
-
-```bash
-git clone git@github.com:DevCloudFE/matechat-react.git
-cd matechat-react
-pnpm install
-pnpm dev
-```
-
-Build the library:
-
-```bash
-pnpm build
-```
-
----
-
 ## Documentation
 
 The documentation is still in progress, but you can feel free to create a new issue in [GitCode](https://gitcode.com/DevCloudFE/MateChat/issues) or [GitHub](https://github.com/DevCloudFE/MateChat/issues) to submit your questions or suggestions. This project is still under development, so the documentation is not complete yet, some features may change in the future.
 
 For more information, please track the progress in [#4](https://github.com/DevCloudFE/matechat-react/issues/4) and [#5](https://github.com/DevCloudFE/MateChat/issues/5).
-
-
-
-
 
 ## Star History
 
@@ -110,10 +88,9 @@ For more information, please track the progress in [#4](https://github.com/DevCl
 
 We welcome all kinds of contributions:
 
-* File issues for bugs or features
-* Create pull requests
-* Help with documentation or translations
-
+- File issues for bugs or features
+- Create pull requests
+- Help with documentation or translations
 
 **Contributors:**
 
@@ -127,7 +104,7 @@ We welcome all kinds of contributions:
 
 |                                              MateChat React Chat Group                                               |                                         SOA Chat Group                                          |
 | :------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
-| [<img alt="MateChat React Chat Group" src="./assets/matechat-react-qq-group.jpg" />](https://qm.qq.com/q/aMLehEXzBm) | [<img alt="SOAt Chat Group" src="./assets/soa-qq-group.jpg" />](https://qm.qq.com/q/lOocKriX74) |
+| [<img alt="MateChat React Chat Group" src="./assets/matechat-react-qq-group.jpg" />](https://qm.qq.com/q/aMLehEXzBm) | [<img alt="SOA Chat Group" src="./assets/soa-qq-group.jpg" />](https://qm.qq.com/q/lOocKriX74) |
 
 ## License
 
