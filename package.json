@@ -35,14 +35,14 @@
     "lint:fix": "pnpm run lint --fix",
     "build": "vite build",
     "dev": "tsx scripts/watch.ts",
+    "docs:build": "pnpm --filter @matechat/react-docs build",
     "docs:dev": "tsx scripts/docs-watch.ts",
     "playground:build": "vite build --config playground/vite.config.ts",
     "preview": "vite --config playground/vite.config.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "format": "biome format . --write",
-    "prepublishOnly": "pnpm run build",
-    "sync:changelog": "tsx scripts/sync-changelog.ts"
+    "prepublishOnly": "pnpm run build"
   },
   "peerDependencies": {
     "react": "^19.1.0",
