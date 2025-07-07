@@ -1,5 +1,11 @@
 # Changelog
 
+## \[0.1.0-alpha.7]
+
+### Performance Improvements
+
+- [`36ca7eb`](https://github.com/DevCloudFE/matechat-react/commit/36ca7eb9900a9e484a1b083f881e6d49e431e24a) Wrap all `useChat` hooks with `useCallback` to avoid re-rendering.
+
 ## \[0.1.0-alpha.6]
 
 ### Bug Fixes
