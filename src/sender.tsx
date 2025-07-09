@@ -7,6 +7,20 @@ import PublishNew from "./icons/publish-new.svg";
 import QuickStop from "./icons/quick-stop.svg";
 import type { Backend } from "./utils";
 
+export interface InputCountProps {
+  count: number;
+  limit: number;
+  className?: string;
+}
+
+export function InputCount({ count, limit = 500, className }: InputCountProps) {
+  return (
+    <span className={className}>
+      {count} / {limit}
+    </span>
+  );
+}
+
 export interface SenderButtonProps extends React.ComponentProps<"button"> {
   /**
    * Icon to display in the button.
@@ -86,6 +100,7 @@ export interface SenderProps extends React.ComponentProps<"div"> {
    * @param controller - The AbortController to abort the request.
    */
   onSend?: (controller: AbortController) => void;
+  toolbar?: React.ReactNode;
 }
 export function Sender({
   className,
@@ -94,6 +109,7 @@ export function Sender({
   onMessageChange,
   input,
   onSend,
+  toolbar,
   ...props
 }: SenderProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -165,6 +181,7 @@ export function Sender({
         <div className="flex items-center gap-2">
           <span className="text-sm text-gray-500">{message.length} / 500</span>
         </div>
+        {toolbar}
         <SenderButton onClick={handleSend} isSending={isSending} />
       </div>
     </div>
