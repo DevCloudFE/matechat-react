@@ -179,7 +179,7 @@ export function Sender({
       />
       <div className="flex items-center w-full px-4 py-2">
         {toolbar}
-        <SenderButton onClick={handleSend} isSending={isSending} />
+        <SenderButton onClick={handleSend} isSending={isSending} className="ml-auto" />
       </div>
     </div>
   );
