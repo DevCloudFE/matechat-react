@@ -10,10 +10,10 @@ import type { Backend } from "./utils";
 export interface InputCountProps {
   count: number;
   limit: number;
-  className?: string;
+  className: string;
 }
 
-export function InputCount({ count, limit = 500, className }: InputCountProps) {
+export function InputCount({ count, limit, className }: InputCountProps) {
   return (
     <span className={className}>
       {count} / {limit}
@@ -177,10 +177,7 @@ export function Sender({
         className="w-full py-4 px-4 border-0 rounded-2xl resize-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
         rows={1}
       />
-      <div className="flex items-center justify-between w-full px-4 py-2">
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-500">{message.length} / 500</span>
-        </div>
+      <div className="flex items-center w-full px-4 py-2">
         {toolbar}
         <SenderButton onClick={handleSend} isSending={isSending} />
       </div>
