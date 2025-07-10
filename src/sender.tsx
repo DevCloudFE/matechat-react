@@ -7,15 +7,20 @@ import PublishNew from "./icons/publish-new.svg";
 import QuickStop from "./icons/quick-stop.svg";
 import type { Backend } from "./utils";
 
-export interface InputCountProps {
+export interface InputCountProps extends React.ComponentProps<"span"> {
   count: number;
   limit: number;
   className: string;
 }
 
-export function InputCount({ count, limit, className }: InputCountProps) {
+export function InputCount({
+  count,
+  limit,
+  className,
+  ...props
+}: InputCountProps) {
   return (
-    <span className={className}>
+    <span className={className} {...props}>
       {count} / {limit}
     </span>
   );
@@ -179,7 +184,11 @@ export function Sender({
       />
       <div className="flex items-center w-full px-4 py-2">
         {toolbar}
-        <SenderButton onClick={handleSend} isSending={isSending} className="ml-auto" />
+        <SenderButton
+          onClick={handleSend}
+          isSending={isSending}
+          className="ml-auto"
+        />
       </div>
     </div>
   );
