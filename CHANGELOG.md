@@ -1,5 +1,25 @@
 # Changelog
 
+## \[0.1.0-alpha.7]
+
+### Performance Improvements
+
+- [`36ca7eb`](https://github.com/DevCloudFE/matechat-react/commit/36ca7eb9900a9e484a1b083f881e6d49e431e24a) Wrap all `useChat` hooks with `useCallback` to avoid re-rendering.
+
+## \[0.1.0-alpha.6]
+
+### Bug Fixes
+
+- [`8044b1e`](https://github.com/DevCloudFE/matechat-react/commit/8044b1eed9defb6f195cf715bd8c2321ad41be1d) ([#30](https://github.com/DevCloudFE/matechat-react/pull/30) by [@Raven-Book](https://github.com/DevCloudFE/matechat-react/../../Raven-Book)) adjust title/description font-size to match the prompt component
+
+## \[0.1.0-alpha.5]
+
+### New Features
+
+- [`31f4edf`](https://github.com/DevCloudFE/matechat-react/commit/31f4edf5b24d7488ad3049e40eeca081593f9939) ([#31](https://github.com/DevCloudFE/matechat-react/pull/31)) Add `FileUpload` component for file selections.
+- [`4e2905b`](https://github.com/DevCloudFE/matechat-react/commit/4e2905b6e8a06e0496205f347c11732f6c18af7e) Optimize callback performance by using `useCallback`.
+- [`cd8ace0`](https://github.com/DevCloudFE/matechat-react/commit/cd8ace015d070290798369768125581429c0bf49) Remove gap and margin between textarea and footer in `Sender` component.
+
 ## \[0.1.0-alpha.4]
 
 ### New Features

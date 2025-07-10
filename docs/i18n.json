@@ -1,0 +1,14 @@
+{
+  "quickStart": {
+    "zh": "快速开始",
+    "en": "Quick Start"
+  },
+  "components": {
+    "zh": "组件",
+    "en": "Components"
+  },
+  "interaction": {
+    "zh": "交互",
+    "en": "Interaction"
+  }
+}

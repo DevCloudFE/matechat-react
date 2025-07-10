@@ -4,11 +4,14 @@
     "covector",
     "deepseek",
     "devui",
+    "gitcode",
     "jbolda",
     "matechat",
     "nanoevents",
     "rolldown",
+    "rspress",
     "tsdown",
-    "unbundle"
+    "unbundle",
+    "xlink"
   ]
 }

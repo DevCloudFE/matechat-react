@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import type React from "react";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import Appendix from "./icons/appendix.svg";
 
@@ -14,11 +14,14 @@ export function FileUpload({
   ...props
 }: FileUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files ?? []);
-    onFilesSelect?.(files);
-    if (fileInputRef.current) fileInputRef.current.value = "";
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = Array.from(e.target.files ?? []);
+      onFilesSelect?.(files);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    },
+    [onFilesSelect],
+  );
 
   return (
     <button

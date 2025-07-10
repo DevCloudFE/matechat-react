@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { InputOptions } from "./backend";
 import type { Backend, Events, EventTypes, MessageParam } from "./types";
 
@@ -15,20 +15,26 @@ export function useChat(
   const [messages, setMessages] = useState<MessageParam[]>(initialMessages);
   const [isPending, setIsPending] = useState(false);
 
-  const input = async (prompt: string, options?: InputOptions) => {
-    setIsPending(true);
-    return backend.input(prompt, {
-      messages,
-      ...options,
-    });
-  };
+  const input = useCallback(
+    async (prompt: string, options?: InputOptions) => {
+      setIsPending(true);
+      return backend.input(prompt, {
+        messages,
+        ...options,
+      });
+    },
+    [backend, messages],
+  );
 
-  const on = <K extends EventTypes["type"]>(
-    type: K,
-    handler: Events[K],
-  ): (() => void) => {
-    return backend.on(type, handler);
-  };
+  const on = useCallback(
+    <K extends EventTypes["type"]>(
+      type: K,
+      handler: Events[K],
+    ): (() => void) => {
+      return backend.on(type, handler);
+    },
+    [backend],
+  );
 
   useEffect(() => {
     const cleanCbs: (() => void)[] = [

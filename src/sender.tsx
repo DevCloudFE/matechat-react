@@ -1,7 +1,7 @@
 import "./tailwind.css";
 
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import PublishNew from "./icons/publish-new.svg";
 import QuickStop from "./icons/quick-stop.svg";
@@ -130,7 +130,7 @@ export function Sender({
   }, [message, onMessageChange]);
 
   const [controller, setController] = useState<AbortController | null>(null);
-  const handleSend = () => {
+  const handleSend = useCallback(() => {
     if (isSending) {
       setIsSending(false);
       return controller?.abort();
@@ -154,20 +154,23 @@ export function Sender({
     } else {
       onSend?.(newController);
     }
-  };
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
-      handleSend();
-    }
-  };
+  }, [isSending, message, onSend, controller, input]);
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        handleSend();
+      }
+    },
+    [handleSend],
+  );
 
   return (
     <div
       data-slot="sender"
       className={twMerge(
         clsx(
-          "flex flex-col items-center gap-4 border border-gray-200 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
+          "flex flex-col items-center border border-gray-200 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
           className,
         ),
       )}
@@ -179,8 +182,8 @@ export function Sender({
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="w-full py-4 px-4 border-0 rounded-2xl resize-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
-        rows={1}
+        className="w-full pt-4 px-4 border-0 rounded-2xl resize-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
+        rows={2}
       />
       <div className="flex items-center w-full px-4 py-2 gap-4">
         {toolbar}

@@ -1,0 +1,25 @@
+{
+  "name": "@matechat/react-docs",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "rspress build",
+    "dev": "rspress dev",
+    "lint:fix": "biome check . --fix",
+    "preview": "rspress preview"
+  },
+  "dependencies": {
+    "@matechat/react": "workspace:*",
+    "rspress": "^1.40.2"
+  },
+  "devDependencies": {
+    "@rspress/plugin-api-docgen": "^1.44.0",
+    "@rspress/plugin-playground": "^1.44.0",
+    "@rspress/plugin-preview": "^1.44.0",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^18.11.17",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.10"
+  }
+}

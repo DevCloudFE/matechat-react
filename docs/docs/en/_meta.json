@@ -1,0 +1,16 @@
+[
+  {
+    "text": "components",
+    "link": "/components",
+    "activeMatch": "^/components"
+  },
+  {
+    "text": "Releases",
+    "items": [
+      {
+        "text": "Release Notes",
+        "link": "https://github.com/DevCloudFE/matechat-react/releases"
+      }
+    ]
+  }
+]

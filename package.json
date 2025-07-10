@@ -1,6 +1,6 @@
 {
   "name": "@matechat/react",
-  "version": "0.1.0-alpha.4",
+  "version": "0.1.0-alpha.7",
   "packageManager": "pnpm@10.11.0",
   "description": "Front-end AI scenario solution UI library based on Huawei DevUI Design.",
   "type": "module",
@@ -35,6 +35,8 @@
     "lint:fix": "pnpm run lint --fix",
     "build": "vite build",
     "dev": "tsx scripts/watch.ts",
+    "docs:build": "pnpm --filter @matechat/react-docs build",
+    "docs:dev": "tsx scripts/watch.ts --project docs",
     "playground:build": "vite build --config playground/vite.config.ts",
     "preview": "vite --config playground/vite.config.ts",
     "test": "vitest",
