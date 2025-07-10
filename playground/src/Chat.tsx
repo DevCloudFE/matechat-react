@@ -3,14 +3,13 @@ import { useState } from "react";
 import { BubbleList } from "../../dist/bubble";
 import { Button } from "../../dist/button";
 import { FileUpload } from "../../dist/file-upload";
-
 import {
   Prompt,
   PromptDescription,
   Prompts,
   PromptTitle,
 } from "../../dist/prompt";
-import { Sender } from "../../dist/sender";
+import { Sender, InputCount } from "../../dist/sender";
 import type { MessageParam } from "../../dist/utils";
 import { useChat } from "../../dist/utils/chat";
 import { useMateChat } from "../../dist/utils/core";
@@ -101,8 +100,8 @@ export function Chat() {
             initialMessage={prompt}
             input={input}
             onMessageChange={setPrompt}
+            toolbar={<div className="flex flex-row justify-between w-full"><InputCount count={prompt.length} limit={500}/><FileUpload/></div>}
           />
-          <FileUpload />
         </main>
       </div>
     </>
