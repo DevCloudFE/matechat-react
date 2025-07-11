@@ -16,7 +16,7 @@ export interface InputCountProps extends React.ComponentProps<"span"> {
 export function InputCount({
   count,
   limit,
-  className,
+  className = "text-gray-400",
   ...props
 }: InputCountProps) {
   return (

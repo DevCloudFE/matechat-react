@@ -99,7 +99,6 @@ export function Chat() {
                 <InputCount
                   count={prompt.length}
                   limit={500}
-                  className="text-gray-400"
                 />
                 <FileUpload />
               </div>
