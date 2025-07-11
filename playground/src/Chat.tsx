@@ -96,7 +96,11 @@ export function Chat() {
             onMessageChange={setPrompt}
             toolbar={
               <div className="flex flex-row justify-between w-full">
-                <InputCount count={prompt.length} limit={500} />
+                <InputCount
+                  count={prompt.length}
+                  limit={500}
+                  className="text-gray-400"
+                />
                 <FileUpload />
               </div>
             }
