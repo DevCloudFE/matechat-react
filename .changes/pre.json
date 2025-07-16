@@ -1,6 +1,7 @@
 {
   "tag": "alpha",
   "changes": [
+    ".changes/add-inputcount-component.md",
     ".changes/add-list-component.md",
     ".changes/background-option.md",
     ".changes/bubble-patch.md",
