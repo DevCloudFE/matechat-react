@@ -1,5 +1,15 @@
 # Changelog
 
+## \[0.1.0-beta.0]
+
+### Refactors
+
+- [`5019927`](https://github.com/DevCloudFE/matechat-react/commit/501992755827669d76b63a8e88837f71db186e4a) Rewrite auto scroll logic of `BubbleList` component:
+
+  - Use `ResizeObserver` to detect content size changes and scroll accordingly.
+  - Add `scrollContainer` method to scroll to bottom when content size changes.
+  - Introduce `pauseScroll` to prevent unnecessary scrolls during updates.
+
 ## \[0.1.0-alpha.8]
 
 ### New Features
