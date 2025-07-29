@@ -3,7 +3,7 @@ import "./tailwind.css";
 
 import clsx from "clsx";
 import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
@@ -240,6 +240,11 @@ export interface BubbleListProps extends React.ComponentProps<"div"> {
   };
   footer?: React.ReactNode;
   pending?: React.ReactNode;
+  /**
+   * The height threshold for triggering scroll behavior.
+   * @default 8
+   */
+  threshold?: number;
 }
 
 export function BubbleList({
@@ -254,20 +259,68 @@ export function BubbleList({
     align: "left",
   },
   isPending = true,
+  messages,
+  threshold = 8,
   ...props
 }: BubbleListProps) {
-  const { messages } = props;
-  const lastMessageRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: This effect runs only when messages change
+  const pauseScroll = useRef<boolean>(false);
+  const contentRect = useRef<DOMRect>(new DOMRect());
+
+  const scrollContainer = useCallback((smooth?: boolean) => {
+    if (pauseScroll.current) return;
+
+    containerRef.current?.scrollTo({
+      top: containerRef.current?.scrollHeight,
+      behavior: smooth === false ? "instant" : "smooth",
+    });
+  }, []);
+
   useEffect(() => {
-    if (lastMessageRef.current) {
-      lastMessageRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-      });
+    if (!containerRef.current || !contentRef.current) return;
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { height, width } = entry.contentRect;
+        if (
+          Math.abs(contentRect.current.height - height) > threshold ||
+          Math.abs(contentRect.current.width - width) > threshold
+        ) {
+          contentRect.current = entry.contentRect;
+          scrollContainer();
+        }
+      }
+    });
+
+    observer.observe(containerRef.current);
+    observer.observe(contentRef.current);
+
+    return () => observer.disconnect();
+  }, [scrollContainer, threshold]);
+
+  const isScrollAtBottom = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) return true;
+
+    return (
+      Math.abs(
+        container.scrollTop + container.clientHeight - container.scrollHeight,
+      ) < threshold
+    );
+  }, [threshold]);
+
+  const handleWheel = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    if (isScrollAtBottom()) {
+      pauseScroll.current = false;
+    } else {
+      pauseScroll.current = true;
     }
-  }, [messages, isPending]);
+  }, [isScrollAtBottom]);
 
   return (
     <div
@@ -275,11 +328,28 @@ export function BubbleList({
       className={twMerge(
         clsx("flex flex-col overflow-y-auto flex-1 gap-4", className),
       )}
+      ref={containerRef}
+      onWheel={handleWheel}
+      onTouchStart={() => {
+        pauseScroll.current = true;
+      }}
+      onTouchEnd={() => {
+        if (isScrollAtBottom()) {
+          pauseScroll.current = false;
+          scrollContainer(false);
+        } else {
+          pauseScroll.current = true;
+        }
+      }}
+      onTouchMove={() => {
+        pauseScroll.current = true;
+      }}
       {...props}
     >
       <div
         data-slot="bubble-items"
         className="flex flex-col max-w-full flex-1 gap-4"
+        ref={contentRef}
       >
         {messages.map((message, index) => (
           <div
@@ -310,7 +380,6 @@ export function BubbleList({
                   ? "solid"
                   : "transparent"
               }
-              ref={index === messages.length - 1 ? lastMessageRef : undefined}
             />
           </div>
         ))}

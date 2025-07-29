@@ -1,6 +1,7 @@
 {
-  "tag": "alpha",
+  "tag": "beta",
   "changes": [
+    ".changes/add-inputcount-component.md",
     ".changes/add-list-component.md",
     ".changes/background-option.md",
     ".changes/bubble-patch.md",
@@ -13,6 +14,6 @@
     ".changes/optimize-sender-button.md",
     ".changes/optimize-sender-input.md",
     ".changes/optimize-usechat.md",
-    ".changes/release-alpha.md"
+    ".changes/refactor-bubble-list.md"
   ]
 }

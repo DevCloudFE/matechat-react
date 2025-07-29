@@ -1,0 +1,82 @@
+name: Bug Report
+description: Submit a bug report for a frontend UI library.
+title: "[Bug] Brief Title of the Issue"
+body:
+  - type: dropdown
+    id: will-contribute
+    attributes:
+      label: Willing to Contribute to the Fix?
+      description: If you're planning to assist in fixing this issue, please let us know so we can avoid duplicating efforts.
+      options:
+        - "Yes"
+        - "No"
+        - Maybe
+      default: 0
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to submit this UI bug report! Please provide as much detail as possible to help us resolve the issue quickly.
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Information
+      description: How can we reach you if we need more information?
+      placeholder: E.g., email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What Happened?
+      description: What UI issue did you encounter? Please describe the specific behavior.
+      placeholder: E.g., Button unresponsive, text overflow, etc.
+      value: "UI issue occurred!"
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: How should the UI element appear or behave?
+      placeholder: Please describe the expected UI behavior.
+      value: "The button should be clickable, the text should fit the container."
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: In which browsers did you observe this issue?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+      description: Please select the browsers where the issue occurred.
+    validations:
+      required: false
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Please provide the specific steps to reproduce this issue.
+      placeholder: E.g., 1. Click the button 2. Error message appears
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Browser Console Logs (if any)
+      description: If you saw any errors in the browser console, please paste the relevant logs here.
+      placeholder: Please copy and paste the related console logs.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow the project's code of conduct.
+      options:
+        - label: I agree to follow the project's code of conduct
+          required: true

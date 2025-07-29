@@ -1,5 +1,24 @@
 # Changelog
 
+## \[0.1.0-beta.0]
+
+### Refactors
+
+- [`5019927`](https://github.com/DevCloudFE/matechat-react/commit/501992755827669d76b63a8e88837f71db186e4a) Rewrite auto scroll logic of `BubbleList` component:
+
+  - Use `ResizeObserver` to detect content size changes and scroll accordingly.
+  - Add `scrollContainer` method to scroll to bottom when content size changes.
+  - Introduce `pauseScroll` to prevent unnecessary scrolls during updates.
+
+## \[0.1.0-alpha.8]
+
+### New Features
+
+- [`6a494c2`](https://github.com/DevCloudFE/matechat-react/commit/6a494c2e4e4c117c404e42e362e4b9a3535aa62e) ([#47](https://github.com/DevCloudFE/matechat-react/pull/47) by [@xx-yoke](https://github.com/DevCloudFE/matechat-react/../../xx-yoke)) Add `InputCount` component.
+
+  - Remove the input count div container and wrap it into a new component, allowing users to customize the input limit.
+  - Remove the justify-center style from the div container and add ml-auto to the SenderButton to ensure button remains on the right side.
+
 ## \[0.1.0-alpha.7]
 
 ### Performance Improvements

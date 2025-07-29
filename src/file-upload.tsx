@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import Appendix from "./icons/appendix.svg";
 
 export interface FileUploadProps extends React.ComponentProps<"button"> {
-  onFilesSelect: (files: File[]) => void;
+  onFilesSelect?: (files: File[]) => void;
 }
 
 export function FileUpload({
@@ -17,7 +17,7 @@ export function FileUpload({
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = Array.from(e.target.files ?? []);
-      onFilesSelect(files);
+      onFilesSelect?.(files);
       if (fileInputRef.current) fileInputRef.current.value = "";
     },
     [onFilesSelect],
