@@ -13,5 +13,6 @@
     "tsdown",
     "unbundle",
     "xlink"
-  ]
+  ],
+  "ignoreWords": ["Anson"]
 }
