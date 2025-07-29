@@ -22,6 +22,11 @@ jobs:
           node-version: lts/*
           cache: pnpm
 
+      - name: Markdown lint
+        uses: DavidAnson/markdownlint-cli2-action@v20
+        with:
+          globs: "**/*.md"
+
       - name: Install
         run: pnpm install
 
@@ -36,8 +41,3 @@ jobs:
 
       - name: Test
         run: pnpm run test
-
-      - name: Markdown lint
-        uses: DavidAnson/markdownlint-cli2-action@v20
-        with:
-          globs: "**/*.md"
