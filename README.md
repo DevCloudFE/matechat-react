@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 <div align="center">
   <h1>MateChat React</h1>
 </div>
@@ -95,7 +96,7 @@ We welcome all kinds of contributions:
 **Contributors:**
 
 <a href="https://github.com/DevCloudFE/matechat-react/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=DevCloudFE/matechat-react" />
+  <img src="https://contrib.rocks/image?repo=DevCloudFE/matechat-react" alt="DevCloudFE/matechat-react contributors"/>
 </a>
 
 ---

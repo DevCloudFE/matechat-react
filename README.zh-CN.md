@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 <div align="center">
   <h1>MateChat React</h1>
 </div>
@@ -101,7 +102,7 @@ export default function BubbleDemo() {
 **贡献者：**
 
 <a href="https://github.com/DevCloudFE/matechat-react/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=DevCloudFE/matechat-react" />
+  <img src="https://contrib.rocks/image?repo=DevCloudFE/matechat-react" alt="DevCloudFE/matechat-react 项目贡献者"/>
 </a>
 
 ---
