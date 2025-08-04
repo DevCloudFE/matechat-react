@@ -28,7 +28,7 @@ jobs:
           globs: |
             "**/*.md"
             "!CHANGELOG.md"
-
+            
       - name: Install
         run: pnpm install
 

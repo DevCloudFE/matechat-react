@@ -157,12 +157,22 @@ export function Sender({
   }, [isSending, message, onSend, controller, input]);
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-      if (event.key === "Enter" && !event.shiftKey) {
+      if (
+        event.key === "Enter" &&
+        !event.shiftKey &&
+        !event.nativeEvent.isComposing
+      ) {
         event.preventDefault();
         handleSend();
       }
     },
     [handleSend],
+  );
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setMessage(e.target.value);
+    },
+    [],
   );
 
   return (
@@ -179,7 +189,7 @@ export function Sender({
       <textarea
         ref={textareaRef}
         value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         className="w-full pt-4 px-4 border-0 rounded-2xl resize-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"

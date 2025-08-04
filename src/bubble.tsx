@@ -272,9 +272,11 @@ export function BubbleList({
   const scrollContainer = useCallback((smooth?: boolean) => {
     if (pauseScroll.current) return;
 
-    containerRef.current?.scrollTo({
-      top: containerRef.current?.scrollHeight,
-      behavior: smooth === false ? "instant" : "smooth",
+    requestAnimationFrame(() => {
+      containerRef.current?.scrollTo({
+        top: containerRef.current?.scrollHeight,
+        behavior: smooth ? "smooth" : "instant",
+      });
     });
   }, []);
 
