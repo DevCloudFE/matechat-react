@@ -1,5 +1,3 @@
-<!-- markdownlint-disable -->
-
 # Changelog
 
 ## \[0.1.0-beta.0]
