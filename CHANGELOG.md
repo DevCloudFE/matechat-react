@@ -1,5 +1,11 @@
 # Changelog
 
+## \[0.1.0-beta.1]
+
+### Performance Improvements
+
+- [`57077a8`](https://github.com/DevCloudFE/matechat-react/commit/57077a8439a97bed327668bc6f2be3bb630c2749) Optimize performance of `BubbleList` component, avoid extra rerender overheads.
+
 ## \[0.1.0-beta.0]
 
 ### Refactors

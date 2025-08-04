@@ -5,6 +5,7 @@
     ".changes/add-list-component.md",
     ".changes/background-option.md",
     ".changes/bubble-patch.md",
+    ".changes/bubble-perf.md",
     ".changes/chore-deps.md",
     ".changes/file-upload.md",
     ".changes/fix-prompt.md",
