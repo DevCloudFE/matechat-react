@@ -54,55 +54,49 @@ export function Chat() {
   };
 
   return (
-    <>
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <main className="flex flex-col items-center justify-center h-[80vh] w-full max-w-3xl p-4 bg-white rounded-lg shadow-md gap-5">
-          <BubbleList
-            className="px-4 w-full max-w-full"
-            messages={messages}
-            background="right-solid"
-            isPending={isPending}
-            footer={
-              <Button
-                onClick={onClear}
-                variant="default"
-                className="self-center"
-              >
-                <MessageSquarePlus size="1.1rem" />
-                Start a new conversation
-              </Button>
-            }
-          />
-          {messages.length === 0 && (
-            <Prompts>
-              <Prompt>
-                <PromptTitle>Understanding the Transformer Model</PromptTitle>
-                <PromptDescription>
-                  Give a detailed analysis of the Transformer model.
-                </PromptDescription>
-              </Prompt>
-              <Prompt size="xs">
-                <PromptTitle>Understanding the Attention Mechanism</PromptTitle>
-                <PromptDescription>
-                  Explain the attention mechanism in neural networks.
-                </PromptDescription>
-              </Prompt>
-            </Prompts>
-          )}
-          <Sender
-            className="w-full"
-            initialMessage={prompt}
-            input={input}
-            onMessageChange={setPrompt}
-            toolbar={
-              <div className="flex flex-row justify-between w-full">
-                <InputCount count={prompt.length} limit={500} />
-                <FileUpload />
-              </div>
-            }
-          />
-        </main>
-      </div>
-    </>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <main className="flex flex-col items-center justify-center h-[80vh] w-full max-w-3xl p-4 bg-white rounded-lg shadow-md gap-5">
+        <BubbleList
+          className="px-4 w-full max-w-full"
+          messages={messages}
+          background="right-solid"
+          isPending={isPending}
+          footer={
+            <Button onClick={onClear} variant="default" className="self-center">
+              <MessageSquarePlus size="1.1rem" />
+              Start a new conversation
+            </Button>
+          }
+        />
+        {messages.length === 0 && (
+          <Prompts>
+            <Prompt>
+              <PromptTitle>Understanding the Transformer Model</PromptTitle>
+              <PromptDescription>
+                Give a detailed analysis of the Transformer model.
+              </PromptDescription>
+            </Prompt>
+            <Prompt size="xs">
+              <PromptTitle>Understanding the Attention Mechanism</PromptTitle>
+              <PromptDescription>
+                Explain the attention mechanism in neural networks.
+              </PromptDescription>
+            </Prompt>
+          </Prompts>
+        )}
+        <Sender
+          className="w-full"
+          initialMessage={prompt}
+          input={input}
+          onMessageChange={setPrompt}
+          toolbar={
+            <div className="flex flex-row justify-between w-full">
+              <InputCount count={prompt.length} limit={500} />
+              <FileUpload />
+            </div>
+          }
+        />
+      </main>
+    </div>
   );
 }
