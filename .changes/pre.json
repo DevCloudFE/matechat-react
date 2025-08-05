@@ -11,6 +11,7 @@
     ".changes/fix-prompt.md",
     ".changes/fix-sender-lint.md",
     ".changes/fix-utils-build.md",
+    ".changes/memo-bubble-list.md",
     ".changes/optimize-callback.md",
     ".changes/optimize-sender-button.md",
     ".changes/optimize-sender-input.md",

@@ -1,5 +1,11 @@
 # Changelog
 
+## \[0.1.0-beta.3]
+
+### Performance Improvements
+
+- [`b07439f`](https://github.com/DevCloudFE/matechat-react/commit/b07439f90089648ddd2f94d92a72dd818074af02) Default wrap `BubbleList` with `React.memo` to avoid extra rerender.
+
 ## \[0.1.0-beta.2]
 
 ### Bug Fixes
