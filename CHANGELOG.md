@@ -1,5 +1,11 @@
 # Changelog
 
+## \[0.1.0-beta.2]
+
+### Bug Fixes
+
+- [`a11cb5d`](https://github.com/DevCloudFE/matechat-react/commit/a11cb5d57b0cf83ed7cdd07e60c276d75843df95) Enforce some styles for `Sender` component.
+
 ## \[0.1.0-beta.1]
 
 ### Performance Improvements
