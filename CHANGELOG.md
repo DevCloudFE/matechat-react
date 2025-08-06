@@ -1,5 +1,17 @@
 # Changelog
 
+## \[0.1.0-beta.4]
+
+### New Features
+
+- [`421dc74`](https://github.com/DevCloudFE/matechat-react/commit/421dc74f39f24c00801d336dce5fbbdf6830d7f5) Optimize markdown component in `Bubble`, customize link, heading and code. Support copy button for code blocks.
+- [`3869f95`](https://github.com/DevCloudFE/matechat-react/commit/3869f9554a87df0925f61350753ead20876f93ec) Optimize behavior of `useChat`:
+
+  - Add `throwOnEmptyBackend` option to `useChat` function.
+  - Throw an error when `backend` is nullish and `throwOnEmptyBackend` is `true`.
+  - Rename `isPending`to`pending` in `useChat` return value.
+  - Allow empty `backend` in `useChat` function.
+
 ## \[0.1.0-beta.3]
 
 ### Performance Improvements
