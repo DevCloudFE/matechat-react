@@ -13,10 +13,13 @@
     ".changes/fix-utils-build.md",
     ".changes/memo-bubble-list.md",
     ".changes/optimize-callback.md",
+    ".changes/optimize-markdown.md",
     ".changes/optimize-sender-button.md",
     ".changes/optimize-sender-input.md",
+    ".changes/optimize-use-chat.md",
     ".changes/optimize-usechat.md",
     ".changes/refactor-bubble-list.md",
+    ".changes/refactor-bubble.md",
     ".changes/sender-enforce.md"
   ]
 }
