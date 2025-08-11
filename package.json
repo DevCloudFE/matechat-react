@@ -1,7 +1,7 @@
 {
   "name": "@matechat/react",
   "version": "0.1.0-rc.0",
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.14.0",
   "description": "Front-end AI scenario solution UI library based on Huawei DevUI Design.",
   "type": "module",
   "license": "MIT",
@@ -42,6 +42,7 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "format": "biome format . --write",
+    "registry:build": "shadcn build --output docs/doc_build/r",
     "prepublishOnly": "pnpm run build"
   },
   "peerDependencies": {
@@ -77,6 +78,7 @@
     "lucide-react": "^0.536.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "shadcn": "2.9.3-canary.0",
     "tailwindcss": "^4.1.11",
     "tsdown": "^0.13.3",
     "tsx": "^4.20.3",

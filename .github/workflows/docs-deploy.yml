@@ -39,6 +39,8 @@ jobs:
       - name: Build with Rspress
         run: |
           pnpm docs:build
+      - name: Build Shadcn
+        run: pnpm registry:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

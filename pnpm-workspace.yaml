@@ -1,10 +1,12 @@
 packages:
   - playground
   - docs
+
 onlyBuiltDependencies:
-  - "@biomejs/biome"
-  - "@swc/core"
-  - "@tailwindcss/oxide"
+  - '@biomejs/biome'
+  - '@swc/core'
+  - '@tailwindcss/oxide'
   - core-js
   - esbuild
+  - msw
   - unrs-resolver
