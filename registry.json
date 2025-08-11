@@ -55,8 +55,14 @@
         },
         {
           "path": "src/bubble/hooks.tsx",
-          "type": "registry:hook"
+          "type": "registry:component"
         }
+      ],
+      "dependencies": [
+        "react-markdown",
+        "react-gfm",
+        "react-math",
+        "react-syntax-highlighter"
       ]
     }
   ]
