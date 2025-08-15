@@ -1,49 +1,15 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import "./tailwind.css";
+import "../tailwind.css";
 
 import clsx from "clsx";
 import type React from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef } from "react";
 import Markdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import {
-  oneLight,
-  vscDarkPlus,
-} from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { twMerge } from "tailwind-merge";
-import type { MessageParam } from "./utils";
-
-const useTheme = () => {
-  const [isDark, setDark] = useState(false);
-
-  useEffect(() => {
-    const checkDarkMode = () => {
-      setDark(document.documentElement.classList.contains("dark"));
-    };
-    checkDarkMode();
-
-    const observer = new MutationObserver(checkDarkMode);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleSystemThemeChange = (event: MediaQueryListEvent) => {
-      setDark(event.matches);
-    };
-    mediaQuery.addEventListener("change", handleSystemThemeChange);
-
-    return () => {
-      observer.disconnect();
-      mediaQuery.removeEventListener("change", handleSystemThemeChange);
-    };
-  }, []);
-
-  return { isDark };
-};
+import type { MessageParam } from "../utils";
+import { BlockQuote, CodeBlock, Heading, Link } from "./markdown";
 
 const bubbleVariants = cva(
   "flex flex-col gap-1 justify-center rounded-lg dark:text-gray-200 text-gray-800 max-w-full overflow-x-auto",
@@ -111,8 +77,6 @@ export function Bubble({
   isPending = false,
   ...props
 }: BubbleProps) {
-  const { isDark } = useTheme();
-
   const defaultPending = (
     <div className="flex items-center space-x-1 py-1">
       <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
@@ -149,39 +113,15 @@ export function Bubble({
         <Markdown
           remarkPlugins={[remarkGfm, remarkMath]}
           components={{
-            code(props) {
-              const { children, className, ref: _ref, ...rest } = props;
-              const match = /language-(\w+)/.exec(className || "");
-              return match ? (
-                <div className="w-full overflow-x-auto border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                  <SyntaxHighlighter
-                    {...rest}
-                    PreTag="div"
-                    language={match[1]}
-                    style={isDark ? vscDarkPlus : oneLight}
-                    customStyle={{
-                      background: "transparent",
-                      margin: 0,
-                      padding: "1rem",
-                      borderRadius: "0.5rem",
-                      overflowX: "auto",
-                    }}
-                    codeTagProps={{
-                      style: {
-                        fontFamily: "monospace",
-                        fontSize: "0.875rem",
-                      },
-                    }}
-                  >
-                    {String(children).replace(/\n$/, "")}
-                  </SyntaxHighlighter>
-                </div>
-              ) : (
-                <code {...rest} className={className}>
-                  {children}
-                </code>
-              );
-            },
+            a: Link,
+            code: CodeBlock,
+            blockquote: BlockQuote,
+            h1: (props) => <Heading {...props} level={1} />,
+            h2: (props) => <Heading {...props} level={2} />,
+            h3: (props) => <Heading {...props} level={3} />,
+            h4: (props) => <Heading {...props} level={4} />,
+            h5: (props) => <Heading {...props} level={5} />,
+            h6: (props) => <Heading {...props} level={6} />,
           }}
         >
           {text}
@@ -191,23 +131,18 @@ export function Bubble({
   );
 }
 
-export interface AvatarProps {
+export interface AvatarProps extends React.ComponentProps<"div"> {
   text?: string;
   imageUrl?: string;
 }
 
-export function Avatar({
-  className,
-  text,
-  imageUrl,
-  ...props
-}: React.ComponentProps<"div"> & AvatarProps) {
+export function Avatar({ className, text, imageUrl, ...props }: AvatarProps) {
   return (
     <div
       data-slot="avatar"
       className={twMerge(
         clsx(
-          "flex items-center justify-center w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-800 dark:text-gray-200 text-gray-800",
+          "flex items-center justify-center w-9 h-9 rounded-full bg-gray-300 dark:bg-gray-800 dark:text-gray-200 text-gray-800",
           className,
         ),
       )}
@@ -247,17 +182,12 @@ export interface BubbleListProps extends React.ComponentProps<"div"> {
   threshold?: number;
 }
 
-export function BubbleList({
+export const BubbleList = memo(function BubbleList({
   className,
   background = "right-solid",
   footer,
   pending,
-  assistant = {
-    avatar: {
-      text: "A",
-    },
-    align: "left",
-  },
+  assistant,
   isPending = true,
   messages,
   threshold = 8,
@@ -324,6 +254,23 @@ export function BubbleList({
     }
   }, [isScrollAtBottom]);
 
+  const handleTouchStart = useCallback(() => {
+    pauseScroll.current = true;
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    if (isScrollAtBottom()) {
+      pauseScroll.current = false;
+      scrollContainer(false);
+    } else {
+      pauseScroll.current = true;
+    }
+  }, [isScrollAtBottom, scrollContainer]);
+
+  const handleTouchMove = useCallback(() => {
+    pauseScroll.current = true;
+  }, []);
+
   return (
     <div
       data-slot="bubble-list"
@@ -332,20 +279,9 @@ export function BubbleList({
       )}
       ref={containerRef}
       onWheel={handleWheel}
-      onTouchStart={() => {
-        pauseScroll.current = true;
-      }}
-      onTouchEnd={() => {
-        if (isScrollAtBottom()) {
-          pauseScroll.current = false;
-          scrollContainer(false);
-        } else {
-          pauseScroll.current = true;
-        }
-      }}
-      onTouchMove={() => {
-        pauseScroll.current = true;
-      }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchMove={handleTouchMove}
       {...props}
     >
       <div
@@ -353,9 +289,9 @@ export function BubbleList({
         className="flex flex-col max-w-full flex-1 gap-4"
         ref={contentRef}
       >
-        {messages.map((message, index) => (
+        {messages.map((message) => (
           <div
-            key={message.content.slice(0, 8) + index.toString()}
+            key={message.id}
             data-slot="bubble-item"
             className={twMerge(
               clsx(
@@ -423,4 +359,4 @@ export function BubbleList({
       )}
     </div>
   );
-}
+});

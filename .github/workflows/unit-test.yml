@@ -36,7 +36,7 @@ jobs:
         run: pnpm run build
 
       - name: Lint
-        run: pnpm run lint
+        run: pnpm biome ci
 
       - name: Typecheck
         run: pnpm run typecheck

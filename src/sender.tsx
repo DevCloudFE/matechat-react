@@ -10,7 +10,6 @@ import type { Backend } from "./utils";
 export interface InputCountProps extends React.ComponentProps<"span"> {
   count: number;
   limit: number;
-  className: string;
 }
 
 export function InputCount({
@@ -65,7 +64,7 @@ export function SenderButton({
     >
       {icon ?? (
         <img
-          className="filter brightness-0 invert"
+          className="filter !brightness-0 invert"
           src={isSending ? QuickStop : PublishNew}
           alt={isSending ? "icon-quick-stop" : "icon-publish-new"}
         />
@@ -107,6 +106,7 @@ export interface SenderProps extends React.ComponentProps<"div"> {
   onSend?: (controller: AbortController) => void;
   toolbar?: React.ReactNode;
 }
+
 export function Sender({
   className,
   initialMessage = "",
@@ -180,7 +180,7 @@ export function Sender({
       data-slot="sender"
       className={twMerge(
         clsx(
-          "flex flex-col items-center border border-gray-200 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
+          "flex flex-col items-center border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
           className,
         ),
       )}
@@ -192,7 +192,7 @@ export function Sender({
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="w-full pt-4 px-4 border-0 rounded-2xl resize-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
+        className="w-full pt-4 px-4 border-0 rounded-2xl !resize-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
         rows={2}
       />
       <div className="flex items-center w-full px-4 py-2 gap-4">

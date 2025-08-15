@@ -78,7 +78,7 @@ export function List({
         }
       >
         <div
-          data-solt="list-label"
+          data-slot="list-label"
           className="px-3 py-2 bg-gray-100 font-medium text-sm flex items-center gap-2"
         >
           {optionGroupTemplate

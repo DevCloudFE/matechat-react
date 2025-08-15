@@ -1,6 +1,7 @@
 import { createNanoEvents, type Emitter } from "nanoevents";
 import OpenAI, { type ClientOptions } from "openai";
 import type { Backend, Events, EventTypes, MessageParam } from "./types";
+import { getRandomId } from "./utils";
 
 /**
  * Configuration options for the `OpenAIBackend` class.
@@ -84,7 +85,7 @@ export class OpenAIBackend implements Backend {
    */
   async input(prompt: string, options?: InputOptions): Promise<void> {
     this.emitter.emit("input", {
-      id: Symbol(),
+      id: getRandomId(16),
       type: "input",
       payload: { prompt },
     });
@@ -112,7 +113,7 @@ export class OpenAIBackend implements Backend {
       for await (const chunk of response) {
         const chunkMessage = chunk.choices[0].delta.content || "";
         this.emitter.emit("chunk", {
-          id: Symbol(chunk.id),
+          id: chunk.id,
           type: "chunk",
           payload: { chunk: chunkMessage },
         });
@@ -121,13 +122,13 @@ export class OpenAIBackend implements Backend {
       }
     } catch (error) {
       this.emitter.emit("error", {
-        id: Symbol(),
+        id: getRandomId(16),
         type: "error",
         payload: { error: (error as Error).message },
       });
     }
     this.emitter.emit("finish", {
-      id: Symbol(),
+      id: getRandomId(16),
       type: "finish",
       payload: { message: prompt },
     });

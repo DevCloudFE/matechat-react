@@ -6,9 +6,9 @@ hero:
   text: AI 场景解决方案
   tagline: 基于 DevUI Design 的 AI 场景前端解决方案
   actions:
-  #   - theme: brand
-  #     text: 快速开始
-  #     link: guide/start/introduction
+    - theme: brand
+      text: 快速开始
+      link: /zh/guide/introduction/get-start
     - theme: alt
       text: GitHub
       link: https://github.com/DevCloudFE/matechat-react

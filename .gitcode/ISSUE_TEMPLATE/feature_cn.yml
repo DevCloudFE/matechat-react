@@ -1,0 +1,72 @@
+name: 功能请求（中文）
+description: 提交功能请求
+title: "[Feature] 功能的简要标题"
+body:
+  - type: dropdown
+    id: will-contribute
+    attributes:
+      label: 是否愿意协助开发？
+      description: 如果您计划协助开发此功能，请告诉我们以便协调工作。
+      options:
+        - "否"
+        - "是"
+        - 可能
+      default: 0
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        感谢您提交此功能请求！请提供尽可能多的详细信息，以帮助我们了解您的需求。
+  - type: input
+    id: contact
+    attributes:
+      label: 联系方式
+      description: 如果我们需要更多信息，如何联系您？
+      placeholder: 例如：email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: 功能描述
+      description: 请描述您想要请求的功能或建议的改进。
+      placeholder: 例如：希望添加对特定API集成的支持或新的设置选项。
+      value: "我想添加一个新功能..."
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: 使用场景
+      description: 请提供此功能将被使用的上下文或场景，帮助我们了解其需求。
+      placeholder: 例如：用于自动化报告或增强可访问性的功能。
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 功能优先级
+      options:
+        - 高
+        - 中
+        - 低
+      description: 请指定此功能的优先级。
+    validations:
+      required: true
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: 附加信息
+      description: 如果您有任何额外的详细信息或资源，请在此处提供。
+      placeholder: 提供相关链接或文档。
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 行为准则
+      description: 通过提交此功能请求，您同意遵守项目的行为准则。
+      options:
+        - label: 我同意遵守项目的行为准则
+          required: true

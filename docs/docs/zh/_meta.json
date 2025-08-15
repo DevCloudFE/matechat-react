@@ -1,5 +1,10 @@
 [
   {
+    "text": "guide",
+    "link": "/zh/guide/introduction/get-start",
+    "activeMatch": "^/zh/guide/introduction/get-start"
+  },
+  {
     "text": "components",
     "link": "/zh/components",
     "activeMatch": "^/zh/components"

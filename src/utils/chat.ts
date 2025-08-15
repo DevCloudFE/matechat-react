@@ -1,103 +1,132 @@
 import { useCallback, useEffect, useState } from "react";
 import type { InputOptions } from "./backend";
-import type { Backend, Events, EventTypes, MessageParam } from "./types";
+import type {
+  Backend,
+  Events,
+  EventTypes,
+  MessageParam,
+  Nullable,
+} from "./types";
 
-export function useChat(
-  backend: Backend,
-  initialMessages: MessageParam[] = [],
-): {
+/**
+ * Options for `useChat`.
+ */
+export interface UseChatOptions {
+  /**
+   * Whether to throw an error when the backend is nullish.
+   * @description
+   * If `true`, an error will be thrown when the backend is nullish.
+   * The error will be thrown when calling `input` or `on` callback,
+   * but not thrown immediately.
+   * @default false
+   */
+  throwOnEmptyBackend?: boolean;
+}
+
+export interface UseChatReturn {
   messages: MessageParam[];
   input: (prompt: string, options?: InputOptions) => Promise<void>;
-  on: <K extends EventTypes["type"]>(type: K, handler: Events[K]) => () => void;
+  on: <K extends EventTypes["type"]>(
+    type: K,
+    handler: Events[K],
+  ) => Nullable<() => void>;
   setMessages: React.Dispatch<React.SetStateAction<MessageParam[]>>;
-  isPending: boolean;
-} {
+  pending: boolean;
+}
+
+export function useChat(
+  backend?: Backend,
+  initialMessages: MessageParam[] = [],
+  options: UseChatOptions = {},
+): UseChatReturn {
   const [messages, setMessages] = useState<MessageParam[]>(initialMessages);
-  const [isPending, setIsPending] = useState(false);
+  const [pending, setPending] = useState(false);
 
   const input = useCallback(
-    async (prompt: string, options?: InputOptions) => {
-      setIsPending(true);
-      return backend.input(prompt, {
+    async (prompt: string, inputOptions?: InputOptions) => {
+      if (!backend && options.throwOnEmptyBackend) {
+        throw new Error("Backend is not initialized");
+      }
+      return backend?.input(prompt, {
         messages,
-        ...options,
+        ...inputOptions,
       });
     },
-    [backend, messages],
+    [backend, messages, options.throwOnEmptyBackend],
   );
 
   const on = useCallback(
-    <K extends EventTypes["type"]>(
-      type: K,
-      handler: Events[K],
-    ): (() => void) => {
-      return backend.on(type, handler);
+    <K extends EventTypes["type"]>(type: K, handler: Events[K]) => {
+      if (!backend && options.throwOnEmptyBackend) {
+        throw new Error("Backend is not initialized");
+      }
+      return backend?.on(type, handler);
     },
-    [backend],
+    [backend, options, options.throwOnEmptyBackend],
   );
 
   useEffect(() => {
-    const cleanCbs: (() => void)[] = [
-      backend.on("input", (event) => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          {
-            role: "user",
-            name: "User",
-            content: event.payload.prompt,
-            avatar: {
-              text: "U",
-            },
-            align: "right",
-          },
-        ]);
-      }),
-      backend.on("message", (event) => {
-        setMessages((prevMessages) => [...prevMessages, event.payload]);
-      }),
-      backend.on("error", (event) => {
-        setIsPending(false);
-        console.error("Error from backend:", event.payload.error);
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          {
-            role: "system",
-            name: "Error",
-            content: event.payload.error,
-            align: "center",
-          },
-        ]);
-      }),
-      backend.on("finish", () => {
-        setIsPending(false);
-      }),
-      backend.on("chunk", (event) => {
-        setIsPending(false);
-        setMessages((prev) => {
-          const lastMessage = prev[prev.length - 1];
-          if (lastMessage && lastMessage.role === "assistant") {
-            return [
-              ...prev.slice(0, -1),
+    const cleanCbs: (() => void)[] = backend
+      ? [
+          backend.on("input", (event) => {
+            setPending(true);
+            setMessages((prevMessages) => [
+              ...prevMessages,
               {
-                ...lastMessage,
-                content: lastMessage.content + event.payload.chunk,
+                id: event.id,
+                role: "user",
+                name: "User",
+                content: event.payload.prompt,
+                align: "right",
               },
-            ];
-          }
-          return [
-            ...prev,
-            {
-              role: "assistant",
-              content: event.payload.chunk,
-              avatar: {
-                text: "A",
+            ]);
+          }),
+          backend.on("message", (event) => {
+            setMessages((prevMessages) => [...prevMessages, event.payload]);
+          }),
+          backend.on("error", (event) => {
+            setPending(false);
+            console.error("Error from backend:", event.payload.error);
+            setMessages((prevMessages) => [
+              ...prevMessages,
+              {
+                id: event.id,
+                role: "system",
+                name: "Error",
+                content: event.payload.error,
+                align: "center",
               },
-              align: "left",
-            },
-          ];
-        });
-      }),
-    ];
+            ]);
+          }),
+          backend.on("finish", () => {
+            setPending(false);
+          }),
+          backend.on("chunk", (event) => {
+            setPending(false);
+            setMessages((prev) => {
+              const lastMessage = prev[prev.length - 1];
+              if (lastMessage && lastMessage.role === "assistant") {
+                return [
+                  ...prev.slice(0, -1),
+                  {
+                    ...lastMessage,
+                    content: lastMessage.content + event.payload.chunk,
+                  },
+                ];
+              }
+              return [
+                ...prev,
+                {
+                  id: event.id,
+                  role: "assistant",
+                  content: event.payload.chunk,
+                  align: "left",
+                },
+              ];
+            });
+          }),
+        ]
+      : [];
     return () => {
       for (const cb of cleanCbs) {
         cb();
@@ -106,5 +135,5 @@ export function useChat(
     };
   }, [backend]);
 
-  return { messages, input, on, setMessages, isPending };
+  return { messages, input, on, setMessages, pending };
 }

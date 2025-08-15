@@ -1,5 +1,10 @@
 [
   {
+    "text": "guide",
+    "link": "/guide/introduction/get-start",
+    "activeMatch": "^/guide/introduction/get-start"
+  },
+  {
     "text": "components",
     "link": "/components",
     "activeMatch": "^/components"

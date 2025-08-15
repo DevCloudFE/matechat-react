@@ -1,0 +1,82 @@
+name: Bug 报告
+description: 为前端 UI 库提交 Bug 报告。
+title: "[Bug] 问题的简要标题"
+body:
+  - type: dropdown
+    id: will-contribute
+    attributes:
+      label: 愿意为修复做出贡献吗？
+      description: 如果您计划协助修复此问题，请告知我们，以避免重复工作。
+      options:
+        - "是"
+        - "否"
+        - 可能
+      default: 0
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        感谢您花时间提交此 UI Bug 报告！请提供尽可能详细的信息，以帮助我们快速解决问题。
+  - type: input
+    id: contact
+    attributes:
+      label: 联系方式
+      description: 如果我们需要更多信息，如何联系您？
+      placeholder: 例如：email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么问题？
+      description: 您遇到了什么 UI 问题？请描述具体行为。
+      placeholder: 例如：按钮无响应、文本溢出等
+      value: " UI 出问题了！"
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: 预期行为
+      description: UI 元素应该如何显示或行为？
+      placeholder: 请描述预期的 UI 行为。
+      value: "按钮应该是可点击的，文本应该适合容器。"
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: 在哪些浏览器中观察到此问题？
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+      description: 请选择出现问题的浏览器。
+    validations:
+      required: false
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: 重现步骤
+      description: 请提供重现此问题的具体步骤。
+      placeholder: 例如：1. 点击按钮 2. 出现错误信息
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 浏览器控制台日志（如有）
+      description: 如果您在浏览器控制台中看到任何错误，请在此处粘贴相关日志。
+      placeholder: 请复制并粘贴相关的控制台日志。
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 行为准则
+      description: 通过提交此问题，您同意遵守项目的行为准则。
+      options:
+        - label: 我同意遵守项目的行为准则
+          required: true

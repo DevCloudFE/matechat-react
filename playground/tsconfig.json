@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@matechat/react": ["../src/index.ts"],
+      "@matechat/react/*": ["../src/*"]
+    }
+  },
+  "include": ["src"]
+}

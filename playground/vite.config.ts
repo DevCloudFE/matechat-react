@@ -1,3 +1,4 @@
+import path from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react-swc";
 import { createLogger, defineConfig } from "vite";
@@ -8,7 +9,11 @@ const logger = createLogger();
 logger.warn = () => {};
 
 export default defineConfig({
-  root: "./playground",
   plugins: [react(), tailwindcss()],
   customLogger: logger,
+  resolve: {
+    alias: {
+      "@matechat/react": path.resolve(__dirname, "../src"),
+    },
+  },
 });

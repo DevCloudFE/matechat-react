@@ -1,0 +1,69 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "matechat",
+  "homepage": "https://matechat.noctisynth.org",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:block",
+      "title": "Button",
+      "description": "MateChat Button",
+      "files": [
+        {
+          "path": "src/button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sender",
+      "type": "registry:block",
+      "title": "Sender",
+      "description": "MateChat Sender",
+      "files": [
+        {
+          "path": "src/sender.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "prompt",
+      "type": "registry:block",
+      "title": "Prompt",
+      "description": "MateChat Prompt",
+      "files": [
+        {
+          "path": "src/prompt.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "bubble",
+      "type": "registry:block",
+      "title": "Bubble",
+      "description": "MateChat Bubble",
+      "files": [
+        {
+          "path": "src/bubble/index.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/bubble/markdown.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/bubble/hooks.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "react-markdown",
+        "remark-gfm",
+        "remark-math",
+        "react-syntax-highlighter"
+      ]
+    }
+  ]
+}

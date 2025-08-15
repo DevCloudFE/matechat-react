@@ -10,5 +10,13 @@
   "interaction": {
     "zh": "交互",
     "en": "Interaction"
+  },
+  "introduction": {
+    "zh": "介绍",
+    "en": "Introduction"
+  },
+  "guide": {
+    "zh": "指南",
+    "en": "Guide"
   }
 }
