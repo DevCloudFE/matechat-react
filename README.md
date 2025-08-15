@@ -27,7 +27,7 @@ English | [简体中文](./README.zh-CN.md)
 
 MateChat is based on [Huawei DevUI Design](https://devui.design/), offering a modern visual language, consistent user experience, and excellent scalability.
 
-For more information, visit the matechat-react website: [matechat - react](http://matechat.noctisynth.org/)
+For more information, visit the MateChat React website: [MateChat React](http://matechat.noctisynth.org/)
 
 ---
 

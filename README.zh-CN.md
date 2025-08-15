@@ -28,7 +28,7 @@ MateChat React 是 [MateChat](https://github.com/DevCloudFE/MateChat) 的 React 
 
 MateChat 基于 [华为 DevUI Design](https://devui.design/)，提供现代视觉语言、一致的用户体验以及良好的可扩展性。
 
-了解更多请访问 matechat-react 网站： [matechat-react](http://matechat.noctisynth.org/)
+了解更多请访问 MateChat React 网站： [MateChat React](http://matechat.noctisynth.org/)
 
 ---
 
