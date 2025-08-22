@@ -6,6 +6,9 @@ import { twMerge } from "tailwind-merge";
 import PublishNew from "./icons/publish-new.svg";
 import QuickStop from "./icons/quick-stop.svg";
 import type { Backend } from "./utils";
+import { commandItems, serviceMentions } from "./utils/mentionItems";
+import { List } from "./list";
+import type { SelectOption } from "./list";
 
 export interface InputCountProps extends React.ComponentProps<"span"> {
   count: number;
@@ -120,7 +123,49 @@ export function Sender({
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [message, setMessage] = useState(initialMessage);
   const [isSending, setIsSending] = useState(false);
+  const [showCommandList, setShowCommandList] = useState(false);
+  const [showMentionList, setShowMentionList] = useState(false);
+  const renderList = (
+    show: boolean,
+    options: SelectOption[],
+    onSelected: (value: string) => void
+  ) => {
+    if (!show) return null;
 
+    return (
+      <List
+        onMouseDown={(e) => e.preventDefault()}
+        className="absolute z-10 w-full max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg"
+        value={options.length > 0 ? options[0]?.value : undefined}
+        options={options}
+        onSelected={(value) => {
+          const textarea = textareaRef.current!;
+          const cursorPos = textarea.selectionStart;
+
+          const text = textarea.value;
+          const before = text.slice(0, cursorPos);
+          const after = text.slice(cursorPos);
+
+          const triggerIndex = Math.max(before.lastIndexOf('/'), before.lastIndexOf('@'));
+
+          if (triggerIndex === -1) return;
+
+          const triggerChar = before[triggerIndex];
+
+          const newText =
+            before.slice(0, triggerIndex) + triggerChar + value + ' ' + after;
+
+          textarea.value = newText;
+          textarea.selectionStart = textarea.selectionEnd = triggerIndex + value.length + 2;
+          textarea.focus();
+          setMessage(newText);
+
+          onSelected(value);
+        }
+        }
+      />
+    );
+  };
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
@@ -170,9 +215,24 @@ export function Sender({
   );
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setMessage(e.target.value);
+      
+      const value = e.target.value;
+      setMessage(value);
+
+      const lastChar = value.length > 0 ? value[value.length - 1] : "";
+
+      if (lastChar === "/") {
+        setShowCommandList(true);
+        setShowMentionList(false);
+      } else if (lastChar === "@") {
+        setShowMentionList(true);
+        setShowCommandList(false);
+      } else {
+        setShowCommandList(false);
+        setShowMentionList(false);
+      }
     },
-    [],
+    []
   );
 
   return (
@@ -203,6 +263,8 @@ export function Sender({
           className="ml-auto"
         />
       </div>
+      {renderList(showCommandList, commandItems, () => setShowCommandList(false))}
+      {renderList(showMentionList, serviceMentions, () => setShowMentionList(false))}
     </div>
   );
 }
