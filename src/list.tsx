@@ -1,112 +1,197 @@
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export type SelectOptionsType = SelectOption[] | OptionGroup[];
+export type UnknownRecord = Record<string, unknown>;
 
-export interface SelectOption {
-  label?: string;
-  value?: string;
-  className?: string;
+export type GroupData = UnknownRecord & {
   [key: string]: unknown;
-}
+};
 
-export interface OptionGroup {
-  label?: string;
+export type OptionData = UnknownRecord & {
   [key: string]: unknown;
+};
+
+export type SelectItemOptionsType = OptionData[] | GroupData[];
+
+interface ListChangeTargetOptions {
+  name: string;
+  id: string;
+  value: unknown;
 }
 
-export interface ListProps extends React.ComponentProps<"div"> {
-  value: string | undefined;
-  options: SelectOptionsType | undefined;
-  className?: string;
-  optionGroupChildren?: string;
-  optionGroupLabel?: string;
-  optionGroupTemplate?: (group: OptionGroup) => React.ReactNode;
-  optionLabel?: string;
-  optionValue?: string;
-  onSelected?: (value: string) => void;
+interface ListChangeEvent {
+  originalEvent: React.SyntheticEvent;
+  value: unknown;
+  stopPropagation(): void;
+  preventDefault(): void;
+  target: ListChangeTargetOptions;
 }
 
-export function List({
-  value,
-  options,
+export interface ListProps
+  extends Omit<
+    React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLDivElement>,
+      HTMLDivElement
+    >,
+    "onChange"
+  > {
+  listBoxStyle?: React.CSSProperties | undefined;
+  listGroupStyle?: React.CSSProperties | undefined;
+  listItemStyle?: React.CSSProperties | undefined;
+  listStyle?: React.CSSProperties | undefined;
+  optionGroupChildren?: string | undefined;
+  optionGroupLabel?: string | undefined;
+  optionLabel: string;
+  options?: SelectItemOptionsType | undefined;
+  value?: string | null;
+  onChange?: (event: ListChangeEvent) => void;
+}
+
+interface OptionGroupItem {
+  optionGroup: GroupData;
+  group: boolean;
+  index: number;
+  label: unknown;
+}
+
+export type MixedOptionArray = Array<OptionGroupItem | OptionData>;
+
+export const List = ({
   className,
-  optionGroupChildren = "items",
-  optionGroupLabel = "label",
-  optionGroupTemplate,
-  optionLabel = "label",
-  optionValue = "value",
-  onSelected,
+  listBoxStyle,
+  listGroupStyle,
+  listItemStyle,
+  listStyle,
+  optionGroupChildren,
+  optionGroupLabel,
+  optionLabel,
+  options,
+  value,
+  onChange,
   ...props
-}: ListProps) {
-  const renderOption = (option: SelectOption) => (
-    <button
-      type="button"
-      tabIndex={-1}
-      data-slot="list-item"
-      key={
-        (option[optionValue] as string | number) ??
-        (option[optionLabel] as string | number)
-      }
-      className={twMerge(
-        clsx(
-          "cursor-pointer px-4 py-2 text-sm hover:bg-blue-300 block w-full text-left",
-          value === option[optionValue] &&
-            "bg-blue-500 hover:bg-blue-500 font-semibold",
-        ),
-      )}
-      onClick={() => onSelected?.(option[optionValue] as string)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onSelected?.(option[optionValue] as string);
-        }
-      }}
-    >
-      {option[optionLabel] as React.ReactNode}
-    </button>
-  );
+}: ListProps) => {
+  const handleSelect = (
+    event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+    option: UnknownRecord,
+  ) => {
+    const changeEvent: ListChangeEvent = {
+      originalEvent: event,
+      value: option[optionLabel],
+      stopPropagation: () => event.stopPropagation(),
+      preventDefault: () => event.preventDefault(),
+      target: {
+        name: option.label?.toString() || "",
+        id: option.value?.toString() || "",
+        value: option[optionLabel],
+      },
+    };
+    onChange?.(changeEvent);
+  };
 
-  const renderGroup = (group: OptionGroup) => {
-    const children = (group?.[optionGroupChildren] as SelectOption[]) ?? [];
+  const flatOptions = (options: GroupData[] | undefined) => {
+    return (options || []).reduce(
+      (result: MixedOptionArray, option: GroupData, index: number) => {
+        result.push({
+          optionGroup: option,
+          group: true,
+          index,
+          label: option[optionGroupLabel as keyof GroupData],
+        });
 
-    return (
-      <div
-        key={
-          (group[optionGroupLabel] as string | number) ??
-          (group.code as string | number)
+        const groupChildren = optionGroupChildren
+          ? option[optionGroupChildren as keyof GroupData]
+          : null;
+
+        if (Array.isArray(groupChildren)) {
+          groupChildren.forEach((o: OptionData) => result.push(o));
         }
-      >
-        <div
-          data-slot="list-label"
-          className="px-3 py-2 bg-gray-100 font-medium text-sm flex items-center gap-2"
-        >
-          {optionGroupTemplate
-            ? (optionGroupTemplate(group) as React.ReactNode)
-            : (group[optionGroupLabel] as React.ReactNode)}
-        </div>
-        {children.map(renderOption)}
-      </div>
+        return result;
+      },
+      [] as MixedOptionArray,
     );
   };
 
-  const isGrouped =
-    Array.isArray(options) &&
-    options.length > 0 &&
-    typeof options[0] === "object" &&
-    optionGroupChildren &&
-    Array.isArray(options[0][optionGroupChildren]);
+  const createItem = (option: OptionData | OptionGroupItem, index: number) => {
+    const isOptionGroupItem = (
+      item: OptionData | OptionGroupItem,
+    ): item is OptionGroupItem => {
+      return "group" in item && item.group === true;
+    };
+
+    if (isOptionGroupItem(option)) {
+      const groupContent =
+        option.optionGroup[optionGroupLabel as keyof GroupData];
+      const key = `group_${index}_${String(groupContent)}`;
+
+      return (
+        <li
+          key={key}
+          role-slot="list-group"
+          aria-label={String(groupContent || "")}
+          className={clsx("font-bold dark:text-gray-400 py-2 px-4 text-sm")}
+          style={listGroupStyle}
+        >
+          {String(groupContent || " ")}
+        </li>
+      );
+    }
+
+    const optionData = option as OptionData;
+    const optionKey = optionData[optionLabel as keyof OptionData];
+    const key = `option_${index}_${String(optionKey)}`;
+
+    const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+      handleSelect(e, optionData);
+    };
+
+    const optionValue = optionData.value;
+    const isSelected = String(optionValue) === String(value);
+
+    return (
+      <li
+        key={key}
+        role-slot="list-item"
+        className={twMerge(
+          clsx("py-2 px-4 hover:bg-gray-200 text-gray-600 cursor-pointer", {
+            "bg-blue-500 text-white hover:bg-blue-600": isSelected,
+          }),
+        )}
+        style={listItemStyle}
+        onClick={handleClick}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleSelect(
+              e as
+                | React.MouseEvent<HTMLElement>
+                | React.KeyboardEvent<HTMLElement>,
+              optionData,
+            );
+          }
+        }}
+      >
+        {String(optionKey || "")}
+      </li>
+    );
+  };
+
+  const createList = () => {
+    const finalOptions = optionGroupLabel
+      ? flatOptions(options as GroupData[] | undefined)
+      : (options as OptionData[]);
+
+    return (
+      <ul role-slot="listbox" style={listBoxStyle}>
+        {finalOptions?.map((option, index) => createItem(option, index))}
+      </ul>
+    );
+  };
+
+  const list = createList();
 
   return (
-    <div
-      data-slot="list"
-      className={twMerge(clsx("w-full max-w-xs overflow-y-auto", className))}
-      {...props}
-    >
-      {Array.isArray(options) &&
-        (isGrouped
-          ? (options as OptionGroup[]).map(renderGroup)
-          : (options as SelectOption[]).map(renderOption))}
+    <div style={listStyle} data-slot="list" {...props}>
+      {list}
     </div>
   );
-}
+};
