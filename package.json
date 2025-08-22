@@ -1,6 +1,6 @@
 {
   "name": "@matechat/react",
-  "version": "0.1.0-rc.0",
+  "version": "0.1.0-rc.1",
   "packageManager": "pnpm@10.14.0",
   "description": "Front-end AI scenario solution UI library based on Huawei DevUI Design.",
   "type": "module",
