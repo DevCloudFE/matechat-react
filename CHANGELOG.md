@@ -1,5 +1,11 @@
 # Changelog
 
+## \[0.1.0-rc.1]
+
+### New Features
+
+- [`f35b6e9`](https://github.com/DevCloudFE/matechat-react/commit/f35b6e9938d57294445026e59a028e63d616fb19) ([#65](https://github.com/DevCloudFE/matechat-react/pull/65) by [@TMZZ031130](https://github.com/DevCloudFE/matechat-react/../../TMZZ031130)) Refactor `List` component in `list.tsx` to improve code structure and maintainability.
+
 ## \[0.1.0-rc.0]
 
 ### New Features
