@@ -57,7 +57,6 @@ interface OptionGroupItem {
 export type MixedOptionArray = Array<OptionGroupItem | OptionData>;
 
 export const List = ({
-  className,
   listBoxStyle,
   listGroupStyle,
   listItemStyle,
@@ -74,15 +73,16 @@ export const List = ({
     event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
     option: UnknownRecord,
   ) => {
+    const optionValue = option[optionLabel];
     const changeEvent: ListChangeEvent = {
       originalEvent: event,
-      value: option[optionLabel],
+      value: optionValue,
       stopPropagation: () => event.stopPropagation(),
       preventDefault: () => event.preventDefault(),
       target: {
         name: option.label?.toString() || "",
-        id: option.value?.toString() || "",
-        value: option[optionLabel],
+        id: "list",
+        value: optionValue,
       },
     };
     onChange?.(changeEvent);
@@ -144,7 +144,7 @@ export const List = ({
       handleSelect(e, optionData);
     };
 
-    const optionValue = optionData.value;
+    const optionValue = optionData[optionLabel];
     const isSelected = String(optionValue) === String(value);
 
     return (
@@ -156,6 +156,7 @@ export const List = ({
             "bg-blue-500 text-white hover:bg-blue-600": isSelected,
           }),
         )}
+        id={`lo_id_${index}`}
         style={listItemStyle}
         onClick={handleClick}
         onKeyDown={(e) => {
