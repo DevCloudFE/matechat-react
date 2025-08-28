@@ -139,7 +139,6 @@ export const List = ({
     const optionData = option as OptionData;
     const optionKey = optionData[optionLabel as keyof OptionData];
     const key = `option_${index}_${String(optionKey)}`;
-
     const handleClick = (e: React.MouseEvent<HTMLElement>) => {
       handleSelect(e, optionData);
     };

@@ -20,6 +20,7 @@
     ".changes/optimize-usechat.md",
     ".changes/refactor-bubble-list.md",
     ".changes/refactor-bubble.md",
+    ".changes/refactor-list-component.md",
     ".changes/sender-enforce.md"
   ]
 }
