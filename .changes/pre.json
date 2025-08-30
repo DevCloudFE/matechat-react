@@ -8,6 +8,7 @@
     ".changes/bubble-perf.md",
     ".changes/chore-deps.md",
     ".changes/file-upload.md",
+    ".changes/fix-list-selection.md",
     ".changes/fix-prompt.md",
     ".changes/fix-sender-lint.md",
     ".changes/fix-utils-build.md",
