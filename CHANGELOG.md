@@ -1,5 +1,16 @@
 # Changelog
 
+## \[0.1.0-rc.2]
+
+### Bug Fixes
+
+- [`9f3c6a9`](https://github.com/DevCloudFE/matechat-react/commit/9f3c6a99bac9fe8e9a7a031cfd6c1ae4e7720603) ([#67](https://github.com/DevCloudFE/matechat-react/pull/67) by [@TMZZ031130](https://github.com/DevCloudFE/matechat-react/../../TMZZ031130)) Fixed the issue that normal list mode cannot be selected.
+
+  Other optimizations:
+
+  - Remove the `className` attribute from the `list`.
+  - Add an id attribute to the li option of the list component.
+
 ## \[0.1.0-rc.1]
 
 ### New Features
