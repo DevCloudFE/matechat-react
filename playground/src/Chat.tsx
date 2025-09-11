@@ -59,8 +59,13 @@ export function Chat() {
     initialMessages,
     {
       throwOnEmptyBackend: true,
-    },
+    }
   );
+
+  // 新增：处理输入变化的回调函数
+  const handleInputChange = (value: string) => {
+    setPrompt(value);
+  };
 
   const footer = useMemo(() => {
     const onClear = () => {
@@ -104,6 +109,8 @@ export function Chat() {
         <Sender
           className="w-full"
           input={input}
+          initialMessage={prompt} // 同步初始值
+          onMessageChange={handleInputChange} // 同步变化
           toolbar={
             <div className="flex flex-row justify-between w-full">
               <InputCount count={prompt.length} limit={500} />
