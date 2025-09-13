@@ -59,7 +59,7 @@ export function Chat() {
     initialMessages,
     {
       throwOnEmptyBackend: true,
-    }
+    },
   );
 
   // 新增：处理输入变化的回调函数
