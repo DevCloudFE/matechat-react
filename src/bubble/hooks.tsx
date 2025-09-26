@@ -20,7 +20,7 @@ export const useTheme = () => {
     };
   }, []);
 
-  console.log(isDark)
+  console.log(isDark);
 
   return { isDark };
 };

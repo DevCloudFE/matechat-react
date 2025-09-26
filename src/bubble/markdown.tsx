@@ -29,7 +29,7 @@ export function Heading({ children, className, ...rest }: HeadingProps) {
   );
 }
 
-export interface CodeBlockProps extends React.ComponentProps<"code"> { }
+export interface CodeBlockProps extends React.ComponentProps<"code"> {}
 
 export function CodeBlock({
   children,
@@ -46,7 +46,6 @@ export function CodeBlock({
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }, [children]);
-  console.log(isDark);
 
   return match ? (
     <div
@@ -102,7 +101,7 @@ export function CodeBlock({
   );
 }
 
-export interface BlockQuoteProps extends React.ComponentProps<"blockquote"> { }
+export interface BlockQuoteProps extends React.ComponentProps<"blockquote"> {}
 
 export function BlockQuote({ children, className, ...rest }: BlockQuoteProps) {
   return (
@@ -115,7 +114,7 @@ export function BlockQuote({ children, className, ...rest }: BlockQuoteProps) {
   );
 }
 
-export interface LinkProps extends React.ComponentProps<"a"> { }
+export interface LinkProps extends React.ComponentProps<"a"> {}
 
 export function Link({ children, className, ...rest }: LinkProps) {
   return (
