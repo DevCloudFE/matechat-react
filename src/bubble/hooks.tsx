@@ -15,17 +15,12 @@ export const useTheme = () => {
       attributeFilter: ["class"],
     });
 
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleSystemThemeChange = (event: MediaQueryListEvent) => {
-      setDark(event.matches);
-    };
-    mediaQuery.addEventListener("change", handleSystemThemeChange);
-
     return () => {
       observer.disconnect();
-      mediaQuery.removeEventListener("change", handleSystemThemeChange);
     };
   }, []);
+
+  console.log(isDark)
 
   return { isDark };
 };
