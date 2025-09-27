@@ -7,6 +7,7 @@
     ".changes/bubble-patch.md",
     ".changes/bubble-perf.md",
     ".changes/chore-deps.md",
+    ".changes/exports.md",
     ".changes/file-upload.md",
     ".changes/fix-list-selection.md",
     ".changes/fix-prompt.md",

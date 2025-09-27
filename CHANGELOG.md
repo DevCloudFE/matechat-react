@@ -1,5 +1,11 @@
 # Changelog
 
+## \[0.1.0-rc.3]
+
+### Bug Fixes
+
+- [`742dfeb`](https://github.com/DevCloudFE/matechat-react/commit/742dfeb28f4b7b54a6c20f29e952b2dd7517626e) Fix matechat component exports.
+
 ## \[0.1.0-rc.2]
 
 ### Bug Fixes
