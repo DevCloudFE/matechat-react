@@ -28,6 +28,8 @@ MateChat React 是 [MateChat](https://github.com/DevCloudFE/MateChat) 的 React 
 
 MateChat 基于 [华为 DevUI Design](https://devui.design/)，提供现代视觉语言、一致的用户体验以及良好的可扩展性。
 
+了解更多请访问 MateChat React 网站： [MateChat React](http://matechat.noctisynth.org/)
+
 ---
 
 ## 特性
@@ -81,7 +83,7 @@ export default function BubbleDemo() {
 文档仍在完善中，如果有任何疑问或建议，欢迎在 [GitCode](https://gitcode.com/DevCloudFE/MateChat/issues) 或 [GitHub](https://github.com/DevCloudFE/MateChat/issues) 提 issue。
 由于项目仍在开发中，部分功能和文档可能会有调整。
 
-可关注进展：[#4](https://github.com/DevCloudFE/matechat-react/issues/4) 和 [#5](https://github.com/DevCloudFE/MateChat/issues/5)。
+可关注进展：[#5](https://github.com/DevCloudFE/matechat-react/issues/5)。
 
 ---
 

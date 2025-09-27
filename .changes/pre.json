@@ -8,6 +8,7 @@
     ".changes/bubble-perf.md",
     ".changes/chore-deps.md",
     ".changes/file-upload.md",
+    ".changes/fix-list-selection.md",
     ".changes/fix-prompt.md",
     ".changes/fix-sender-lint.md",
     ".changes/fix-utils-build.md",
@@ -20,6 +21,7 @@
     ".changes/optimize-usechat.md",
     ".changes/refactor-bubble-list.md",
     ".changes/refactor-bubble.md",
+    ".changes/refactor-list-component.md",
     ".changes/sender-enforce.md"
   ]
 }

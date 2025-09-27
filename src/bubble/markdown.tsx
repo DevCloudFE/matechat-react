@@ -37,7 +37,7 @@ export function CodeBlock({
   ref: _ref,
   ...rest
 }: CodeBlockProps) {
-  const isDark = useTheme();
+  const { isDark } = useTheme();
   const match = /language-(\w+)/.exec(className || "");
 
   const [copied, setCopied] = useState<boolean>(false);
