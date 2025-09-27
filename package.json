@@ -22,10 +22,10 @@
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/*.d.ts",
   "exports": {
     ".": "./dist/index.js",
-    "./package.json": "./package.json"
+    "./*": "./dist/*.js"
   },
   "publishConfig": {
     "access": "public"
