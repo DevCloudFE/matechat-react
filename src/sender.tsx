@@ -105,6 +105,7 @@ export interface SenderProps extends React.ComponentProps<"div"> {
    */
   onSend?: (controller: AbortController) => void;
   toolbar?: React.ReactNode;
+  senderButtonClassName?: string;
 }
 
 export function Sender({
@@ -115,6 +116,7 @@ export function Sender({
   input,
   onSend,
   toolbar,
+  senderButtonClassName,
   ...props
 }: SenderProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -122,11 +124,11 @@ export function Sender({
   const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
+    onMessageChange?.(message);
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-    onMessageChange?.(message);
   }, [message, onMessageChange]);
 
   const [controller, setController] = useState<AbortController | null>(null);
@@ -180,7 +182,9 @@ export function Sender({
       data-slot="sender"
       className={twMerge(
         clsx(
-          "flex flex-col items-center border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
+          "flex flex-col items-center border rounded-2xl",
+          "border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:shadow-md",
+          "focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
           className,
         ),
       )}
@@ -192,7 +196,11 @@ export function Sender({
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="w-full pt-4 px-4 border-0 rounded-2xl !resize-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
+        className={clsx(
+          "w-full pt-4 px-4 border-0 rounded-2xl !resize-none",
+          "focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400",
+          "overflow-y-auto max-h-32",
+        )}
         rows={2}
       />
       <div className="flex items-center w-full px-4 py-2 gap-4">
@@ -200,7 +208,7 @@ export function Sender({
         <SenderButton
           onClick={handleSend}
           isSending={isSending}
-          className="ml-auto"
+          className={senderButtonClassName}
         />
       </div>
     </div>
