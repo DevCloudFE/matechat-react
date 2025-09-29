@@ -56,7 +56,7 @@ export function SenderButton({
       data-slot="sender-button"
       className={twMerge(
         clsx(
-          "flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 hover:bg-blue-500/90 text-white",
+          "flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 hover:bg-blue-500/90 text-white cursor-pointer",
           className,
         ),
       )}
