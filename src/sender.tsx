@@ -19,7 +19,10 @@ export function InputCount({
   ...props
 }: InputCountProps) {
   return (
-    <span className={clsx("text-gray-400 cursor-pointer", className)} {...props}>
+    <span
+      className={clsx("text-gray-400 cursor-pointer", className)}
+      {...props}
+    >
       {count} / {limit}
     </span>
   );
