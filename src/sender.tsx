@@ -105,6 +105,7 @@ export interface SenderProps extends React.ComponentProps<"div"> {
    */
   onSend?: (controller: AbortController) => void;
   toolbar?: React.ReactNode;
+  senderButtonClassName?: string;
 }
 
 export function Sender({
@@ -115,6 +116,7 @@ export function Sender({
   input,
   onSend,
   toolbar,
+  senderButtonClassName,
   ...props
 }: SenderProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -206,7 +208,7 @@ export function Sender({
         <SenderButton
           onClick={handleSend}
           isSending={isSending}
-          className="ml-auto"
+          className={senderButtonClassName}
         />
       </div>
     </div>
