@@ -197,7 +197,7 @@ export function Sender({
         className={clsx(
           "w-full pt-4 px-4 border-0 rounded-2xl !resize-none",
           "focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400",
-          "overflow-y-auto max-h-32"
+          "overflow-y-auto max-h-32",
         )}
         rows={2}
       />
