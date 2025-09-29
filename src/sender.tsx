@@ -19,7 +19,7 @@ export function InputCount({
   ...props
 }: InputCountProps) {
   return (
-    <span className={clsx("text-gray-400", className)} {...props}>
+    <span className={clsx("text-gray-400 cursor-pointer", className)} {...props}>
       {count} / {limit}
     </span>
   );
@@ -56,7 +56,7 @@ export function SenderButton({
       data-slot="sender-button"
       className={twMerge(
         clsx(
-          "flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 hover:bg-blue-500/90 text-white",
+          "flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 hover:bg-blue-500/90 text-white cursor-pointer",
           className,
         ),
       )}
