@@ -122,11 +122,11 @@ export function Sender({
   const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
-    onMessageChange?.(message);
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
+    onMessageChange?.(message);
   }, [message, onMessageChange]);
 
   const [controller, setController] = useState<AbortController | null>(null);
@@ -180,7 +180,7 @@ export function Sender({
       data-slot="sender"
       className={twMerge(
         clsx(
-          "flex flex-col items-center border rounded-2xl",
+          "px-1 flex flex-col items-center border rounded-2xl",
           "border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:shadow-md",
           "focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
           className,
@@ -195,9 +195,14 @@ export function Sender({
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         className={clsx(
-          "w-full pt-4 px-4 border-0 rounded-2xl !resize-none",
+          "w-full pt-4 px-4 border-0 rounded-2xl !resize-none bg-transparent",
           "focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400",
           "overflow-y-auto max-h-32",
+          "[scrollbar-gutter:stable] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full",
+          "[&::-webkit-scrollbar-thumb]:cursor-auto",
+          "[&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600",
+          "[&::-webkit-scrollbar-thumb:hover]:bg-gray-400 dark:[&::-webkit-scrollbar-thumb:hover]:bg-gray-500",
+          "[&::-webkit-scrollbar-track]:mt-3"
         )}
         rows={2}
       />
