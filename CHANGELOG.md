@@ -1,5 +1,11 @@
 # Changelog
 
+## \[0.1.0-rc.4]
+
+### Bug Fixes
+
+- [`b31f68b`](https://github.com/DevCloudFE/matechat-react/commit/b31f68b42392b507712f4aa6c32e2fec867058f6) ([#73](https://github.com/DevCloudFE/matechat-react/pull/73) by [@xx-yoke](https://github.com/DevCloudFE/matechat-react/../../xx-yoke)) Fix max height of sender and optimize scrollbar style.
+
 ## \[0.1.0-rc.3]
 
 ### Bug Fixes
