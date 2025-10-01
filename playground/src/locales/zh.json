@@ -1,0 +1,10 @@
+{
+  "translation": {
+    "chat": "对话",
+    "history": "对话历史",
+    "placeholder": "给 MateChat 发送消息",
+    "attention": "内容由 AI 生成，请仔细甄别",
+    "privacy": "隐私声明",
+    "tip": "欢迎使用 MateChat，请在设置中输入API密钥"
+  }
+}
