@@ -202,7 +202,7 @@ export function Sender({
           "[&::-webkit-scrollbar-thumb]:cursor-auto",
           "[&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600",
           "[&::-webkit-scrollbar-thumb:hover]:bg-gray-400 dark:[&::-webkit-scrollbar-thumb:hover]:bg-gray-500",
-          "[&::-webkit-scrollbar-track]:mt-3"
+          "[&::-webkit-scrollbar-track]:mt-3",
         )}
         rows={2}
       />
