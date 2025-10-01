@@ -3,5 +3,5 @@
 @source "../../src/";
 
 [data-slot="bubble-item"] {
-    align-items: center !important;
+  align-items: center !important;
 }

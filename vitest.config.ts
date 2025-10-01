@@ -2,7 +2,7 @@ import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-  // @ts-ignore - Vitest types are not compatible with Rolldown Vite
+  // @ts-expect-error - Vitest types are not compatible with Rolldown Vite
   plugins: [react()],
   test: {
     environment: "happy-dom",

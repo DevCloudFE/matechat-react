@@ -1,8 +1,8 @@
-import { createOpenAIBackend } from '@matechat/react/utils/backend';
-import { agent } from '@matechat/react/utils/core';
-import clsx from 'clsx';
-import { useState } from 'react';
-import settingIcon from './assets/setting.svg';
+import { createOpenAIBackend } from "@matechat/react/utils/backend";
+import { agent } from "@matechat/react/utils/core";
+import clsx from "clsx";
+import { useState } from "react";
+import settingIcon from "./assets/setting.svg";
 
 function Settings() {
   const [isOpen, setOpen] = useState(false);
@@ -15,14 +15,14 @@ function Settings() {
     setOpen(false);
   };
 
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState("");
 
   const activateChat = () => {
     agent.use(
       createOpenAIBackend({
         apiKey: token,
-        baseURL: 'https://api.deepseek.com',
-        model: 'deepseek-chat',
+        baseURL: "https://api.deepseek.com",
+        model: "deepseek-chat",
         maxTokens: 200,
         dangerouslyAllowBrowser: true,
       }),
@@ -43,9 +43,9 @@ function Settings() {
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-20">
           <div
             className={clsx(
-              'flex flex-col gap-4.5 p-6 rounded-lg bg-gradient-to-b z-10',
-              'from-[#8e7ba8] via-[#9c90b0] via-30% to-[#caafc9]',
-              'dark:from-[#a77693] dark:via-[#174871] dark:via-80% dark:to-[#0f2d4d]',
+              "flex flex-col gap-4.5 p-6 rounded-lg bg-gradient-to-b z-10",
+              "from-[#8e7ba8] via-[#9c90b0] via-30% to-[#caafc9]",
+              "dark:from-[#a77693] dark:via-[#174871] dark:via-80% dark:to-[#0f2d4d]",
             )}
           >
             <span className="flex justify-center items-center text-lg font-bold">

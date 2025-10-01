@@ -16,7 +16,5 @@
     "unbundle",
     "xlink"
   ],
-  "ignoreWords": [
-    "Anson"
-  ]
+  "ignoreWords": ["Anson"]
 }

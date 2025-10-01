@@ -1,18 +1,18 @@
-import clsx from 'clsx';
-import type React from 'react';
-import { useCallback } from 'react';
-import themeIcon from './assets/theme.svg';
+import clsx from "clsx";
+import type React from "react";
+import { useCallback } from "react";
+import themeIcon from "./assets/theme.svg";
 
 function ThemeToggle({
   className,
   ...props
-}: React.ComponentPropsWithRef<'button'>) {
+}: React.ComponentPropsWithRef<"button">) {
   const toggleTheme = useCallback(() => {
     const docEle = document.documentElement;
-    if (docEle.classList.contains('dark')) {
-      docEle.classList.remove('dark');
+    if (docEle.classList.contains("dark")) {
+      docEle.classList.remove("dark");
     } else {
-      docEle.classList.add('dark');
+      docEle.classList.add("dark");
     }
   }, []);
 
@@ -20,7 +20,7 @@ function ThemeToggle({
     <button
       type="button"
       className={clsx(
-        'p-2 bg-transparent hover:bg-white/23 rounded-lg cursor-pointer',
+        "p-2 bg-transparent hover:bg-white/23 rounded-lg cursor-pointer",
         className,
       )}
       onClick={toggleTheme}

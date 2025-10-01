@@ -23,6 +23,11 @@
       "quoteStyle": "double"
     }
   },
+  "css": {
+    "linter": {
+      "enabled": false
+    }
+  },
   "assist": {
     "enabled": true,
     "actions": {

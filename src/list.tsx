@@ -103,7 +103,7 @@ export const List = ({
           : null;
 
         if (Array.isArray(groupChildren)) {
-          groupChildren.forEach((o: OptionData) => result.push(o));
+          groupChildren.forEach((o: OptionData) => { result.push(o) });
         }
         return result;
       },
@@ -163,8 +163,8 @@ export const List = ({
             e.preventDefault();
             handleSelect(
               e as
-                | React.MouseEvent<HTMLElement>
-                | React.KeyboardEvent<HTMLElement>,
+              | React.MouseEvent<HTMLElement>
+              | React.KeyboardEvent<HTMLElement>,
               optionData,
             );
           }
