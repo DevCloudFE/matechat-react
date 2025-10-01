@@ -11,6 +11,7 @@ import { InputCount, Sender } from "@matechat/react/sender";
 import type { MessageParam } from "@matechat/react/utils";
 import { useChat } from "@matechat/react/utils/chat";
 import { useMateChat } from "@matechat/react/utils/core";
+import clsx from "clsx";
 import { MessageSquarePlus } from "lucide-react";
 import { useMemo, useState } from "react";
 
@@ -84,7 +85,13 @@ export function Chat() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <main className="flex flex-col items-center justify-center h-[80vh] w-full max-w-3xl p-4 bg-white rounded-lg shadow-md gap-5">
         <BubbleList
-          className="px-4 w-full max-w-full"
+          className={clsx(
+            "px-4 w-full max-w-full",
+            "[scrollbar-gutter:stable] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full",
+            "[&::-webkit-scrollbar-thumb]:cursor-auto",
+            "[&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600",
+            "[&::-webkit-scrollbar-thumb:hover]:bg-gray-400 dark:[&::-webkit-scrollbar-thumb:hover]:bg-gray-500",
+          )}
           messages={messages}
           background="right-solid"
           isPending={pending}

@@ -180,7 +180,9 @@ export function Sender({
       data-slot="sender"
       className={twMerge(
         clsx(
-          "flex flex-col items-center border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
+          "px-1 flex flex-col items-center border rounded-2xl",
+          "border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:shadow-md",
+          "focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
           className,
         ),
       )}
@@ -192,7 +194,16 @@ export function Sender({
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="w-full pt-4 px-4 border-0 rounded-2xl !resize-none focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400"
+        className={clsx(
+          "w-full pt-4 px-4 border-0 rounded-2xl !resize-none bg-transparent",
+          "focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400",
+          "overflow-y-auto max-h-32",
+          "[scrollbar-gutter:stable] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full",
+          "[&::-webkit-scrollbar-thumb]:cursor-auto",
+          "[&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600",
+          "[&::-webkit-scrollbar-thumb:hover]:bg-gray-400 dark:[&::-webkit-scrollbar-thumb:hover]:bg-gray-500",
+          "[&::-webkit-scrollbar-track]:mt-3",
+        )}
         rows={2}
       />
       <div className="flex items-center w-full px-4 py-2 gap-4">
