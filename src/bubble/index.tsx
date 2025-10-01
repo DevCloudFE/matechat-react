@@ -12,7 +12,7 @@ import type { MessageParam } from "../utils";
 import { BlockQuote, CodeBlock, Heading, Link } from "./markdown";
 
 const bubbleVariants = cva(
-  "flex flex-col gap-1 justify-center rounded-lg dark:text-gray-200 text-gray-800 max-w-full overflow-x-auto",
+  "flex flex-col gap-1 justify-center rounded-lg dark:text-gray-200 text-gray-800 max-w-full whitespace-pre-wrap break-words",
   {
     variants: {
       size: {
