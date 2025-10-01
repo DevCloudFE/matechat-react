@@ -103,7 +103,9 @@ export const List = ({
           : null;
 
         if (Array.isArray(groupChildren)) {
-          groupChildren.forEach((o: OptionData) => result.push(o));
+          groupChildren.forEach((o: OptionData) => {
+            result.push(o);
+          });
         }
         return result;
       },
