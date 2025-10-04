@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type React from "react";
 import { useCallback } from "react";
-import themeIcon from "./assets/theme.svg";
+import ThemeIcon from "./assets/theme.svg?react";
 
 function ThemeToggle({
   className,
@@ -26,7 +26,7 @@ function ThemeToggle({
       onClick={toggleTheme}
       {...props}
     >
-      <img alt="theme icon" src={themeIcon} className="w-5 h-5" />
+      <ThemeIcon className="size-5 text-gray-800 dark:text-gray-400" />
     </button>
   );
 }

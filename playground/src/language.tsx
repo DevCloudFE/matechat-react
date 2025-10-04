@@ -13,7 +13,7 @@ function Language() {
       onClick={toggleLanguage}
       className="px-2 py-1.5 bg-transparent hover:bg-white/23 rounded-lg cursor-pointer"
     >
-      <span className="inline-block scale-x-105 scale-y-88">
+      <span className="inline-block scale-x-105 scale-y-88 dark:text-gray-400">
         {i18n.language === "zh" ? "EN" : "CN"}
       </span>
     </button>

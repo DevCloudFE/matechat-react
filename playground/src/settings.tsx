@@ -2,7 +2,7 @@ import { createOpenAIBackend } from "@matechat/react/utils/backend";
 import { agent } from "@matechat/react/utils/core";
 import clsx from "clsx";
 import { useState } from "react";
-import settingIcon from "./assets/setting.svg";
+import SettingIcon from "./assets/setting.svg?react";
 
 function Settings() {
   const [isOpen, setOpen] = useState(false);
@@ -37,7 +37,7 @@ function Settings() {
         onClick={openModal}
         className="p-2 bg-transparent hover:bg-white/23 rounded-lg cursor-pointer"
       >
-        <img alt="setting icon" src={settingIcon} className="w-5 h-5" />
+        <SettingIcon className="size-5 text-gray-800 dark:text-gray-400" />
       </button>
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-20">
