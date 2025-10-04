@@ -1,10 +1,10 @@
 import { BubbleList, FileUpload } from "@matechat/react";
 import { InputCount, Sender } from "@matechat/react/sender";
 import { useChat, useMateChat } from "@matechat/react/utils/index";
+import clsx from "clsx";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import mcLogo from "./assets/logo.svg";
-import clsx from "clsx";
 
 function Communicate() {
   const { t } = useTranslation();
@@ -32,9 +32,13 @@ function Communicate() {
             <div className="absolute inset-0 flex flex-col justify-center items-center gap-5">
               <div className="flex flex-row items-center gap-1.5">
                 <img alt="MateChat logo" className="w-15 h-15" src={mcLogo} />
-                <span className="text-3xl font-bold dark:text-gray-200">MateChat</span>
+                <span className="text-3xl font-bold dark:text-gray-200">
+                  MateChat
+                </span>
               </div>
-              <span className="text-sm text-gray-500 dark:text-gray-200">{t("tip")}</span>
+              <span className="text-sm text-gray-500 dark:text-gray-200">
+                {t("tip")}
+              </span>
             </div>
           )}
         </div>
@@ -42,7 +46,7 @@ function Communicate() {
           className={clsx(
             "w-full",
             "focus-within:border-[#a18dc2] focus-within:ring-2 focus-within:ring-[#a694c2]",
-            "dark:focus-within:border-[#7a6994] dark:focus-within:ring-2 dark:focus-within:ring-[#706385]"
+            "dark:focus-within:border-[#7a6994] dark:focus-within:ring-2 dark:focus-within:ring-[#706385]",
           )}
           placeholder={t("placeholder")}
           input={input}

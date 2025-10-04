@@ -38,7 +38,9 @@ function App() {
           <div className="flex flex-col gap-0.5">
             <div className="flex flex-col items-center mt-2 gap-1.5">
               <img alt="MateChat logo" className="w-9 h-9" src={mcLogo} />
-              <span className="text-[10px] font-bold dark:text-gray-200">MateChat</span>
+              <span className="text-[10px] font-bold dark:text-gray-200">
+                MateChat
+              </span>
             </div>
             <hr className="w-7/13 mx-auto my-4 border-gray-400 dark:border-gray-300" />
             <div className="flex flex-col items-center gap-1.5 cursor-pointer">
