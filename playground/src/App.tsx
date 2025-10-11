@@ -30,7 +30,7 @@ function App() {
       className={clsx(
         "min-h-screen bg-gradient-to-b",
         "from-blue-300 via-pink-100 via-10% to-violet-300",
-        "dark:from-[#a77693] dark:via-[#174871] dark:via-80% dark:to-[#0f2d4d]",
+        "dark:from-[#865f77] dark:via-[#133b5c] dark:via-80% dark:to-[#091e35]",
       )}
     >
       <div className="flex h-screen py-2 pr-2">
@@ -38,16 +38,18 @@ function App() {
           <div className="flex flex-col gap-0.5">
             <div className="flex flex-col items-center mt-2 gap-1.5">
               <img alt="MateChat logo" className="w-9 h-9" src={mcLogo} />
-              <span className="text-[10px] font-bold">MateChat</span>
+              <span className="text-[10px] font-bold dark:text-gray-200">
+                MateChat
+              </span>
             </div>
-            <hr className="w-7/13 mx-auto my-4 border-gray-400" />
+            <hr className="w-7/13 mx-auto my-4 border-gray-400 dark:border-gray-300" />
             <div className="flex flex-col items-center gap-1.5 cursor-pointer">
               <img
                 alt="Chat icon"
-                className="bg-white p-1.5 rounded-lg shadow-[3px_3px_8px_rgb(0,0,0,0.1)]"
+                className="bg-white dark:bg-pink-200/20 p-1.5 rounded-lg shadow-[3px_3px_8px_rgb(0,0,0,0.1)]"
                 src={chatIcon}
               />
-              <span className="text-xs">{t("chat")}</span>
+              <span className="text-xs dark:text-gray-200">{t("chat")}</span>
             </div>
           </div>
           <div className="flex flex-col justify-center items-center gap-4 mb-3.5">
@@ -61,6 +63,7 @@ function App() {
             className={clsx(
               "w-1/4 p-3 rounded-l-xl min-w-[240px] max-w-[380px]",
               "bg-gradient-to-b from-gray-100/80 from-10% to-violet-100/80",
+              "dark:bg-none dark:bg-slate-900/40",
             )}
           >
             <History />
@@ -69,6 +72,7 @@ function App() {
             className={clsx(
               "flex-1 rounded-r-xl",
               "bg-gradient-to-b from-[#fffffff2] to-[#f8fafff2]",
+              "dark:bg-none dark:bg-black/35",
             )}
           >
             <Communicate />
