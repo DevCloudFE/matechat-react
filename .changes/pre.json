@@ -12,6 +12,7 @@
     ".changes/fix-list-selection.md",
     ".changes/fix-prompt.md",
     ".changes/fix-sender-lint.md",
+    ".changes/fix-sender-overflow.md",
     ".changes/fix-utils-build.md",
     ".changes/memo-bubble-list.md",
     ".changes/optimize-callback.md",

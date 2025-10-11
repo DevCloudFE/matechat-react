@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@source "../../src/";
+
+[data-slot="bubble-item"] {
+  align-items: center !important;
+}
