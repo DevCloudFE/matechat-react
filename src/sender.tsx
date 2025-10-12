@@ -5,6 +5,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import PublishNew from "./icons/publish-new.svg";
 import QuickStop from "./icons/quick-stop.svg";
+import type { OnTextInject, TriggerConfig } from "./suggestion";
+import Suggestion from "./suggestion";
 import type { Backend } from "./utils";
 
 export interface InputCountProps extends React.ComponentProps<"span"> {
@@ -105,6 +107,10 @@ export interface SenderProps extends React.ComponentProps<"div"> {
    */
   onSend?: (controller: AbortController) => void;
   toolbar?: React.ReactNode;
+  /**
+   * Trigger configurations for the suggestion list
+   */
+  triggerConfigs?: TriggerConfig[];
 }
 
 export function Sender({
@@ -115,11 +121,13 @@ export function Sender({
   input,
   onSend,
   toolbar,
+  triggerConfigs,
   ...props
 }: SenderProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [message, setMessage] = useState(initialMessage);
   const [isSending, setIsSending] = useState(false);
+  const [caretPosition, setCaretPosition] = useState<number | null>(null);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -128,6 +136,15 @@ export function Sender({
     }
     onMessageChange?.(message);
   }, [message, onMessageChange]);
+
+  useEffect(() => {
+    if (textareaRef.current && caretPosition !== null) {
+      textareaRef.current.focus();
+      textareaRef.current.selectionStart = caretPosition;
+      textareaRef.current.selectionEnd = caretPosition;
+      setCaretPosition(null);
+    }
+  }, [caretPosition]);
 
   const [controller, setController] = useState<AbortController | null>(null);
   const handleSend = useCallback(() => {
@@ -175,12 +192,26 @@ export function Sender({
     [],
   );
 
+  const handleTextInject: OnTextInject = useCallback(
+    (newText, suggestionStartPosition) => {
+      setMessage((prevMessage) => {
+        const currentCaretPosition =
+          textareaRef.current?.selectionStart ?? prevMessage.length;
+        const textBefore = prevMessage.slice(0, suggestionStartPosition);
+        const textAfter = prevMessage.slice(currentCaretPosition);
+        const newMessage = textBefore + newText + textAfter;
+        return newMessage;
+      });
+      setCaretPosition(suggestionStartPosition + newText.length);
+    },
+    [],
+  );
   return (
     <div
       data-slot="sender"
       className={twMerge(
         clsx(
-          "px-1 flex flex-col items-center border rounded-2xl",
+          "relative px-1 flex flex-col items-center border rounded-2xl",
           "border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:shadow-md",
           "focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
           className,
@@ -188,6 +219,14 @@ export function Sender({
       )}
       {...props}
     >
+      <div className="absolute bottom-full left-0 w-full bg-white dark:bg-gray-50 rounded-lg shadow-amber-50 max-h-64 overflow-y-auto">
+        <Suggestion
+          message={message}
+          textareaRef={textareaRef}
+          triggerConfigs={triggerConfigs ?? []}
+          onInject={handleTextInject}
+        />
+      </div>
       <textarea
         ref={textareaRef}
         value={message}
