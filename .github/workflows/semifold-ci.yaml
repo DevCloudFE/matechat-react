@@ -20,14 +20,18 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: 'pnpm'
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
       - name: Install Semifold
         run: cargo install semifold
+      - name: Install dependencies
+        run: pnpm install
       - name: Semifold CI
         run: semifold ci
         env:
