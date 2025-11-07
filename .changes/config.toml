@@ -1,0 +1,34 @@
+[branches]
+base = "main"
+release = "release"
+
+[tags]
+chore = "Chores"
+feat = "New Features"
+fix = "Bug Fixes"
+perf = "Performance Improvements"
+refactor = "Refactors"
+
+[packages."@matechat/react"]
+path = "."
+resolver = "nodejs"
+version-mode = { pre-release.tag = "rc" }
+
+[packages."@matechat/react-docs"]
+path = "docs"
+resolver = "nodejs"
+
+[packages."@matechat/react-playground"]
+path = "playground"
+resolver = "nodejs"
+
+[resolver.nodejs.pre-check]
+url = "https://registry.npmjs.org/{{ package.name }}/{{ package.version }}"
+
+[[resolver.nodejs.publish]]
+command = "npm"
+args = ["publish"]
+
+[[resolver.nodejs.post-version]]
+command = "pnpm"
+args = ["install"]
