@@ -12,7 +12,6 @@ refactor = "Refactors"
 [packages."@matechat/react"]
 path = "."
 resolver = "nodejs"
-version-mode = { pre-release.tag = "rc" }
 
 [packages."@matechat/react-docs"]
 path = "docs"
