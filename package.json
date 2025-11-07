@@ -1,55 +1,10 @@
 {
-  "name": "@matechat/react",
-  "version": "0.0.0",
-  "packageManager": "pnpm@10.14.0",
-  "description": "Front-end AI scenario solution UI library based on Huawei DevUI Design.",
-  "type": "module",
-  "license": "MIT",
-  "homepage": "https://gitcode.com/DevCloudFE/matechat-react",
-  "bugs": {
-    "url": "https://gitcode.com/DevCloudFE/matechat-react/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DevCloudFE/matechat-react.git"
-  },
   "author": {
     "email": "fu050409@163.com",
     "name": "苏向夜"
   },
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/*.d.ts",
-  "exports": {
-    ".": "./dist/index.js",
-    "./*": "./dist/*.js"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "lint": "biome check .",
-    "lint:fix": "pnpm run lint --fix",
-    "build": "vite build",
-    "dev": "tsx scripts/watch.ts",
-    "docs:build": "pnpm --filter @matechat/react-docs build",
-    "docs:dev": "tsx scripts/watch.ts --project docs",
-    "playground:build": "pnpm --filter @matechat/react-playground build",
-    "preview": "pnpm --filter @matechat/react-playground dev",
-    "test": "vitest",
-    "typecheck": "tsc --noEmit",
-    "format": "biome format . --write",
-    "registry:build": "shadcn build --output docs/doc_build/r",
-    "prepublishOnly": "pnpm run build"
-  },
-  "peerDependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-markdown": "^10.1.0",
-    "react-syntax-highlighter": "^15.5.13"
+  "bugs": {
+    "url": "https://gitcode.com/DevCloudFE/matechat-react/issues"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
@@ -63,6 +18,7 @@
     "remark-math": "^6.0.0",
     "tailwind-merge": "^3.3.1"
   },
+  "description": "Front-end AI scenario solution UI library based on Huawei DevUI Design.",
   "devDependencies": {
     "@biomejs/biome": "^2.3.4",
     "@testing-library/jest-dom": "^6.9.1",
@@ -88,9 +44,53 @@
     "vite-plugin-lib-inject-css": "^2.2.2",
     "vitest": "^4.0.7"
   },
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://gitcode.com/DevCloudFE/matechat-react",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "name": "@matechat/react",
+  "packageManager": "pnpm@10.14.0",
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-markdown": "^10.1.0",
+    "react-syntax-highlighter": "^15.5.13"
+  },
   "pnpm": {
     "overrides": {
       "vite": "npm:rolldown-vite@^7"
     }
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevCloudFE/matechat-react.git"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "tsx scripts/watch.ts",
+    "docs:build": "pnpm --filter @matechat/react-docs build",
+    "docs:dev": "tsx scripts/watch.ts --project docs",
+    "format": "biome format . --write",
+    "lint": "biome check .",
+    "lint:fix": "pnpm run lint --fix",
+    "playground:build": "pnpm --filter @matechat/react-playground build",
+    "prepublishOnly": "pnpm run build",
+    "preview": "pnpm --filter @matechat/react-playground dev",
+    "registry:build": "shadcn build --output docs/doc_build/r",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "type": "module",
+  "types": "./dist/*.d.ts",
+  "version": "0.1.0"
 }
