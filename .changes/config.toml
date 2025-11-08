@@ -12,7 +12,6 @@ refactor = "Refactors"
 [packages."@matechat/react"]
 path = "."
 resolver = "nodejs"
-version-mode = { pre-release.tag = "rc" }
 
 [packages."@matechat/react-docs"]
 path = "docs"
@@ -27,7 +26,7 @@ url = "https://registry.npmjs.org/{{ package.name }}/{{ package.version }}"
 
 [[resolver.nodejs.publish]]
 command = "npm"
-args = ["publish"]
+args = ["publish", "--provenance", "--access", "public"]
 
 [[resolver.nodejs.post-version]]
 command = "pnpm"

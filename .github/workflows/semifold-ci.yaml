@@ -4,6 +4,7 @@ on:
     branches: [main]
 
 permissions:
+  id-token: write
   contents: write
   pull-requests: write
 
@@ -26,6 +27,7 @@ jobs:
           run_install: false
       - uses: actions/setup-node@v6
         with:
+          registry-url: 'https://registry.npmjs.org'
           node-version: 22
           cache: 'pnpm'
       - name: Install Semifold
