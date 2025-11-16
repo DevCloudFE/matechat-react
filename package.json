@@ -92,5 +92,5 @@
   },
   "type": "module",
   "types": "./dist/*.d.ts",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }

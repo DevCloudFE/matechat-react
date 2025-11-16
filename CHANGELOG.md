@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.1
+
+### New Features
+
+- [`f735a6b`](https://github.com/DevCloudFE/matechat-react/commit/f735a6b3a4b200ce98d23c73f082f76b1ca0b707): Add `Suggestion` component to provide trigger-based autocomplete in textareas.
+This component supports multiple trigger characters and grouped options. ([#62](https://github.com/DevCloudFE/matechat-react/pull/62) by @moeyue23)
+
 ## v0.1.0
 
 ### Refactors
