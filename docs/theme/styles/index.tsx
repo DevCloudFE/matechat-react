@@ -2,8 +2,8 @@ import { useLang } from "rspress/runtime";
 import {
   HomeLayout as BasicHomeLayout,
   Layout as BasicLayout,
-  //   getCustomMDXComponent,
 } from "rspress/theme";
+import "./styles/index.css";
 
 function HomeLayout() {
   //   const { code: Code } = getCustomMDXComponent();
@@ -21,6 +21,7 @@ const Layout = () => {
             : "🚧 MateChat React 文档仍在开发中"}
         </div>
       }
+      // components={{ ... }}
     />
   );
 };

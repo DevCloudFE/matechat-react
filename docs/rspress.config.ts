@@ -60,7 +60,7 @@ export default defineConfig({
       message: "MIT Licensed | © 2025 DevCloudFE. All Rights Reserved.",
     },
   },
-  globalStyles: path.resolve(__dirname, "./docs/tailwind.css"),
+  globalStyles: path.resolve(__dirname, "theme/styles/index.css"),
   route: {
     cleanUrls: true,
   },
