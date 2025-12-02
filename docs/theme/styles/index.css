@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(222.2 84% 4.9%);
+  --color-primary: hsl(221.2 83.2% 53.3%);
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+
+  --rp-c-bg: var(--color-background);
+  --rp-c-text: var(--color-foreground);
+  --rp-c-brand: var(--color-primary);
+  --rp-c-brand-light: color-mix(in srgb, var(--color-primary) 80%, transparent);
+}
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+@layer components {
+  .rspress-doc a {
+    @apply text-primary hover:underline;
+  }
+}
