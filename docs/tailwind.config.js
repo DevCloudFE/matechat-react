@@ -1,16 +1,16 @@
 module.exports = {
   content: [
-    './docs/**/*.{md,mdx,js,ts,jsx,tsx}',
-    './theme/**/*.{js,ts,jsx,tsx}',
+    "./docs/**/*.{md,mdx,js,ts,jsx,tsx}",
+    "./theme/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: ['selector'],
+  darkMode: ["selector"],
   theme: {
     extend: {
       colors: {
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: 'hsl(var(--primary))',
-      }
-    }
-  }
-}
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: "hsl(var(--primary))",
+      },
+    },
+  },
+};
