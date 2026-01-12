@@ -21,7 +21,7 @@ export function InputCount({
   ...props
 }: InputCountProps) {
   return (
-    <span className={clsx("text-gray-400", className)} {...props}>
+    <span className={clsx("text-muted", className)} {...props}>
       {count} / {limit}
     </span>
   );
@@ -58,7 +58,7 @@ export function SenderButton({
       data-slot="sender-button"
       className={twMerge(
         clsx(
-          "flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 hover:bg-blue-500/90 text-white cursor-pointer",
+          "flex items-center justify-center cursor-pointer size-icon-button rounded-full bg-primary text-primary-foreground hover:bg-primary-hover",
           className,
         ),
       )}
@@ -66,7 +66,7 @@ export function SenderButton({
     >
       {icon ?? (
         <img
-          className="filter !brightness-0 invert"
+          className="filter brightness-0! invert"
           src={isSending ? QuickStop : PublishNew}
           alt={isSending ? "icon-quick-stop" : "icon-publish-new"}
         />
@@ -211,15 +211,15 @@ export function Sender({
       data-slot="sender"
       className={twMerge(
         clsx(
-          "relative px-1 flex flex-col items-center border rounded-2xl",
-          "border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:shadow-md",
-          "focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
+          "relative px-1 flex flex-col items-center border rounded-xl",
+          "border-border shadow-sm transition-all duration-normal hover:shadow-md",
+          "focus-within:ring-2 focus-within:ring-ring focus-within:border-primary",
           className,
         ),
       )}
       {...props}
     >
-      <div className="absolute bottom-full left-0 w-full bg-white dark:bg-gray-50 rounded-lg shadow-amber-50 max-h-64 overflow-y-auto">
+      <div className="absolute bottom-full left-0 w-full bg-background-elevated rounded-lg shadow-elevated max-h-dropdown overflow-y-auto">
         <Suggestion
           message={message}
           textareaRef={textareaRef}
@@ -234,14 +234,9 @@ export function Sender({
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         className={clsx(
-          "w-full pt-4 px-4 border-0 rounded-2xl !resize-none bg-transparent",
-          "focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400",
-          "overflow-y-auto max-h-32",
-          "[scrollbar-gutter:stable] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full",
-          "[&::-webkit-scrollbar-thumb]:cursor-auto",
-          "[&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600",
-          "[&::-webkit-scrollbar-thumb:hover]:bg-gray-400 dark:[&::-webkit-scrollbar-thumb:hover]:bg-gray-500",
-          "[&::-webkit-scrollbar-track]:mt-3",
+          "w-full pt-4 px-4 border-0 rounded-xl resize-none! bg-transparent",
+          "focus:ring-0 focus:outline-none text-foreground placeholder-muted",
+          "overflow-y-auto max-h-textarea custom-scrollbar", // 关键变化！
         )}
         rows={2}
       />

@@ -21,7 +21,7 @@ const promptsVariants = cva("flex", {
 });
 
 const promptVariants = cva(
-  "flex flex-col justify-center bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-150 cursor-pointer",
+  "flex flex-col justify-center bg-background-elevated border-border hover:border-border/80",
   {
     variants: {
       size: {
@@ -38,7 +38,7 @@ const promptVariants = cva(
   },
 );
 
-const promptTitleVariants = cva("font-medium text-gray-900", {
+const promptTitleVariants = cva("font-medium text-foreground", {
   variants: {
     size: {
       xs: "text-sm",
@@ -53,7 +53,7 @@ const promptTitleVariants = cva("font-medium text-gray-900", {
   },
 });
 
-const promptDescriptionVariants = cva("text-gray-600", {
+const promptDescriptionVariants = cva("text-muted-foreground", {
   variants: {
     size: {
       xs: "text-xs",
@@ -106,7 +106,7 @@ export function PromptTitle({
     ? twMerge(clsx(promptTitleVariants({ size, className })))
     : twMerge(
         clsx(
-          "font-medium text-gray-900",
+          "font-medium text-foreground",
           "[div[data-size='xs']_&]:text-sm",
           "[div[data-size='sm']_&]:text-base",
           "[div[data-size='default']_&]:text-base",
@@ -130,7 +130,7 @@ export function PromptDescription({
     ? twMerge(clsx(promptDescriptionVariants({ size, className })))
     : twMerge(
         clsx(
-          "text-gray-600",
+          "text-muted-foreground",
           "[div[data-size='xs']_&]:text-xs",
           "[div[data-size='sm']_&]:text-sm",
           "[div[data-size='default']_&]:text-sm",

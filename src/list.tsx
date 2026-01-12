@@ -1,3 +1,5 @@
+import "./tailwind.css";
+
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -130,7 +132,7 @@ export const List = ({
           key={key}
           role-slot="list-group"
           aria-label={String(groupContent || "")}
-          className={clsx("font-bold dark:text-gray-400 py-2 px-4 text-sm")}
+          className={clsx("font-bold text-muted-foreground py-2 px-4 text-sm")}
           style={listGroupStyle}
         >
           {String(groupContent || " ")}
@@ -153,8 +155,8 @@ export const List = ({
         key={key}
         role-slot="list-item"
         className={twMerge(
-          clsx("py-2 px-4 hover:bg-gray-200 text-gray-600 cursor-pointer", {
-            "bg-blue-500 text-white hover:bg-blue-600": isSelected,
+          clsx("py-2 px-4 hover:bg-accent text-foreground cursor-pointer", {
+            "bg-primary hover:bg-primary/90 text-primary-foreground hover:bg-primary-hover": isSelected,
           }),
         )}
         id={`lo_id_${index}`}
