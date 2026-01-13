@@ -32,5 +32,5 @@ test("single prompt", () => {
   expect(descriptionElement).toBeInTheDocument();
   expect(titleElement).toHaveClass("font-medium", "text-mc-pt-fg");
   expect(titleElement.tagName).toBe("H3");
-  expect(descriptionElement).toHaveClass("text-gray-600");
+  expect(descriptionElement).toHaveClass("text-mc-pt-mut");
 });
