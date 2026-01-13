@@ -8,11 +8,11 @@ import { twMerge } from "tailwind-merge";
 const promptsVariants = cva("flex", {
   variants: {
     size: {
-      xs: "gap-2",
-      sm: "gap-3",
-      default: "gap-4",
-      md: "gap-4",
-      lg: "gap-5",
+      xs: "gap-mc-pt-layout-gap-xs",
+      sm: "gap-mc-pt-layout-gap-sm",
+      default: "gap-mc-pt-layout-gap",
+      md: "gap-mc-pt-layout-gap",
+      lg: "gap-mc-pt-layout-gap-lg",
     },
   },
   defaultVariants: {
@@ -21,15 +21,15 @@ const promptsVariants = cva("flex", {
 });
 
 const promptVariants = cva(
-  "flex flex-col justify-center bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-150 cursor-pointer",
+  "flex flex-col justify-center bg-mc-pt-bg border-mc-pt-brd rounded-mc-pt transition-all duration-mc-pt hover:shadow-mc-pt-el",
   {
     variants: {
       size: {
-        xs: "px-3 py-2 gap-1",
-        sm: "px-4 py-2.5 gap-1.5",
-        default: "px-4 py-3 gap-2",
-        md: "px-5 py-3.5 gap-2",
-        lg: "px-6 py-4 gap-2.5",
+        xs: "px-mc-pt-px-xs py-mc-pt-py-xs gap-mc-pt-gap-xs",
+        sm: "px-mc-pt-px-sm py-mc-pt-py-sm gap-mc-pt-gap-sm",
+        default: "px-mc-pt-px py-mc-pt-py gap-mc-pt-gap",
+        md: "px-mc-pt-px-md py-mc-pt-py-md gap-mc-pt-gap",
+        lg: "px-mc-pt-px-lg py-mc-pt-py-lg gap-mc-pt-gap-lg",
       },
     },
     defaultVariants: {
@@ -38,7 +38,7 @@ const promptVariants = cva(
   },
 );
 
-const promptTitleVariants = cva("font-medium text-gray-900", {
+const promptTitleVariants = cva("font-medium text-mc-pt-fg", {
   variants: {
     size: {
       xs: "text-sm",
@@ -53,7 +53,7 @@ const promptTitleVariants = cva("font-medium text-gray-900", {
   },
 });
 
-const promptDescriptionVariants = cva("text-gray-600", {
+const promptDescriptionVariants = cva("text-mc-pt-mut", {
   variants: {
     size: {
       xs: "text-xs",
@@ -106,7 +106,7 @@ export function PromptTitle({
     ? twMerge(clsx(promptTitleVariants({ size, className })))
     : twMerge(
         clsx(
-          "font-medium text-gray-900",
+          "font-medium text-mc-pt-fg",
           "[div[data-size='xs']_&]:text-sm",
           "[div[data-size='sm']_&]:text-base",
           "[div[data-size='default']_&]:text-base",
@@ -130,7 +130,7 @@ export function PromptDescription({
     ? twMerge(clsx(promptDescriptionVariants({ size, className })))
     : twMerge(
         clsx(
-          "text-gray-600",
+          "text-mc-pt-mut",
           "[div[data-size='xs']_&]:text-xs",
           "[div[data-size='sm']_&]:text-sm",
           "[div[data-size='default']_&]:text-sm",

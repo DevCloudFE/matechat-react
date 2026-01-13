@@ -28,7 +28,7 @@ export function FileUpload({
       data-slot="file-upload"
       type="button"
       className={twMerge(
-        clsx("cursor-pointer text-gray-500 hover:text-gray-500/80", className),
+        clsx("cursor-pointer text-mc-fu-fg hover:text-mc-fu-hv", className),
       )}
       onClick={() => fileInputRef.current?.click()}
       {...props}
