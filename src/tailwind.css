@@ -2,92 +2,117 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* 1. color */
-  --color-background: oklch(1 0 0);             /* white    */
-  --color-foreground: oklch(0.2 0 0);           /* gray-700 */
-  
-  --color-background-elevated: oklch(1 0 0);    /* white */
+  /* Base */
+  --color-mc-bg: oklch(1 0 0); /* bg-white */
+  --color-mc-fg: oklch(0.2 0 0); /* text-slate-900 */
+  --color-mc-pri: oklch(0.62 0.21 260); /* bg-blue-600 */
+  --color-mc-pri-fg: oklch(1 0 0); /* text-white */
+  --color-mc-brd: oklch(0.87 0.01 260); /* border-slate-200 */
+  --color-mc-elev: oklch(1 0 0); /* bg-white */
+  --color-mc-mut: oklch(0.6 0 0); /* text-slate-600 */
+  --color-mc-mut-fg: oklch(0.55 0 0); /* text-slate-500 */
+  --color-mc-ring: var(--color-mc-pri); /* focus:ring-blue-600 */
+  --duration-mc-norm: 300ms; /* duration-300 */
+  --spacing-mc-1: 0.25rem; /* gap-1 */
+  --spacing-mc-2: 0.5rem; /* gap-2 */
+  --spacing-mc-3: 0.75rem; /* gap-3 */
+  --spacing-mc-4: 1rem; /* gap-4 */
+  /* Button Component*/
+  --color-mc-btn: var(--color-mc-pri); /* bg-blue-600 */
+  --color-mc-btn-fg: var(--color-mc-pri-fg); /* text-white */
+  --radius-mc-btn: 0.375rem; /* rounded-md */
+  --spacing-mc-btn-px: 1rem; /* px-4 */
+  --spacing-mc-btn-py: 0.5rem; /* py-2 */
+  --spacing-mc-btn-gap: 0.25rem; /* gap-1 */
+  --size-mc-btn-ic: 2rem; /* w-8 h-8 */
+  /* Sender Component */
+  --color-mc-sd-bg: var(--color-mc-elev); /* bg-white */
+  --color-mc-sd-brd: var(--color-mc-brd); /* border-slate-200 */
+  --color-mc-sd-mut: var(--color-mc-mut-fg); /* text-slate-500 */
+  --color-mc-sd-fg: var(--color-mc-fg); /* text-slate-900 */
+  --radius-mc-sd: 0.75rem; /* rounded-xl */
+  --radius-mc-sd-el: 0.5rem; /* rounded-lg */
+  --radius-mc-full: 9999px; /* rounded-full */
+  --shadow-mc-sd: 0 1px 3px 0 rgb(0 0 0 / 0.1); /* shadow-sm */
+  --shadow-mc-el: var(--shadow-mc-pt-el); /* shadow-xl */
+  --h-mc-sd-max: 8rem; /* max-h-32 */
+  --h-mc-sd-drp-max: 16rem; /* max-h-64 */
+  --spacing-mc-sd-p: 1rem; /* p-4 */
+  --spacing-mc-sd-pt: 1rem; /* pt-4 */
+  --spacing-mc-sd-inner-gap: var(--spacing-mc-2); /* gap-2 */
+  /* List Component */
+  --color-mc-li-act: var(--color-mc-pri); /* bg-blue-600 */
+  --color-mc-li-act-fg: var(--color-mc-pri-fg); /* text-white */
+  --color-mc-li-hv: oklch(0.96 0 0); /* hover:bg-slate-50 */
+  --spacing-mc-li-py: 0.5rem; /* py-2 */
+  --spacing-mc-li-px: 1rem; /* px-4 */
+  --spacing-mc-li-gap: 0.5rem; /* gap-2 */
+  --h-mc-li-max: 16rem; /* max-h-64 */
+  /* Prompt Component */
+  --color-mc-pt-bg: var(--color-mc-elev); /* bg-white */
+  --color-mc-pt-brd: var(--color-mc-brd); /* border-slate-200 */
+  --color-mc-pt-fg: var(--color-mc-fg); /* text-slate-900 */
+  --color-mc-pt-mut: var(--color-mc-mut-fg); /* text-slate-500 */
+  --radius-mc-pt: 0.5rem; /* rounded-lg */
+  --shadow-mc-pt-el: 0 10px 15px -3px rgb(0 0 0 / 0.1); /* shadow-xl */
+  --duration-mc-pt: var(--duration-mc-norm); /* duration-300 */
+  --spacing-mc-pt-px: 1rem; /* px-4 */
+  --spacing-mc-pt-py: 0.75rem; /* py-3 */
+  --spacing-mc-pt-gap: 0.5rem; /* gap-2 */
+  --spacing-mc-pt-px-xs: 0.75rem; /* px-3 */
+  --spacing-mc-pt-py-xs: 0.5rem; /* py-2 */
+  --spacing-mc-pt-px-sm: 1rem; /* px-4 */
+  --spacing-mc-pt-py-sm: 0.625rem; /* py-2.5 */
+  --spacing-mc-pt-gap-sm: 0.375rem; /* gap-1.5 */
+  --spacing-mc-pt-px-md: 1.25rem; /* px-5 */
+  --spacing-mc-pt-py-md: 0.875rem; /* py-3.5 */
+  --spacing-mc-pt-px-lg: 1.5rem; /* px-6 */
+  --spacing-mc-pt-py-lg: 1rem; /* py-4 */
+  --spacing-mc-pt-gap-lg: 0.625rem; /* gap-2.5 */
+  --spacing-mc-pt-layout-gap: 1rem; /* gap-4 */
+  --spacing-mc-pt-layout-gap-xs: 0.5rem; /* gap-2 */
+  --spacing-mc-pt-layout-gap-sm: 0.75rem; /* gap-3 */
+  --spacing-mc-pt-layout-gap-lg: 1.25rem; /* gap-5 */
+  /* FileUpload Component */
+  --color-mc-fu-fg: oklch(0.6 0 0); /* text-gray-500 */
+  --color-mc-fu-hv: oklch(0.45 0 0); /* hover:text-gray-700 */
 
-  --color-primary: oklch(0.62 0.21 260);        /* blue-500 */
-  --color-primary-foreground: oklch(1 0 0);     /* white */
-
-  --color-muted: oklch(0.6 0 0);                /* gray-400 */
-  --color-muted-foreground: oklch(0.55 0 0);
-
-  --color-accent: oklch(0.96 0 0);
-  --color-accent-foreground: oklch(0.2 0 0);
-  
-  --color-border: oklch(0.87 0.01 260);         /* gray-200 */
-  --color-scrollbar: oklch(0.87 0.01 260);      /* gray-300 */
-  --color-scrollbar-hover: oklch(0.7 0.01 260); /* gray-400 */
-  --color-ring: oklch(0.62 0.21 260);           /* primary */
-
-  /* 2. Rounded Corner   */
-  --radius-lg: 0.5rem;                          /* rounded-lg */
-  --radius-xl: 1rem;                            /* rounded-2xl */
-  --radius-full: 9999px;                        /* rounded-full */
-
-  /* 3. shadow */
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --shadow-elevated: 0 10px 15px -3px rgb(253 230 138 / 0.3); /* amber-50 */
-
-  /* 4. Type  */
-  --size-icon-button: 2rem;                     /* h-8 w-8 */
-  --height-textarea-max: 8rem;                  /* max-h-32 */
-  --height-dropdown-max: 16rem;                 /* max-h-64 */
-
-  /* 5. Motion  */
-  --duration-normal: 300ms;
-
-  /* 6. Spacing */
-  --spacing-1: 0.25rem;
-  --spacing-2: 0.5rem;   /* py-2 */
-  --spacing-4: 1rem;     /* px-4, gap-4 */
+  /* Global */
+  --color-mc-sb: var(--color-mc-brd); /* border-slate-200 */
+  --color-mc-sb-hv: oklch(0.7 0.01 260); /* bg-slate-300 */
+  --w-mc-sb: 0.375rem; /* w-1.5 */
 }
-
 .dark {
   @theme {
-    --color-background: oklch(0.15 0.01 260);
-    --color-foreground: oklch(0.9 0 0);
-    --color-background-elevated: oklch(0.13 0 0);
-    --color-border: oklch(0.3 0.01 260);
-    
-    --color-accent: oklch(0.26 0 0);
-    --color-muted: oklch(0.65 0 0);
-    --color-muted-foreground: oklch(0.65 0 0);
+    --color-mc-bg: oklch(0.15 0.01 260); /* bg-slate-900 (approx) */
+    --color-mc-fg: oklch(0.9 0 0); /* text-slate-100 */
+    --color-mc-elev: oklch(0.13 0 0); /* bg-slate-950 (approx) */
+    --color-mc-brd: oklch(0.3 0.01 260); /* border-slate-700 */
 
-    --color-scrollbar: oklch(0.26 0 0);
-    --color-scrollbar-hover: oklch(0.4 0 0);
-    
-    --shadow-elevated: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 0 0 1px oklch(1 0 0 / 0.05);
+    --color-mc-sb-hv: oklch(0.5 0.01 260);
+    --shadow-mc-pt-el:
+      0 10px 15px -3px rgb(0 0 0 / 0.5), 0 0 0 1px oklch(1 0 0 / 0.05);
   }
 }
-
-
 @layer components {
-  .bg-primary-hover {
-    background-color: color-mix(in oklab, var(--color-primary) 90%, transparent);
+  .bg-mc-btn-hv {
+    background-color: color-mix(
+      in oklab,
+      var(--color-mc-pri) 90%,
+      transparent
+    ); /* hover:bg-blue-600/90 */
   }
-    .custom-scrollbar {
+  .custom-scrollbar {
     scrollbar-gutter: stable;
-    
     &::-webkit-scrollbar {
-      width: 0.375rem;  /* w-1.5 */
+      width: var(--w-mc-sb);
     }
-    
     &::-webkit-scrollbar-thumb {
       border-radius: 9999px;
-      cursor: auto;
-      background-color: var(--color-scrollbar);
-      
+      background-color: var(--color-mc-sb);
       &:hover {
-        background-color: var(--color-scrollbar-hover);
+        background-color: var(--color-mc-sb-hv);
       }
-    }
-    
-    &::-webkit-scrollbar-track {
-      margin-top: var(--spacing-3);
     }
   }
 }

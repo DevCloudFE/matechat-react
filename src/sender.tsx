@@ -21,7 +21,7 @@ export function InputCount({
   ...props
 }: InputCountProps) {
   return (
-    <span className={clsx("text-muted", className)} {...props}>
+    <span className={clsx("text-mc-sd-mut", className)} {...props}>
       {count} / {limit}
     </span>
   );
@@ -58,7 +58,7 @@ export function SenderButton({
       data-slot="sender-button"
       className={twMerge(
         clsx(
-          "flex items-center justify-center cursor-pointer size-icon-button rounded-full bg-primary text-primary-foreground hover:bg-primary-hover",
+          "flex items-center justify-center cursor-pointer size-mc-btn-ic rounded-full bg-mc-btn text-mc-btn-fg hover:bg-mc-btn-hv",
           className,
         ),
       )}
@@ -211,15 +211,16 @@ export function Sender({
       data-slot="sender"
       className={twMerge(
         clsx(
-          "relative px-1 flex flex-col items-center border rounded-xl",
-          "border-border shadow-sm transition-all duration-normal hover:shadow-md",
-          "focus-within:ring-2 focus-within:ring-ring focus-within:border-primary",
+          "relative px-1 flex flex-col items-center border rounded-mc-sd",
+          "bg-mc-sd-bg border-mc-sd-brd shadow-mc-sd transition-all",
+          "focus-within:ring-2 focus-within:ring-mc-ring focus-within:border-mc-pri",
+          className,
           className,
         ),
       )}
       {...props}
     >
-      <div className="absolute bottom-full left-0 w-full bg-background-elevated rounded-lg shadow-elevated max-h-dropdown overflow-y-auto">
+      <div className="absolute bottom-full left-0 w-full bg-mc-sd-bg rounded-mc-sd-el shadow-mc-sd max-h-mc-sd-drp-max overflow-y-auto custom-scrollbar">
         <Suggestion
           message={message}
           textareaRef={textareaRef}
@@ -234,13 +235,13 @@ export function Sender({
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         className={clsx(
-          "w-full pt-4 px-4 border-0 rounded-xl resize-none! bg-transparent",
-          "focus:ring-0 focus:outline-none text-foreground placeholder-muted",
-          "overflow-y-auto max-h-textarea custom-scrollbar", // 关键变化！
+          "w-full pt-mc-4 px-mc-4 border-0 rounded-mc-sd resize-none! bg-transparent",
+          "focus:ring-0 focus:outline-none text-mc-sd-fg placeholder-mc-sd-mut",
+          "overflow-y-auto max-h-mc-sd-max custom-scrollbar",
         )}
         rows={2}
       />
-      <div className="flex items-center w-full px-4 py-2 gap-4">
+      <div className="flex items-center w-full px-mc-sd-p py-mc-li-py gap-mc-2">
         {toolbar}
         <SenderButton
           onClick={handleSend}

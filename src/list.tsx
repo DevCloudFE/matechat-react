@@ -132,7 +132,9 @@ export const List = ({
           key={key}
           role-slot="list-group"
           aria-label={String(groupContent || "")}
-          className={clsx("font-bold text-muted-foreground py-2 px-4 text-sm")}
+          className={clsx(
+            "font-bold text-mc-sd-mut py-mc-li-py px-mc-li-px text-sm",
+          )}
           style={listGroupStyle}
         >
           {String(groupContent || " ")}
@@ -155,9 +157,12 @@ export const List = ({
         key={key}
         role-slot="list-item"
         className={twMerge(
-          clsx("py-2 px-4 hover:bg-accent text-foreground cursor-pointer", {
-            "bg-primary hover:bg-primary/90 text-primary-foreground hover:bg-primary-hover": isSelected,
-          }),
+          clsx(
+            "py-mc-li-py px-mc-li-px hover:bg-mc-li-hv text-mc-fg cursor-pointer",
+            {
+              "bg-mc-li-act text-mc-li-act-fg": isSelected,
+            },
+          ),
         )}
         id={`lo_id_${index}`}
         style={listItemStyle}
@@ -194,7 +199,12 @@ export const List = ({
   const list = createList();
 
   return (
-    <div style={listStyle} data-slot="list" {...props}>
+    <div
+      className={twMerge(clsx("bg-mc-bg", props.className))}
+      style={listStyle}
+      data-slot="list"
+      {...props}
+    >
       {list}
     </div>
   );
