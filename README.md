@@ -5,7 +5,7 @@
 
 <div align="center">
 
-MateChat React is the React version of [MateChat](https://github.com/DevCloudFE/MateChat), a front-end AI scenario solution UI library based on Huawei DevUI Design.
+MateChat React is a front-end AI scenario solution UI library based on Huawei DevUI Design, the React version of [MateChat](https://github.com/DevCloudFE/MateChat), .
 
 [![npm Version](https://img.shields.io/npm/v/@matechat/react.svg)](https://www.npmjs.com/package/@matechat/react)
 [![npm Downloads](https://img.shields.io/npm/dm/@matechat/react.svg)](https://www.npmjs.com/package/@matechat/react)
@@ -29,19 +29,16 @@ MateChat is based on [Huawei DevUI Design](https://devui.design/), offering a mo
 
 For more information, visit the MateChat React website: [MateChat React](http://matechat.noctisynth.org/)
 
----
-
 ## Features
 
-- 🧠 Built for AI interaction and prompt use-cases
-- 🎨 Based on DevUI design system
-- ⚛️ Fully typed React + TypeScript components
-- 🌗 Built-in light/dark theme switching
-- 🔌 Highly customizable & flexible
+- **Comprehensive Components**: Provides a wide range of components tailored for AI scenarios, including chat bubbles, input areas, and conversation lists.
+- **Customizable Styles**: Built with Tailwind CSS, allowing easy customization to fit your design needs.
+- **Highly Customizable**: All components are highly customizable, allowing you to easily adapt them to your specific needs.
+- **Headless Components**: All components are able to use in headless mode through [shadcn/ui](https://ui.shadcn.com/).
 
----
+## Installation
 
-## Quick Start
+### Classical Installation
 
 ```bash
 # npm
@@ -51,31 +48,21 @@ npm install @matechat/react
 pnpm add @matechat/react
 ```
 
-```tsx
-import { Bubble } from "@matechat/react";
-import avatar from "./avatar.png";
+### Installation with shadcn/ui
 
-export default function BubbleDemo() {
-  return (
-    <div className="bubble-chat">
-      <div className="bubble-row left">
-        <img src={avatar} alt="Bot" className="avatar" />
-        <Bubble text="Hello, how can I help you?" />
-      </div>
-      <div className="bubble-row right">
-        <Bubble text="I want to know the product features!" />
-        <img src={avatar} alt="User" className="avatar" />
-      </div>
-      <div className="bubble-row left">
-        <img src={avatar} alt="Bot" className="avatar" />
-        <Bubble text="OK, please wait..." isPending />
-      </div>
-    </div>
-  );
-}
-```
+1. Initialize shadcn/ui
 
----
+   ```bash
+   pnpm dlx shadcn@latest init
+   ```
+
+2. Install MateChat React components
+
+   It is possible to install MateChat React components with shadcn/ui CLI. For example, to install the bubble component of MateChat React:
+
+   ```bash
+   pnpm dlx shadcn@latest add https://matechat.noctisynth.org/r/bubble.json
+   ```
 
 ## Documentation
 
@@ -102,8 +89,6 @@ We welcome all kinds of contributions:
 <a href="https://github.com/DevCloudFE/matechat-react/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=DevCloudFE/matechat-react" alt="DevCloudFE/matechat-react contributors"/>
 </a>
-
----
 
 ## Contact Us
 
