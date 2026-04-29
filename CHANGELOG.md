@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.0
+
+### Changes
+
+- feat: improve shadcn ecosystem compatibility
+- Add components.json to enable shadcn CLI recognition
+- Register list and file-upload components in registry.json
+
 ## v0.1.1
 
 ### New Features

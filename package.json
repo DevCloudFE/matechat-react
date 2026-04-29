@@ -87,10 +87,10 @@
     "prepublishOnly": "pnpm run build",
     "preview": "pnpm --filter @matechat/react-playground dev",
     "registry:build": "shadcn build --output docs/doc_build/r",
-    "test": "vitest",
+    "test": "vitest run --pool=vmForks",
     "typecheck": "tsc --noEmit"
   },
   "type": "module",
   "types": "./dist/*.d.ts",
-  "version": "0.1.1"
+  "version": "0.2.0"
 }
