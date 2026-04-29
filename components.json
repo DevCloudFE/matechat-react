@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.css",
+    "css": "src/tailwind.css"
+  },
+  "aliases": {
+    "components": "@matechat/react",
+    "utils": "@matechat/react/utils"
+  }
+}
