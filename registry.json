@@ -40,6 +40,30 @@
       ]
     },
     {
+      "name": "file-upload",
+      "type": "registry:block",
+      "title": "FileUpload",
+      "description": "MateChat FileUpload",
+      "files": [
+        {
+          "path": "src/file-upload.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "list",
+      "type": "registry:block",
+      "title": "List",
+      "description": "MateChat List",
+      "files": [
+        {
+          "path": "src/list.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "bubble",
       "type": "registry:block",
       "title": "Bubble",
