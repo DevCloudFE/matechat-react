@@ -1,10 +1,12 @@
-import { createOpenAIBackend } from "@matechat/react/utils/backend";
-import { agent } from "@matechat/react/utils/core";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { useState } from "react";
 import SettingIcon from "./assets/setting.svg?react";
 
-function Settings() {
+function Settings({
+  onActivate,
+}: {
+  onActivate: (token: string) => void;
+}) {
   const [isOpen, setOpen] = useState(false);
 
   const openModal = () => {
@@ -18,15 +20,9 @@ function Settings() {
   const [token, setToken] = useState("");
 
   const activateChat = () => {
-    agent.use(
-      createOpenAIBackend({
-        apiKey: token,
-        baseURL: "https://api.deepseek.com",
-        model: "deepseek-chat",
-        maxTokens: 200,
-        dangerouslyAllowBrowser: true,
-      }),
-    );
+    if (token.trim()) {
+      onActivate(token.trim());
+    }
     closeModal();
   };
 

@@ -1,23 +1,68 @@
-import { BubbleList, FileUpload } from "@matechat/react";
+import { BubbleList } from "@matechat/react";
 import { InputCount, Sender } from "@matechat/react/sender";
-import { useChat, useMateChat } from "@matechat/react/utils/index";
-import clsx from "clsx";
-import { useState } from "react";
+import { useChat } from "@ai-sdk/react";
+import { DirectChatTransport, ToolLoopAgent } from "ai";
+import {
+  createOpenAICompatible,
+  type OpenAICompatibleProvider,
+} from "@ai-sdk/openai-compatible";
+import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import mcLogo from "./assets/logo.svg";
 
-function Communicate() {
+function Communicate({ apiKey }: { apiKey: string }) {
   const { t } = useTranslation();
+  const [input, setInput] = useState("");
+  const [provider, setProvider] = useState<any | null>(null);
 
-  const { backend } = useMateChat();
-  const { messages, input, pending } = useChat(backend, [], {
-    throwOnEmptyBackend: true,
+  // const provider = createOpenAICompatible({
+  //   name: "deepseek",
+  //   baseURL: "https://api.deepseek.com/v1",
+  //   apiKey: apiKey || "invalid-key-for-initial-render",
+  // });
+
+  useEffect(() => {
+    setProvider(
+      createOpenAICompatible({
+        name: "deepseek",
+        baseURL: "https://api.deepseek.com/v1",
+        apiKey: apiKey || "invalid-key-for-initial-render",
+      }),
+    );
+  }, [apiKey]);
+
+  const agent = new ToolLoopAgent({
+    model: provider("deepseek-chat"),
   });
 
-  const [prompt, setPrompt] = useState("");
-  const handleInputChange = (value: string) => {
-    setPrompt(value);
-  };
+  const transport = new DirectChatTransport({ agent });
+
+  const { messages, sendMessage, status, stop, error } = useChat({
+    transport,
+  });
+
+  const isPending = status === "submitted" || status === "streaming";
+
+  useEffect(() => {
+    console.log("=== Debug Info ===");
+    console.log("messages count:", messages.length);
+    console.log("isPending:", isPending);
+    console.log(
+      "apiKey:",
+      apiKey ? `provided (${apiKey.substring(0, 5)}...)` : "NOT provided",
+    );
+    console.log("status:", status);
+    console.log("error:", error?.message);
+  }, [messages.length, isPending, apiKey, status, error]);
+
+  const handleSend = useCallback(
+    (message: { text: string }) => {
+      if (message.text.trim()) {
+        sendMessage({ text: message.text.trim() });
+      }
+    },
+    [sendMessage],
+  );
 
   return (
     <div className="size-full flex flex-col pt-5 px-4 pb-2 items-center">
@@ -26,7 +71,7 @@ function Communicate() {
           <BubbleList
             className="size-full max-w-full"
             messages={messages}
-            isPending={pending}
+            isPending={isPending}
           />
           {messages.length === 0 && (
             <div className="absolute inset-0 flex flex-col justify-center items-center gap-5">
@@ -39,22 +84,26 @@ function Communicate() {
               <span className="text-sm text-gray-500 dark:text-gray-200">
                 {t("tip")}
               </span>
+              <div className="text-xs text-gray-400 mt-2">
+                Debug:{" "}
+                {apiKey
+                  ? `apiKey set (${apiKey.substring(0, 5)}...)`
+                  : "apiKey NOT set"}{" "}
+                | Status: {status} | Error: {error?.message ?? "none"}
+              </div>
             </div>
           )}
         </div>
         <Sender
-          className={clsx(
-            "w-full",
-            "focus-within:border-[#a18dc2] focus-within:ring-2 focus-within:ring-[#a694c2]",
-            "dark:focus-within:border-[#7a6994] dark:focus-within:ring-2 dark:focus-within:ring-[#706385]",
-          )}
+          className="w-full focus-within:border-[#a18dc2] focus-within:ring-2 focus-within:ring-[#a694c2] dark:focus-within:border-[#7a6994] dark:focus-within:ring-2 dark:focus-within:ring-[#706385]"
           placeholder={t("placeholder")}
-          input={input}
-          onMessageChange={handleInputChange}
+          sendMessage={handleSend}
+          onMessageChange={setInput}
+          onSend={isPending ? stop : undefined}
           toolbar={
             <div className="flex flex-row justify-between w-full">
-              <InputCount count={prompt.length} limit={2000} />
-              <FileUpload />
+              <InputCount count={input.length} limit={2000} />
+              <div />
             </div>
           }
         />

@@ -15,7 +15,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.63",
+    "@ai-sdk/openai-compatible": "^2.0.47",
+    "@ai-sdk/react": "^3.0.179",
     "@tailwindcss/vite": "^4.1.14",
+    "ai": "^6.0.177",
     "clsx": "^2.1.1",
     "i18next": "^25.5.3",
     "i18next-browser-languagedetector": "^8.2.0",
@@ -24,12 +28,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.4",
-    "@types/react": "^19.1.17",
+    "@types/react": "^19.2.1",
     "@types/react-dom": "^19.1.11",
     "@vitejs/plugin-react": "^5.0.4",
     "@vitejs/plugin-react-swc": "^4.1.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "typescript": "~5.8.3",
     "vite": "npm:rolldown-vite@^7.1.14",
     "vite-plugin-svgr": "^4.5.0"
