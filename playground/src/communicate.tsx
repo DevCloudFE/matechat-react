@@ -3,30 +3,23 @@ import { useChat } from "@ai-sdk/react";
 import { BubbleList } from "@matechat/react";
 import { InputCount, Sender } from "@matechat/react/sender";
 import { DirectChatTransport, ToolLoopAgent } from "ai";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import mcLogo from "./assets/logo.svg";
 
-function Communicate({ apiKey }: { apiKey: string }) {
+function Communicate() {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
 
-  const agent = useMemo(() => {
-    console.log(apiKey, "apikey changed");
-    const provider = createOpenAICompatible({
-      name: "deepseek",
-      baseURL: "https://api.deepseek.com/v1",
-      apiKey: apiKey,
-    });
-    return new ToolLoopAgent({ model: provider("deepseek-chat") });
-  }, [apiKey]);
+  const provider = createOpenAICompatible({
+    name: "deepseek",
+    baseURL: "https://api.deepseek.com/v1",
+    apiKey: process.env.MODEL_API_KEY,
+  });
+  const agent = new ToolLoopAgent({ model: provider("deepseek-v4-flash") });
+  const transport = new DirectChatTransport({ agent });
 
-  const transport = useMemo(() => {
-    console.log("creating new transport");
-    return new DirectChatTransport({ agent });
-  }, [agent]);
-
-  const { messages, sendMessage, status, stop, error } = useChat({
+  const { messages, sendMessage, status, stop } = useChat({
     transport,
   });
 
@@ -42,9 +35,9 @@ function Communicate({ apiKey }: { apiKey: string }) {
   );
 
   return (
-    <div className="size-full flex flex-col pt-5 px-4 pb-2 items-center">
-      <div className="size-full max-w-3xl flex flex-col gap-3 items-center">
-        <div className="flex-grow w-full relative">
+    <div className="h-full flex flex-col pt-5 px-4 pb-2 items-center overflow-hidden">
+      <div className="w-full max-w-3xl flex flex-col gap-3 items-center h-full">
+        <div className="flex-grow w-full min-h-0 relative">
           <BubbleList
             className="size-full max-w-full"
             messages={messages}
@@ -61,18 +54,11 @@ function Communicate({ apiKey }: { apiKey: string }) {
               <span className="text-sm text-gray-500 dark:text-gray-200">
                 {t("tip")}
               </span>
-              <div className="text-xs text-gray-400 mt-2">
-                Debug:{" "}
-                {apiKey
-                  ? `apiKey set (${apiKey.substring(0, 5)}...)`
-                  : "apiKey NOT set"}{" "}
-                | Status: {status} | Error: {error?.message ?? "none"}
-              </div>
             </div>
           )}
         </div>
         <Sender
-          className="w-full focus-within:border-[#a18dc2] focus-within:ring-2 focus-within:ring-[#a694c2] dark:focus-within:border-[#7a6994] dark:focus-within:ring-2 dark:focus-within:ring-[#706385]"
+          className="w-full flex-shrink-0 focus-within:border-[#a18dc2] focus-within:ring-2 focus-within:ring-[#a694c2] dark:focus-within:border-[#7a6994] dark:focus-within:ring-2 dark:focus-within:ring-[#706385]"
           placeholder={t("placeholder")}
           sendMessage={handleSend}
           onMessageChange={setInput}
@@ -84,7 +70,7 @@ function Communicate({ apiKey }: { apiKey: string }) {
             </div>
           }
         />
-        <div className="flex flex-row">
+        <div className="flex-shrink-0 flex flex-row">
           <span className="text-[12px] text-gray-500">{t("attention")}</span>
           <hr className="h-4 w-px bg-gray-300 dark:bg-gray-600 border-0 mx-2" />
           <span className="text-[12px] text-gray-500 hover:text-gray-550 underline cursor-pointer">

@@ -320,7 +320,7 @@ export const BubbleList = memo(function BubbleList({
             >
               {avatar && (
                 <Avatar
-                  className="flex-shrink-0"
+                  className="shrink-0"
                   {...(typeof avatar === "string"
                     ? { imageUrl: avatar }
                     : avatar)}
@@ -349,7 +349,7 @@ export const BubbleList = memo(function BubbleList({
               "flex items-start gap-2 w-full",
             )}
           >
-            <Avatar className="flex-shrink-0" {...(assistant?.avatar || {})} />
+            <Avatar className="shrink-0" {...(assistant?.avatar || {})} />
             <Bubble
               isPending={isPending}
               pending={pending}

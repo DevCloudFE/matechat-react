@@ -1,19 +1,16 @@
 import "./tailwind.css";
 
 import { clsx } from "clsx";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import chatIcon from "./assets/chat.svg";
 import mcLogo from "./assets/logo.svg";
 import Communicate from "./communicate";
 import History from "./history";
 import Language from "./language";
-import Settings from "./settings";
 import ThemeToggle from "./theme";
 
 function App() {
   const { t } = useTranslation();
-  const [apiKey, setApiKey] = useState("");
 
   return (
     <div
@@ -45,7 +42,6 @@ function App() {
           <div className="flex flex-col justify-center items-center gap-4 mb-3.5">
             <Language />
             <ThemeToggle />
-            <Settings onActivate={setApiKey} />
           </div>
         </div>
         <div className="flex flex-row size-full">
@@ -65,7 +61,7 @@ function App() {
               "dark:bg-none dark:bg-black/35",
             )}
           >
-            <Communicate apiKey={apiKey} />
+            <Communicate />
           </div>
         </div>
       </div>
