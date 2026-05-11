@@ -1,8 +1,8 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import "../tailwind.css";
 
-import clsx from "clsx";
 import type { UIMessage } from "ai";
+import clsx from "clsx";
 import type React from "react";
 import { memo, useCallback, useEffect, useRef } from "react";
 import Markdown from "react-markdown";
@@ -144,7 +144,9 @@ export function Avatar({ className, text, imageUrl, ...props }: AvatarProps) {
 
 function getTextFromParts(parts: UIMessage["parts"]): string {
   return parts
-    .filter((part): part is { type: "text"; text: string } => part.type === "text")
+    .filter(
+      (part): part is { type: "text"; text: string } => part.type === "text",
+    )
     .map((part) => part.text)
     .join("");
 }
@@ -153,18 +155,29 @@ function getAlignFromRole(role: UIMessage["role"]): "left" | "right" {
   return role === "user" ? "right" : "left";
 }
 
+function isAvatarProps(obj: unknown): obj is AvatarProps {
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    ("text" in obj || "imageUrl" in obj)
+  );
+}
+
 function getAvatarFromMetadata(
   metadata: UIMessage["metadata"],
 ): AvatarProps | string | undefined {
-  if (!metadata) {
+  if (!metadata || typeof metadata !== "object") {
+    return undefined;
+  }
+  if (!("avatar" in metadata)) {
     return undefined;
   }
   const avatar = metadata.avatar;
   if (typeof avatar === "string") {
     return avatar;
   }
-  if (avatar && typeof avatar === "object") {
-    return avatar as AvatarProps;
+  if (isAvatarProps(avatar)) {
+    return avatar;
   }
   return undefined;
 }
@@ -308,7 +321,9 @@ export const BubbleList = memo(function BubbleList({
               {avatar && (
                 <Avatar
                   className="flex-shrink-0"
-                  {...(typeof avatar === "string" ? { imageUrl: avatar } : avatar)}
+                  {...(typeof avatar === "string"
+                    ? { imageUrl: avatar }
+                    : avatar)}
                 />
               )}
               <Bubble

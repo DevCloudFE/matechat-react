@@ -47,9 +47,7 @@ export function SenderButton({
       {...props}
     >
       {icon ?? (
-        <span className={clsx("text-white")}>
-          {isSending ? "■" : "→"}
-        </span>
+        <span className={clsx("text-white")}>{isSending ? "■" : "→"}</span>
       )}
     </button>
   );

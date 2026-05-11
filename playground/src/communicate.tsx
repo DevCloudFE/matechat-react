@@ -1,59 +1,36 @@
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { useChat } from "@ai-sdk/react";
 import { BubbleList } from "@matechat/react";
 import { InputCount, Sender } from "@matechat/react/sender";
-import { useChat } from "@ai-sdk/react";
 import { DirectChatTransport, ToolLoopAgent } from "ai";
-import {
-  createOpenAICompatible,
-  type OpenAICompatibleProvider,
-} from "@ai-sdk/openai-compatible";
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import mcLogo from "./assets/logo.svg";
 
 function Communicate({ apiKey }: { apiKey: string }) {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
-  const [provider, setProvider] = useState<any | null>(null);
 
-  // const provider = createOpenAICompatible({
-  //   name: "deepseek",
-  //   baseURL: "https://api.deepseek.com/v1",
-  //   apiKey: apiKey || "invalid-key-for-initial-render",
-  // });
-
-  useEffect(() => {
-    setProvider(
-      createOpenAICompatible({
-        name: "deepseek",
-        baseURL: "https://api.deepseek.com/v1",
-        apiKey: apiKey || "invalid-key-for-initial-render",
-      }),
-    );
+  const agent = useMemo(() => {
+    console.log(apiKey, "apikey changed");
+    const provider = createOpenAICompatible({
+      name: "deepseek",
+      baseURL: "https://api.deepseek.com/v1",
+      apiKey: apiKey,
+    });
+    return new ToolLoopAgent({ model: provider("deepseek-chat") });
   }, [apiKey]);
 
-  const agent = new ToolLoopAgent({
-    model: provider("deepseek-chat"),
-  });
-
-  const transport = new DirectChatTransport({ agent });
+  const transport = useMemo(() => {
+    console.log("creating new transport");
+    return new DirectChatTransport({ agent });
+  }, [agent]);
 
   const { messages, sendMessage, status, stop, error } = useChat({
     transport,
   });
 
   const isPending = status === "submitted" || status === "streaming";
-
-  useEffect(() => {
-    console.log("=== Debug Info ===");
-    console.log("messages count:", messages.length);
-    console.log("isPending:", isPending);
-    console.log(
-      "apiKey:",
-      apiKey ? `provided (${apiKey.substring(0, 5)}...)` : "NOT provided",
-    );
-    console.log("status:", status);
-    console.log("error:", error?.message);
-  }, [messages.length, isPending, apiKey, status, error]);
 
   const handleSend = useCallback(
     (message: { text: string }) => {

@@ -2,11 +2,7 @@ import { clsx } from "clsx";
 import { useState } from "react";
 import SettingIcon from "./assets/setting.svg?react";
 
-function Settings({
-  onActivate,
-}: {
-  onActivate: (token: string) => void;
-}) {
+function Settings({ onActivate }: { onActivate: (token: string) => void }) {
   const [isOpen, setOpen] = useState(false);
 
   const openModal = () => {
