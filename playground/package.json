@@ -18,24 +18,24 @@
     "@ai-sdk/openai": "^3.0.63",
     "@ai-sdk/openai-compatible": "^2.0.47",
     "@ai-sdk/react": "^3.0.179",
-    "@tailwindcss/vite": "^4.1.14",
+    "@tailwindcss/vite": "^4.3.0",
     "ai": "^6.0.177",
     "clsx": "^2.1.1",
-    "i18next": "^25.5.3",
-    "i18next-browser-languagedetector": "^8.2.0",
+    "i18next": "^25.10.10",
+    "i18next-browser-languagedetector": "^8.2.1",
     "react-i18next": "^15.7.4",
-    "tailwindcss": "^4.1.14"
+    "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.4",
-    "@types/react": "^19.2.1",
-    "@types/react-dom": "^19.1.11",
-    "@vitejs/plugin-react": "^5.0.4",
-    "@vitejs/plugin-react-swc": "^4.1.0",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "@biomejs/biome": "^2.4.15",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.2.0",
+    "@vitejs/plugin-react-swc": "^4.3.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "typescript": "~5.8.3",
-    "vite": "npm:rolldown-vite@^7.1.14",
+    "vite": "^8.0.12",
     "vite-plugin-svgr": "^4.5.0"
   }
 }
