@@ -126,7 +126,7 @@ export function Link({
   rel,
   ...rest
 }: LinkProps) {
-  const safeHref = UNSAFE_HREF_PATTERN.test(href ?? "") ? "#" : href;
+  const safeHref = UNSAFE_HREF_PATTERN.test(href ?? "") ? undefined : href;
   const effectiveTarget = target ?? "_blank";
   const relTokens = new Set([
     "noopener",
