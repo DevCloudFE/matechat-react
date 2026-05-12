@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
   oneLight,
@@ -42,10 +42,28 @@ export function CodeBlock({
   const match = /language-(\w+)/.exec(className || "");
 
   const [copied, setCopied] = useState<boolean>(false);
+  const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current !== null) {
+        clearTimeout(copyTimerRef.current);
+      }
+    };
+  }, []);
   const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(String(children).replace(/\n$/, ""));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    navigator.clipboard
+      .writeText(String(children).replace(/\n$/, ""))
+      .then(() => {
+        setCopied(true);
+        if (copyTimerRef.current !== null) {
+          clearTimeout(copyTimerRef.current);
+        }
+        copyTimerRef.current = setTimeout(() => {
+          setCopied(false);
+          copyTimerRef.current = null;
+        }, 2000);
+      })
+      .catch(() => {});
   }, [children]);
 
   return match ? (
