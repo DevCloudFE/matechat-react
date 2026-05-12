@@ -1,29 +1,16 @@
 import "./tailwind.css";
 
-import { createOpenAIBackend } from "@matechat/react/utils/backend";
-import { agent } from "@matechat/react/utils/core";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import chatIcon from "./assets/chat.svg";
 import mcLogo from "./assets/logo.svg";
 import Communicate from "./communicate";
 import History from "./history";
 import Language from "./language";
-import Settings from "./settings";
 import ThemeToggle from "./theme";
 
 function App() {
   const { t } = useTranslation();
-
-  agent.use(
-    createOpenAIBackend({
-      apiKey: "token",
-      baseURL: "https://api.deepseek.com",
-      model: "deepseek-chat",
-      maxTokens: 200,
-      dangerouslyAllowBrowser: true,
-    }),
-  );
 
   return (
     <div
@@ -55,7 +42,6 @@ function App() {
           <div className="flex flex-col justify-center items-center gap-4 mb-3.5">
             <Language />
             <ThemeToggle />
-            <Settings />
           </div>
         </div>
         <div className="flex flex-row size-full">

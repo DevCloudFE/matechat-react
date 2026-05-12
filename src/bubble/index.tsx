@@ -1,6 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import "../tailwind.css";
 
+import type { UIMessage } from "ai";
 import clsx from "clsx";
 import type React from "react";
 import { memo, useCallback, useEffect, useRef } from "react";
@@ -8,7 +9,6 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { twMerge } from "tailwind-merge";
-import type { MessageParam } from "../utils";
 import { BlockQuote, CodeBlock, Heading, Link } from "./markdown";
 
 const bubbleVariants = cva(
@@ -39,31 +39,12 @@ const bubbleVariants = cva(
   },
 );
 
-/**
- * Props for the Bubble component.
- */
 export interface BubbleProps
   extends React.ComponentProps<"div">,
     VariantProps<typeof bubbleVariants> {
-  /**
-   * The text to display in the bubble.
-   * @description The content of the bubble, which can include Markdown syntax.
-   */
   text: string;
-  /**
-   * Whether to display the background of the bubble.
-   * @default "solid"
-   */
   background?: "transparent" | "solid";
-  /**
-   * Custom pending content to display when pending is true.
-   * @description If not provided, will use default dots animation.
-   */
   pending?: React.ReactNode;
-  /**
-   * Whether the bubble is in pending state.
-   * @default false
-   */
   isPending?: boolean;
 }
 
@@ -116,12 +97,12 @@ export function Bubble({
             a: Link,
             code: CodeBlock,
             blockquote: BlockQuote,
-            h1: (props) => <Heading {...props} level={1} />,
-            h2: (props) => <Heading {...props} level={2} />,
-            h3: (props) => <Heading {...props} level={3} />,
-            h4: (props) => <Heading {...props} level={4} />,
-            h5: (props) => <Heading {...props} level={5} />,
-            h6: (props) => <Heading {...props} level={6} />,
+            h1: (p) => <Heading {...p} level={1} />,
+            h2: (p) => <Heading {...p} level={2} />,
+            h3: (p) => <Heading {...p} level={3} />,
+            h4: (p) => <Heading {...p} level={4} />,
+            h5: (p) => <Heading {...p} level={5} />,
+            h6: (p) => <Heading {...p} level={6} />,
           }}
         >
           {text}
@@ -161,12 +142,48 @@ export function Avatar({ className, text, imageUrl, ...props }: AvatarProps) {
   );
 }
 
+function getTextFromParts(parts: UIMessage["parts"]): string {
+  return parts
+    .filter(
+      (part): part is { type: "text"; text: string } => part.type === "text",
+    )
+    .map((part) => part.text)
+    .join("");
+}
+
+function getAlignFromRole(role: UIMessage["role"]): "left" | "right" {
+  return role === "user" ? "right" : "left";
+}
+
+function isAvatarProps(obj: unknown): obj is AvatarProps {
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    ("text" in obj || "imageUrl" in obj)
+  );
+}
+
+function getAvatarFromMetadata(
+  metadata: UIMessage["metadata"],
+): AvatarProps | string | undefined {
+  if (!metadata || typeof metadata !== "object") {
+    return undefined;
+  }
+  if (!("avatar" in metadata)) {
+    return undefined;
+  }
+  const avatar = metadata.avatar;
+  if (typeof avatar === "string") {
+    return avatar;
+  }
+  if (isAvatarProps(avatar)) {
+    return avatar;
+  }
+  return undefined;
+}
+
 export interface BubbleListProps extends React.ComponentProps<"div"> {
-  messages: MessageParam[];
-  /**
-   * How to display the background of the bubbles.
-   * @default "right-solid"
-   */
+  messages: UIMessage[];
   background?: "transparent" | "solid" | "left-solid" | "right-solid";
   isPending?: boolean;
   assistant?: {
@@ -175,10 +192,6 @@ export interface BubbleListProps extends React.ComponentProps<"div"> {
   };
   footer?: React.ReactNode;
   pending?: React.ReactNode;
-  /**
-   * The height threshold for triggering scroll behavior.
-   * @default 8
-   */
   threshold?: number;
 }
 
@@ -289,38 +302,44 @@ export const BubbleList = memo(function BubbleList({
         className="flex flex-col max-w-full flex-1 gap-4"
         ref={contentRef}
       >
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            data-slot="bubble-item"
-            className={twMerge(
-              clsx(
-                "flex items-start gap-2",
-                message.align === "right" && "flex-row-reverse",
-              ),
-            )}
-          >
-            {message.avatar && (
-              <Avatar
-                className="flex-shrink-0"
-                {...(typeof message.avatar === "string"
-                  ? { imageUrl: message.avatar }
-                  : message.avatar)}
+        {messages.map((message) => {
+          const text = getTextFromParts(message.parts);
+          const align = getAlignFromRole(message.role);
+          const avatar = getAvatarFromMetadata(message.metadata);
+
+          return (
+            <div
+              key={message.id}
+              data-slot="bubble-item"
+              className={twMerge(
+                clsx(
+                  "flex items-start gap-2",
+                  align === "right" && "flex-row-reverse",
+                ),
+              )}
+            >
+              {avatar && (
+                <Avatar
+                  className="shrink-0"
+                  {...(typeof avatar === "string"
+                    ? { imageUrl: avatar }
+                    : avatar)}
+                />
+              )}
+              <Bubble
+                text={text}
+                align={align}
+                background={
+                  (background === "left-solid" && align === "left") ||
+                  (background === "right-solid" && align === "right") ||
+                  background === "solid"
+                    ? "solid"
+                    : "transparent"
+                }
               />
-            )}
-            <Bubble
-              text={message.content}
-              align={message.align}
-              background={
-                (background === "left-solid" && message.align === "left") ||
-                (background === "right-solid" && message.align === "right") ||
-                background === "solid"
-                  ? "solid"
-                  : "transparent"
-              }
-            />
-          </div>
-        ))}
+            </div>
+          );
+        })}
         {isPending && (
           <div
             key="pending"
@@ -330,7 +349,7 @@ export const BubbleList = memo(function BubbleList({
               "flex items-start gap-2 w-full",
             )}
           >
-            <Avatar className="flex-shrink-0" {...(assistant?.avatar || {})} />
+            <Avatar className="shrink-0" {...(assistant?.avatar || {})} />
             <Bubble
               isPending={isPending}
               pending={pending}

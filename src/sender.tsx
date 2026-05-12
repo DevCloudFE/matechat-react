@@ -3,9 +3,8 @@ import "./tailwind.css";
 import clsx from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import PublishNew from "./icons/publish-new.svg";
-import QuickStop from "./icons/quick-stop.svg";
-import type { Backend } from "./utils";
+import type { TriggerConfig } from "./suggestion";
+import Suggestion from "./suggestion";
 
 export interface InputCountProps extends React.ComponentProps<"span"> {
   count: number;
@@ -26,22 +25,7 @@ export function InputCount({
 }
 
 export interface SenderButtonProps extends React.ComponentProps<"button"> {
-  /**
-   * Icon to display in the button.
-   *
-   * Defaults to a send icon when `isSending` is false,
-   * and a stop icon when `isSending` is true. The icon
-   * will be overridden if provided.
-   */
   icon?: React.ReactNode;
-  /**
-   * Whether runtime is currently sending a message.
-   *
-   * If true, the button will display a stop icon
-   * instead of the send icon.
-   *
-   * @default false
-   */
   isSending?: boolean;
 }
 export function SenderButton({
@@ -63,48 +47,20 @@ export function SenderButton({
       {...props}
     >
       {icon ?? (
-        <img
-          className="filter !brightness-0 invert"
-          src={isSending ? QuickStop : PublishNew}
-          alt={isSending ? "icon-quick-stop" : "icon-publish-new"}
-        />
+        <span className={clsx("text-white")}>{isSending ? "■" : "→"}</span>
       )}
     </button>
   );
 }
 
-/**
- * Props for the message sender component.
- * @extends React.ComponentProps<"div">
- */
 export interface SenderProps extends React.ComponentProps<"div"> {
-  /**
-   * Initial message to display in the input field.
-   * @default ""
-   */
   initialMessage?: string;
-  /**
-   * Placeholder text for the input field.
-   * @default "Type your message here..."
-   */
   placeholder?: string;
-  /**
-   * Function to handle input changes.
-   */
-  input: Backend["input"];
-  /**
-   * Function to handle message changes.
-   * @param message - The new message.
-   */
+  sendMessage: (message: { text: string }) => void;
   onMessageChange?: (message: string) => void;
-  /**
-   * Function to handle the send action.
-   * This function is called when the send button is clicked.
-   * It receives an AbortController that can be used to abort the request.
-   * @param controller - The AbortController to abort the request.
-   */
-  onSend?: (controller: AbortController) => void;
+  onSend?: () => void;
   toolbar?: React.ReactNode;
+  triggerConfigs?: TriggerConfig[];
 }
 
 export function Sender({
@@ -112,14 +68,15 @@ export function Sender({
   initialMessage = "",
   placeholder = "Type your message here...",
   onMessageChange,
-  input,
+  sendMessage,
   onSend,
   toolbar,
+  triggerConfigs,
   ...props
 }: SenderProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [message, setMessage] = useState(initialMessage);
-  const [isSending, setIsSending] = useState(false);
+  const [caretPosition, setCaretPosition] = useState<number | null>(null);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -129,32 +86,23 @@ export function Sender({
     onMessageChange?.(message);
   }, [message, onMessageChange]);
 
-  const [controller, setController] = useState<AbortController | null>(null);
-  const handleSend = useCallback(() => {
-    if (isSending) {
-      setIsSending(false);
-      return controller?.abort();
+  useEffect(() => {
+    if (textareaRef.current && caretPosition !== null) {
+      textareaRef.current.focus();
+      textareaRef.current.selectionStart = caretPosition;
+      textareaRef.current.selectionEnd = caretPosition;
+      setCaretPosition(null);
     }
+  }, [caretPosition]);
 
+  const handleSend = useCallback(() => {
     if (message.trim() === "") return;
-    setIsSending(true);
-    const newController = new AbortController();
-    setController(newController);
-    const maybePromise = input(message, {
-      callbacks: {
-        onFinish: () => setIsSending(false),
-      },
-      signal: newController.signal,
-    });
+    const trimmedMessage = message.trim();
     setMessage("");
-    if (maybePromise instanceof Promise) {
-      maybePromise.then(() => {
-        onSend?.(newController);
-      });
-    } else {
-      onSend?.(newController);
-    }
-  }, [isSending, message, onSend, controller, input]);
+    sendMessage({ text: trimmedMessage });
+    onSend?.();
+  }, [message, sendMessage, onSend]);
+
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (
@@ -168,6 +116,7 @@ export function Sender({
     },
     [handleSend],
   );
+
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setMessage(e.target.value);
@@ -175,12 +124,25 @@ export function Sender({
     [],
   );
 
+  const handleTextInject: (newText: string, newCursorPosition: number) => void =
+    useCallback((newText, suggestionStartPosition) => {
+      setMessage((prevMessage) => {
+        const currentCaretPosition =
+          textareaRef.current?.selectionStart ?? prevMessage.length;
+        const textBefore = prevMessage.slice(0, suggestionStartPosition);
+        const textAfter = prevMessage.slice(currentCaretPosition);
+        const newMessage = textBefore + newText + textAfter;
+        return newMessage;
+      });
+      setCaretPosition(suggestionStartPosition + newText.length);
+    }, []);
+
   return (
     <div
       data-slot="sender"
       className={twMerge(
         clsx(
-          "px-1 flex flex-col items-center border rounded-2xl",
+          "relative px-1 flex flex-col items-center border rounded-2xl",
           "border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:shadow-md",
           "focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500",
           className,
@@ -188,6 +150,14 @@ export function Sender({
       )}
       {...props}
     >
+      <div className="absolute bottom-full left-0 w-full bg-white dark:bg-gray-50 rounded-lg shadow-amber-50 max-h-64 overflow-y-auto">
+        <Suggestion
+          message={message}
+          textareaRef={textareaRef}
+          triggerConfigs={triggerConfigs ?? []}
+          onInject={handleTextInject}
+        />
+      </div>
       <textarea
         ref={textareaRef}
         value={message}
@@ -208,11 +178,7 @@ export function Sender({
       />
       <div className="flex items-center w-full px-4 py-2 gap-4">
         {toolbar}
-        <SenderButton
-          onClick={handleSend}
-          isSending={isSending}
-          className="ml-auto"
-        />
+        <SenderButton onClick={handleSend} className="ml-auto" />
       </div>
     </div>
   );

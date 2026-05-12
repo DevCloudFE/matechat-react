@@ -1,4 +1,3 @@
-export * from "./backend";
-export * from "./chat";
-export * from "./core";
-export * from "./types";
+export { openai } from "@ai-sdk/openai";
+export { useChat } from "@ai-sdk/react";
+export { generateText, streamText } from "ai";
