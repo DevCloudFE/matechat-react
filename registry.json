@@ -5,7 +5,7 @@
   "items": [
     {
       "name": "button",
-      "type": "registry:block",
+      "type": "registry:component",
       "title": "Button",
       "description": "MateChat Button",
       "files": [
@@ -24,12 +24,20 @@
         {
           "path": "src/sender.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "src/suggestion.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/list.tsx",
+          "type": "registry:component"
         }
       ]
     },
     {
       "name": "prompt",
-      "type": "registry:block",
+      "type": "registry:component",
       "title": "Prompt",
       "description": "MateChat Prompt",
       "files": [
