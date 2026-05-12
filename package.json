@@ -82,7 +82,7 @@
     "playground:build": "pnpm --filter @matechat/react-playground build",
     "prepublishOnly": "pnpm run build",
     "preview": "pnpm --filter @matechat/react-playground dev",
-    "registry:build": "shadcn build --output docs/doc_build/r",
+    "registry:build": "shadcn build --output docs/doc_build/r && tsx scripts/strip-tailwind-registry.ts docs/doc_build/r",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
