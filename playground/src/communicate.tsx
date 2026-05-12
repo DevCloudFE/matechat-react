@@ -11,11 +11,6 @@ function Communicate() {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
 
-  // NOTE: This playground reads the API key from a local .env file
-  // (VITE_MODEL_API_KEY) for development convenience only.
-  // Never ship a real secret key in client-side code for production use.
-  // In production, proxy AI requests through a server-side backend so the
-  // key is never exposed to the browser.
   const transport = useMemo(() => {
     const provider = createOpenAICompatible({
       name: "deepseek",
