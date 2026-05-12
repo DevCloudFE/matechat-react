@@ -116,14 +116,28 @@ export function BlockQuote({ children, className, ...rest }: BlockQuoteProps) {
 
 export interface LinkProps extends React.ComponentProps<"a"> {}
 
-export function Link({ children, className, ...rest }: LinkProps) {
+const UNSAFE_HREF_PATTERN = /^(javascript|data|vbscript):/i;
+
+export function Link({
+  children,
+  className,
+  href,
+  target,
+  rel,
+  ...rest
+}: LinkProps) {
+  const safeHref = UNSAFE_HREF_PATTERN.test(href ?? "") ? "#" : href;
+  const effectiveTarget = target ?? "_blank";
+  const safeRel = effectiveTarget === "_blank" ? "noopener noreferrer" : rel;
   return (
     <a
       className={clsx(
         "text-blue-600 dark:text-blue-400 hover:underline underline-offset-1",
         className,
       )}
-      target="_blank"
+      href={safeHref}
+      target={effectiveTarget}
+      rel={safeRel}
       {...rest}
     >
       {children}
