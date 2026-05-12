@@ -3,7 +3,9 @@ import { join } from "node:path";
 
 const registryDir = process.argv[2];
 if (!registryDir) {
-  console.error("Usage: tsx scripts/strip-tailwind-registry.ts <registry-output-dir>");
+  console.error(
+    "Usage: tsx scripts/strip-tailwind-registry.ts <registry-output-dir>",
+  );
   process.exit(1);
 }
 
