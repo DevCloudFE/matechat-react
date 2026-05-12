@@ -62,16 +62,19 @@ export default function Suggestion({
   onInject,
 }: SuggestionProps) {
   const context = useSuggestionContext(message, textareaRef, triggerConfigs);
+
+  if (!context) return null;
+
   return (
-    <div>
+    <div className="absolute bottom-full left-0 w-full bg-white dark:bg-gray-50 rounded-lg shadow-amber-50 max-h-64 overflow-y-auto">
       <List
-        options={context?.currentConfig.data}
-        optionLabel={context?.currentConfig.optionLabel ?? "default value"}
-        optionGroupLabel={context?.currentConfig.optionGroupLabel}
-        optionGroupChildren={context?.currentConfig.optionGroupChildren}
+        options={context.currentConfig.data}
+        optionLabel={context.currentConfig.optionLabel ?? "default value"}
+        optionGroupLabel={context.currentConfig.optionGroupLabel}
+        optionGroupChildren={context.currentConfig.optionGroupChildren}
         onChange={(e) => {
           const newText: string = (e.value ?? e.target.value) as string;
-          onInject(newText, context?.triggerIndex ?? -1);
+          onInject(newText, context.triggerIndex);
         }}
       />
     </div>

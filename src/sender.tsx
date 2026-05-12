@@ -150,14 +150,12 @@ export function Sender({
       )}
       {...props}
     >
-      <div className="absolute bottom-full left-0 w-full bg-white dark:bg-gray-50 rounded-lg shadow-amber-50 max-h-64 overflow-y-auto">
-        <Suggestion
-          message={message}
-          textareaRef={textareaRef}
-          triggerConfigs={triggerConfigs ?? []}
-          onInject={handleTextInject}
-        />
-      </div>
+      <Suggestion
+        message={message}
+        textareaRef={textareaRef}
+        triggerConfigs={triggerConfigs ?? []}
+        onInject={handleTextInject}
+      />
       <textarea
         ref={textareaRef}
         value={message}
