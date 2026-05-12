@@ -119,8 +119,15 @@ export interface LinkProps extends React.ComponentProps<"a"> {}
 function sanitizeHref(href?: string): string | undefined {
   if (!href) return href;
 
-  const normalized = href.trim().toLowerCase();
-  if (normalized.startsWith("javascript:")) {
+  const normalized = href
+    .trim()
+    .toLowerCase()
+    .replace(/[\u0000-\u001f\u007f-\u009f\s]+/g, "");
+  if (
+    normalized.startsWith("javascript:") ||
+    normalized.startsWith("data:") ||
+    normalized.startsWith("vbscript:")
+  ) {
     return "#";
   }
 
@@ -129,11 +136,18 @@ function sanitizeHref(href?: string): string | undefined {
 
 export function Link({ children, className, ...rest }: LinkProps) {
   const safeHref = sanitizeHref(rest.href);
+  const rel = [rest.rel, "noopener", "noreferrer"]
+    .filter(Boolean)
+    .join(" ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .filter((value, index, array) => array.indexOf(value) === index)
+    .join(" ");
   return (
     <a
       {...rest}
       href={safeHref}
-      rel="noopener noreferrer"
+      rel={rel}
       target="_blank"
       className={clsx(
         "text-blue-600 dark:text-blue-400 hover:underline underline-offset-1",
