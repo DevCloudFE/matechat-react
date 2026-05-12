@@ -12,7 +12,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "biome check",
-    "preview": "dotenv && vite preview"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@ai-sdk/openai": "^3.0.63",
