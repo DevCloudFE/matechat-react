@@ -128,10 +128,12 @@ export function Link({
 }: LinkProps) {
   const safeHref = UNSAFE_HREF_PATTERN.test(href ?? "") ? "#" : href;
   const effectiveTarget = target ?? "_blank";
-  const safeRel =
-    effectiveTarget === "_blank"
-      ? ["noopener noreferrer", rel].filter(Boolean).join(" ")
-      : rel;
+  const relTokens = new Set([
+    "noopener",
+    "noreferrer",
+    ...(rel?.split(/\s+/).filter(Boolean) ?? []),
+  ]);
+  const safeRel = effectiveTarget === "_blank" ? [...relTokens].join(" ") : rel;
   return (
     <a
       className={clsx(
