@@ -116,15 +116,29 @@ export function BlockQuote({ children, className, ...rest }: BlockQuoteProps) {
 
 export interface LinkProps extends React.ComponentProps<"a"> {}
 
+function sanitizeHref(href?: string): string | undefined {
+  if (!href) return href;
+
+  const normalized = href.trim().toLowerCase();
+  if (normalized.startsWith("javascript:")) {
+    return "#";
+  }
+
+  return href;
+}
+
 export function Link({ children, className, ...rest }: LinkProps) {
+  const safeHref = sanitizeHref(rest.href);
   return (
     <a
+      {...rest}
+      href={safeHref}
+      rel="noopener noreferrer"
+      target="_blank"
       className={clsx(
         "text-blue-600 dark:text-blue-400 hover:underline underline-offset-1",
         className,
       )}
-      target="_blank"
-      {...rest}
     >
       {children}
     </a>
