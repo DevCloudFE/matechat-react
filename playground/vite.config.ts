@@ -10,9 +10,6 @@ logger.warn = () => {};
 export default defineConfig({
   plugins: [react(), tailwindcss(), svgr()],
   customLogger: logger,
-  define: {
-    "process.env.MODEL_API_KEY": JSON.stringify(process.env.VITE_MODEL_API_KEY),
-  },
   resolve: {
     alias: {
       "@matechat/react": path.resolve(__dirname, "../src"),

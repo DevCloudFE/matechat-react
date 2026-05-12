@@ -3,7 +3,7 @@ import { useChat } from "@ai-sdk/react";
 import { BubbleList } from "@matechat/react";
 import { InputCount, Sender } from "@matechat/react/sender";
 import { DirectChatTransport, ToolLoopAgent } from "ai";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import mcLogo from "./assets/logo.svg";
 
@@ -11,13 +11,20 @@ function Communicate() {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
 
-  const provider = createOpenAICompatible({
-    name: "deepseek",
-    baseURL: "https://api.deepseek.com/v1",
-    apiKey: process.env.MODEL_API_KEY,
-  });
-  const agent = new ToolLoopAgent({ model: provider("deepseek-v4-flash") });
-  const transport = new DirectChatTransport({ agent });
+  // NOTE: This playground reads the API key from a local .env file
+  // (VITE_MODEL_API_KEY) for development convenience only.
+  // Never ship a real secret key in client-side code for production use.
+  // In production, proxy AI requests through a server-side backend so the
+  // key is never exposed to the browser.
+  const transport = useMemo(() => {
+    const provider = createOpenAICompatible({
+      name: "deepseek",
+      baseURL: "https://api.deepseek.com/v1",
+      apiKey: import.meta.env.VITE_MODEL_API_KEY,
+    });
+    const agent = new ToolLoopAgent({ model: provider("deepseek-v4-flash") });
+    return new DirectChatTransport({ agent });
+  }, []);
 
   const { messages, sendMessage, status, stop } = useChat({
     transport,
