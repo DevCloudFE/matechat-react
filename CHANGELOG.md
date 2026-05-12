@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.0.0
+
+### New Features
+
+- [`5f9e8fa`](https://github.com/DevCloudFE/matechat-react/commit/5f9e8fa4d34ea3cd6a07d2c8a18b8c47e8a60aa2): Add Vercel AI support ([#90](https://github.com/DevCloudFE/matechat-react/pull/90) by @YESWmeshade)
+
+### Bug Fixes
+
+- [`f4b1894`](https://github.com/DevCloudFE/matechat-react/commit/f4b18945d19e5082cab779dd5c5940352f3b0a44): Fixed an issue where the `Bubble` component would overflow horizontally when a single word was too long. ([#75](https://github.com/DevCloudFE/matechat-react/pull/75) by @xx-yoke)
+- [`b707094`](https://github.com/DevCloudFE/matechat-react/commit/b707094966032ebcd9e6a83689d59b1be0cb3641): fix suggestion injection to avoid input corruption and hide the suggestion panel when inactive ([#94](https://github.com/DevCloudFE/matechat-react/pull/94) by @Copilot)
+- [`39bbd21`](https://github.com/DevCloudFE/matechat-react/commit/39bbd21c73bbd62dcbc105fa1bc518890a8556d1): markdown links are sanitized and external links are protected against tabnabbing. ([#93](https://github.com/DevCloudFE/matechat-react/pull/93) by @Copilot)
+
+### Chores
+
+- [`5f9e8fa`](https://github.com/DevCloudFE/matechat-react/commit/5f9e8fa4d34ea3cd6a07d2c8a18b8c47e8a60aa2): Bump all dependencies. ([#90](https://github.com/DevCloudFE/matechat-react/pull/90) by @YESWmeshade)
+
 ## v0.1.1
 
 ### New Features
