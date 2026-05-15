@@ -5,7 +5,7 @@ import {
   oneLight,
   vscDarkPlus,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { useTheme } from "./hooks";
+import { useTheme } from "./hooks/use-theme";
 
 export interface HeadingProps extends React.ComponentProps<"h1"> {
   level: 1 | 2 | 3 | 4 | 5 | 6;

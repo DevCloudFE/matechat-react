@@ -17,14 +17,24 @@
     },
     {
       "name": "sender",
-      "type": "registry:block",
+      "type": "registry:component",
       "title": "Sender",
       "description": "MateChat Sender",
+      "dependencies": ["clsx", "tailwind-merge"],
       "files": [
         {
           "path": "src/sender.tsx",
           "type": "registry:component"
-        },
+        }
+      ]
+    },
+    {
+      "name": "suggestion",
+      "type": "registry:component",
+      "title": "Suggestion",
+      "description": "MateChat Suggestion",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
         {
           "path": "src/suggestion.tsx",
           "type": "registry:component"
@@ -54,16 +64,16 @@
       "description": "MateChat Bubble",
       "files": [
         {
-          "path": "src/bubble/index.tsx",
+          "path": "src/bubble.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/bubble/markdown.tsx",
+          "path": "src/markdown.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/bubble/hooks.tsx",
-          "type": "registry:component"
+          "path": "src/hooks/use-theme.ts",
+          "type": "registry:hook"
         }
       ],
       "dependencies": [
