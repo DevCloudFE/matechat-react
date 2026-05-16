@@ -1,4 +1,4 @@
-import "./tailwind.css";
+import "@/tailwind.css";
 
 import { cva, type VariantProps } from "class-variance-authority";
 import clsx from "clsx";

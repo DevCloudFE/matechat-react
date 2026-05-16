@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import "./tailwind.css";
+import "@/tailwind.css";
 
 import type { UIMessage } from "ai";
 import clsx from "clsx";
@@ -9,7 +9,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { twMerge } from "tailwind-merge";
-import { BlockQuote, CodeBlock, Heading, Link } from "./markdown";
+import { BlockQuote, CodeBlock, Heading, Link } from "@/markdown";
 
 const bubbleVariants = cva(
   "flex flex-col gap-1 justify-center rounded-lg dark:text-gray-200 text-gray-800 max-w-full whitespace-pre-wrap break-words",

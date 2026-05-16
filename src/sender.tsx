@@ -1,4 +1,4 @@
-import "./tailwind.css";
+import "@/tailwind.css";
 
 import clsx from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";

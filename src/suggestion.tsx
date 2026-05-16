@@ -1,7 +1,7 @@
-import "./tailwind.css";
+import "@/tailwind.css";
 import React from "react";
-import type { SelectItemOptionsType } from "./list";
-import { List } from "./list";
+import type { SelectItemOptionsType } from "@/list";
+import { List } from "@/list";
 
 export interface TriggerConfig {
   char: string;
