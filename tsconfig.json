@@ -16,10 +16,9 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
+    "baseUrl": ".",
     "paths": {
-      "@/icons/*": ["./src/icons/*"],
-      "@/hooks/*": ["./src/hooks/*"],
-      "@/components/*": ["./src/*"],
+      "@/*": ["./src/*"]
     },
   },
   "include": ["src"],

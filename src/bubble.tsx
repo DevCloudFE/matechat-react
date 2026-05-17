@@ -7,7 +7,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { twMerge } from "tailwind-merge";
-import { BlockQuote, CodeBlock, Heading, Link } from "@/components/markdown.js";
+import { BlockQuote, CodeBlock, Heading, Link } from "@/markdown";
 
 import "./tailwind.css";
 

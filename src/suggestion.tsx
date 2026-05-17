@@ -1,6 +1,6 @@
 import React from "react";
-import type { SelectItemOptionsType } from "@/components/list";
-import { List } from "@/components/list";
+import type { SelectItemOptionsType } from "@/list";
+import { List } from "@/list";
 
 import "./tailwind.css";
 
