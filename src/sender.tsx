@@ -1,10 +1,8 @@
-import "./tailwind.css";
-
 import clsx from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import type { TriggerConfig } from "./suggestion";
-import Suggestion from "./suggestion";
+
+import "./tailwind.css";
 
 export interface InputCountProps extends React.ComponentProps<"span"> {
   count: number;
@@ -60,7 +58,11 @@ export interface SenderProps extends React.ComponentProps<"div"> {
   onMessageChange?: (message: string) => void;
   onSend?: () => void;
   toolbar?: React.ReactNode;
-  triggerConfigs?: TriggerConfig[];
+  suggestion?: (context: {
+    message: string;
+    textareaRef: React.RefObject<HTMLTextAreaElement | null>;
+    onInject: (text: string, position: number) => void;
+  }) => React.ReactNode;
 }
 
 export function Sender({
@@ -71,7 +73,7 @@ export function Sender({
   sendMessage,
   onSend,
   toolbar,
-  triggerConfigs,
+  suggestion,
   ...props
 }: SenderProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -150,12 +152,11 @@ export function Sender({
       )}
       {...props}
     >
-      <Suggestion
-        message={message}
-        textareaRef={textareaRef}
-        triggerConfigs={triggerConfigs ?? []}
-        onInject={handleTextInject}
-      />
+      {suggestion?.({
+        message,
+        textareaRef,
+        onInject: handleTextInject,
+      })}
       <textarea
         ref={textareaRef}
         value={message}
@@ -163,10 +164,10 @@ export function Sender({
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         className={clsx(
-          "w-full pt-4 px-4 border-0 rounded-2xl !resize-none bg-transparent",
+          "w-full pt-4 px-4 border-0 rounded-2xl resize-none! bg-transparent",
           "focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400",
           "overflow-y-auto max-h-32",
-          "[scrollbar-gutter:stable] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full",
+          "scrollbar-gutter-stable [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full",
           "[&::-webkit-scrollbar-thumb]:cursor-auto",
           "[&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600",
           "[&::-webkit-scrollbar-thumb:hover]:bg-gray-400 dark:[&::-webkit-scrollbar-thumb:hover]:bg-gray-500",

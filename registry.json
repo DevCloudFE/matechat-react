@@ -5,7 +5,7 @@
   "items": [
     {
       "name": "button",
-      "type": "registry:block",
+      "type": "registry:component",
       "title": "Button",
       "description": "MateChat Button",
       "files": [
@@ -17,7 +17,7 @@
     },
     {
       "name": "sender",
-      "type": "registry:block",
+      "type": "registry:component",
       "title": "Sender",
       "description": "MateChat Sender",
       "files": [
@@ -28,13 +28,41 @@
       ]
     },
     {
+      "name": "suggestion",
+      "type": "registry:component",
+      "title": "Suggestion",
+      "description": "MateChat Suggestion",
+      "files": [
+        {
+          "path": "src/suggestion.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/list.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "prompt",
-      "type": "registry:block",
+      "type": "registry:component",
       "title": "Prompt",
       "description": "MateChat Prompt",
       "files": [
         {
           "path": "src/prompt.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "file-upload",
+      "type": "registry:component",
+      "title": "File Upload",
+      "description": "MateChat File Upload",
+      "files": [
+        {
+          "path": "src/file-upload.tsx",
           "type": "registry:component"
         }
       ]
@@ -46,16 +74,16 @@
       "description": "MateChat Bubble",
       "files": [
         {
-          "path": "src/bubble/index.tsx",
+          "path": "src/bubble.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/bubble/markdown.tsx",
+          "path": "src/markdown.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/bubble/hooks.tsx",
-          "type": "registry:component"
+          "path": "src/hooks/use-theme.ts",
+          "type": "registry:hook"
         }
       ],
       "dependencies": [

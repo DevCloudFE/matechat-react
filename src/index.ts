@@ -1,8 +1,9 @@
 export type { UseChatOptions } from "@ai-sdk/react";
 export { useChat } from "@ai-sdk/react";
-export * from "./bubble";
-export * from "./button";
-export * from "./file-upload";
-export * from "./list";
-export * from "./prompt";
-export * from "./sender";
+export * from "@/bubble";
+export * from "@/button";
+export * from "@/file-upload";
+export * from "@/list";
+export * from "@/prompt";
+export * from "@/sender";
+export * from "@/suggestion";

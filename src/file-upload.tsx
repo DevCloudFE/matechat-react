@@ -2,7 +2,7 @@ import clsx from "clsx";
 import type React from "react";
 import { useCallback, useRef } from "react";
 import { twMerge } from "tailwind-merge";
-import Appendix from "./icons/appendix.svg";
+import Appendix from "@/icons/appendix.svg";
 
 export interface FileUploadProps extends React.ComponentProps<"button"> {
   onFilesSelect?: (files: File[]) => void;

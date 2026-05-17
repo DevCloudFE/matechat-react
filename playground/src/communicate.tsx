@@ -1,6 +1,6 @@
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { useChat } from "@ai-sdk/react";
-import { BubbleList } from "@matechat/react";
+import { BubbleList } from "@matechat/react/bubble";
 import { InputCount, Sender } from "@matechat/react/sender";
 import { DirectChatTransport, ToolLoopAgent } from "ai";
 import { useCallback, useMemo, useState } from "react";
@@ -39,7 +39,7 @@ function Communicate() {
   return (
     <div className="h-full flex flex-col pt-5 px-4 pb-2 items-center overflow-hidden">
       <div className="w-full max-w-3xl flex flex-col gap-3 items-center h-full">
-        <div className="flex-grow w-full min-h-0 relative">
+        <div className="grow w-full min-h-0 relative">
           <BubbleList
             className="size-full max-w-full"
             messages={messages}
@@ -60,7 +60,7 @@ function Communicate() {
           )}
         </div>
         <Sender
-          className="w-full flex-shrink-0 focus-within:border-[#a18dc2] focus-within:ring-2 focus-within:ring-[#a694c2] dark:focus-within:border-[#7a6994] dark:focus-within:ring-2 dark:focus-within:ring-[#706385]"
+          className="w-full shrink-0 focus-within:border-[#a18dc2] focus-within:ring-2 focus-within:ring-[#a694c2] dark:focus-within:border-[#7a6994] dark:focus-within:ring-2 dark:focus-within:ring-[#706385]"
           placeholder={t("placeholder")}
           sendMessage={handleSend}
           onMessageChange={setInput}
@@ -72,7 +72,7 @@ function Communicate() {
             </div>
           }
         />
-        <div className="flex-shrink-0 flex flex-row">
+        <div className="shrink-0 flex flex-row">
           <span className="text-[12px] text-gray-500">{t("attention")}</span>
           <hr className="h-4 w-px bg-gray-300 dark:bg-gray-600 border-0 mx-2" />
           <span className="text-[12px] text-gray-500 hover:text-gray-550 underline cursor-pointer">
