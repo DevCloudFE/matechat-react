@@ -8,7 +8,9 @@ import { libInjectCss } from "vite-plugin-lib-inject-css";
 export default defineConfig({
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@/icons": path.resolve(__dirname, "./src/icons"),
+      "@/hooks": path.resolve(__dirname, "./src/hooks"),
+      "@/components": path.resolve(__dirname, "./src"),
     },
   },
   build: {

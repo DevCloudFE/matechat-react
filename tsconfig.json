@@ -18,8 +18,10 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/icons/*": ["./src/icons/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/components/*": ["./src/*"],
+    },
   },
-  "include": ["src"]
+  "include": ["src"],
 }

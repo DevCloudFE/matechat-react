@@ -8,7 +8,6 @@
       "type": "registry:component",
       "title": "Button",
       "description": "MateChat Button",
-      "dependencies": ["clsx", "tailwind-merge", "class-variance-authority"],
       "files": [
         {
           "path": "src/button.tsx",
@@ -21,7 +20,6 @@
       "type": "registry:component",
       "title": "Sender",
       "description": "MateChat Sender",
-      "dependencies": ["clsx", "tailwind-merge"],
       "files": [
         {
           "path": "src/sender.tsx",
@@ -34,7 +32,6 @@
       "type": "registry:component",
       "title": "Suggestion",
       "description": "MateChat Suggestion",
-      "dependencies": ["clsx", "tailwind-merge"],
       "files": [
         {
           "path": "src/suggestion.tsx",
@@ -51,7 +48,6 @@
       "type": "registry:component",
       "title": "Prompt",
       "description": "MateChat Prompt",
-      "dependencies": ["clsx", "tailwind-merge", "class-variance-authority"],
       "files": [
         {
           "path": "src/prompt.tsx",
@@ -64,7 +60,6 @@
       "type": "registry:component",
       "title": "File Upload",
       "description": "MateChat File Upload",
-      "dependencies": ["clsx", "tailwind-merge"],
       "files": [
         {
           "path": "src/file-upload.tsx",
@@ -92,9 +87,6 @@
         }
       ],
       "dependencies": [
-        "clsx",
-        "tailwind-merge",
-        "class-variance-authority",
         "react-markdown",
         "remark-gfm",
         "remark-math",

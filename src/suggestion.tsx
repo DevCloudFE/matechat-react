@@ -1,7 +1,8 @@
-import "@/tailwind.css";
 import React from "react";
-import type { SelectItemOptionsType } from "@/list";
-import { List } from "@/list";
+import type { SelectItemOptionsType } from "@/components/list";
+import { List } from "@/components/list";
+
+import "./tailwind.css";
 
 export interface TriggerConfig {
   char: string;
@@ -29,12 +30,12 @@ const useSuggestionContext = (
     const textarea = textareaRef?.current;
     if (!textarea) return null;
 
-    const caretPostionIndex = textarea.selectionStart ?? message.length;
+    const caretPositionIndex = textarea.selectionStart ?? message.length;
     let currentConfig: TriggerConfig | undefined;
     let triggerIndex = -1;
     let queryText = "";
 
-    for (let i = caretPostionIndex - 1; i >= 0; i--) {
+    for (let i = caretPositionIndex - 1; i >= 0; i--) {
       const char = message[i];
       const matchedConfig = triggerConfigs.find(
         (config) => config.char === char,
@@ -42,7 +43,7 @@ const useSuggestionContext = (
       if (matchedConfig) {
         currentConfig = matchedConfig;
         triggerIndex = i;
-        queryText = message.slice(i + 1, caretPostionIndex);
+        queryText = message.slice(i + 1, caretPositionIndex);
         break;
       }
     }

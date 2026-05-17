@@ -15,7 +15,7 @@ function App() {
   return (
     <div
       className={clsx(
-        "min-h-screen bg-gradient-to-b",
+        "min-h-screen bg-linear-to-b",
         "from-blue-300 via-pink-100 via-10% to-violet-300",
         "dark:from-[#865f77] dark:via-[#133b5c] dark:via-80% dark:to-[#091e35]",
       )}
@@ -47,8 +47,8 @@ function App() {
         <div className="flex flex-row size-full">
           <div
             className={clsx(
-              "w-1/4 p-3 rounded-l-xl min-w-[240px] max-w-[380px]",
-              "bg-gradient-to-b from-gray-100/80 from-10% to-violet-100/80",
+              "w-1/4 p-3 rounded-l-xl min-w-60 max-w-95",
+              "bg-linear-to-b from-gray-100/80 from-10% to-violet-100/80",
               "dark:bg-none dark:bg-slate-900/40",
             )}
           >
@@ -57,7 +57,7 @@ function App() {
           <div
             className={clsx(
               "flex-1 rounded-r-xl",
-              "bg-gradient-to-b from-[#fffffff2] to-[#f8fafff2]",
+              "bg-linear-to-b from-[#fffffff2] to-[#f8fafff2]",
               "dark:bg-none dark:bg-black/35",
             )}
           >

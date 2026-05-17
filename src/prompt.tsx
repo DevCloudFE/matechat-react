@@ -1,9 +1,9 @@
-import "@/tailwind.css";
-
 import { cva, type VariantProps } from "class-variance-authority";
 import clsx from "clsx";
 import type * as React from "react";
 import { twMerge } from "tailwind-merge";
+
+import "./tailwind.css";
 
 const promptsVariants = cva("flex", {
   variants: {
